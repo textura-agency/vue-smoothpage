@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, watchEffect, computed, ref, withDefaults } from 'vue'
+import { onMounted, onUnmounted, watchEffect, computed, ref, withDefaults, inject } from 'vue'
 import Detector from './extensions/detector'
 import { OnScrollProps } from './extensions/detector.interface'
 import { useLoop } from './hooks/useLoop'
@@ -15,26 +15,24 @@ import { lerp } from './utils/lerp'
 import { useSmoothPageStore } from './store'
 import { getDeviceType } from './utils/getDeviceType'
 import { DeviceType } from './utils/getDeviceType'
+import type { SmoothPageSettings } from './interfaces/settings.interface'
 
 interface SmoothScrollProps {
-    smooth?: number; 
-    wheelIntensity?: number; 
-    minWidth?: number; 
     preventScroll?: boolean;
-    renderDelay?: number;
-    enableOnTouchDevices?: boolean;
-    touchmoveIntensity?: number;
-    minTouchmoveDistance?: number;
 }
+const settings: SmoothPageSettings | undefined = inject('settings')
+const settingsWithDefaults = {
+    smooth: settings?.smooth ||  0.2,
+    wheelIntensity: settings?.wheelIntensity || 2,
+    touchmoveIntensity: settings?.touchmoveIntensity || 2,
+    minTouchmoveDistance: settings?.minTouchmoveDistance || 40,
+    minWidth: settings?.minWidth || 0,
+    renderDelay: settings?.renderDelay || 0,
+    enableOnTouchDevices: settings?.enableOnTouchDevices || false
+}
+
 const props = withDefaults(defineProps<SmoothScrollProps>(), {
-    smooth: 0.2,
-    wheelIntensity: 2,
-    touchmoveIntensity: 2,
-    minTouchmoveDistance: 40,
-    minWidth: 0,
     preventScroll: false,
-    renderDelay: 0,
-    enableOnTouchDevices: false
 })
 const store = useSmoothPageStore()
 const isMounted = ref(false)
@@ -54,9 +52,9 @@ watchEffect(() => {
     if (store.isEnabled && !isInited.value) {
         document.querySelector('html')?.classList?.add('t-smoothscroll--enabled')
         detector.value = new Detector(document, onScroll, { 
-            wheelIntensity: props.wheelIntensity,
-            touchmoveIntensity: props.touchmoveIntensity,
-            minTouchmoveDistance: props.minTouchmoveDistance
+            wheelIntensity: settingsWithDefaults.wheelIntensity,
+            touchmoveIntensity: settingsWithDefaults.touchmoveIntensity,
+            minTouchmoveDistance: settingsWithDefaults.minTouchmoveDistance
         })
         isInited.value = true
         return
@@ -79,17 +77,17 @@ useLoop(() => {
     if (store.isTriggeringScrollPosition) { return }
     store.setIsEnabled(getIsEnabled())
     if (store.isEnabled) {
-        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, props.smooth))
+        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, settingsWithDefaults.smooth))
     } else {
         store.setCurrentScrollPosition(window.scrollY)
         store.setNextScrollPosition(window.scrollY)
     }
-}, props.renderDelay)
+}, settingsWithDefaults.renderDelay)
 function getIsEnabled() {
-    if (props.enableOnTouchDevices) { 
-        return window.innerWidth >= props.minWidth
+    if (settingsWithDefaults.enableOnTouchDevices) { 
+        return window.innerWidth >= settingsWithDefaults.minWidth
     }
-    return deviceType.value === 'desktop' && window.innerWidth >= props.minWidth
+    return deviceType.value === 'desktop' && window.innerWidth >= settingsWithDefaults.minWidth
 }
 const style = computed(() => {
     if (store.isEnabled) {

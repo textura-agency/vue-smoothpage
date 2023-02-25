@@ -1,11 +1,11 @@
 {
   "name": "vue-smoothpage",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "files": ["dist"],
   "main": "./dist/vue-smoothpage.umd.cjs",
-  "module": "./dist/vue-smoothpage.js",
+  "module": "./dist/vue-smoothpage.es.js",
   "author": {
     "name": "Textura Agency / Den Kravchu",
     "url": "https://textura.agency",
@@ -13,7 +13,7 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/vue-smoothpage.js",
+      "import": "./dist/vue-smoothpage.es.js",
       "require": "./dist/vue-smoothpage.umd.cjs"
     },
     "./dist/style.css": "./dist/style.css"
