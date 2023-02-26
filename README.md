@@ -23,3 +23,6 @@ Library contains such configurable components for convinient work with smooth sc
 - Vertical state for HorizontalScrollBlock (in current version even if SmoothPage disabled horizontal scroll works, but if you want to make it vertical on mobile devices - this option would be for you)
 - Different directions for StickyBlock (in current version only from top to bottom)
 - Configurable custom scroll bar for smoothPage, when it is enabled 
+
+### Examples of Websites using SmoothPage Library
+- https://chat-liker.vercel.app/
