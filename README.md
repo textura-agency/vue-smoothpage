@@ -13,5 +13,6 @@ Library contains such configurable components for convinient work with smooth sc
 ### Next updates:
 - Different directions for SmoothPage (in current version only from top to bottom)
 - AnchorLink with element id prop where to scroll (in current version you have to provide number of pixels to scroll)
+- Hash mode for AnchorLink (set the hash to location url)
 - Different directions for HorizontalScrollBlock (in current version only from left to right)
 - Different directions for StickyBlock (in current version only from top to bottom)
