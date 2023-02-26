@@ -15,6 +15,7 @@ class Detector {
     const settingsWithDefaults: DetectorSettings = {
       wheelIntensity: settings.wheelIntensity || 1,
       touchmoveIntensity: settings.touchmoveIntensity || 1,
+      minTouchmoveDistance: settings.minTouchmoveDistance || 40
     }
 
     this.callback = callback || ( () => {} )
