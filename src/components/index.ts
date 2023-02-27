@@ -1,1 +1,0 @@
-export { default as SmoothPage } from './SmoothPage/index.vue'

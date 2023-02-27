@@ -9,14 +9,14 @@ export default defineConfig({
     vue(),
     typescript2({
       check: false,
-      include: ["src/components/*/*.vue", "src/SmoothPage.ts"],
+      include: ["src/SmoothPage/**/*.vue", "src/**/*.ts"],
       tsconfigOverride: {
         compilerOptions: {
           sourceMap: true,
           declaration: true,
           declarationMap: true,
         },
-        exclude: ["vite.config.ts", "main.ts"],
+        exclude: ["vite.config.ts", "src/main.ts"],
       },
     }),
   ],
@@ -28,7 +28,7 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     lib: {
-      entry: "./src/SmoothPage.ts",
+      entry: "./src/SmoothPagePlugin.ts",
       formats: ["es", "cjs"],
       name: "SmoothPage",
       fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),

@@ -93,4 +93,43 @@ Available settings
 
 preventScroll is a dynamic prop
 
+**If you dont want to set up SmoothPage via app.use(), you can directly import it**
+
+You still can set settings to SmoothPage using "settings" prop. 
+Most of them can work dynamicaly, for example "minWidth".
+
+    <template>
+        <header/>
+        <smooth-page :prevent-scroll="isPageLoaded" :settings={...}>
+            <slot/>
+        </smooth-page>
+    </template>
+    <script lang="ts" setup>
+        import { SmoothPage } from 'vue-smoothpage'
+    </script> 
+
+#### Hook "useSmoothPage"
+
+    import { useSmoothPage } from 'vue-smoothpage'
+
+That hook provide you opportunity to read almost all states of the SmoothPage (for example current smooth scroll position) & some methods.
+
+    const {
+        currentScrollPosition, // readonly current scroll position
+        isEnabled,  // readonly if scroll is enabled (depends on props "minWidth" & "enableOnTouchDevices")
+        isTriggeringScrollPosition, // readonly (used by AnchorLink component)
+        isMounted, // readonly
+        isInited, // readonly
+        deviceType, // readonly (could be "desktop", "laptop", "mobile")
+
+        reload // method, reload SmoothScroll
+    } = useSmoothPage()
+
+
+
+
+
+
+
+
 

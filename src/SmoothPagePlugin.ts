@@ -1,6 +1,6 @@
 import type { App } from 'vue'
-import { SmoothPage } from './components'
-import type { SmoothPageSettings } from './components/SmoothPage/interfaces/settings.interface'
+import { SmoothPage, useSmoothPage } from './SmoothPage'
+import type { SmoothPageSettings } from './SmoothPage'
 
 export default {
     install(app: App, settings?: SmoothPageSettings) {
@@ -8,3 +8,6 @@ export default {
         app.provide('smoothPageSettings', settings || {})
     }
 }
+
+export { SmoothPage, useSmoothPage }
+export type { SmoothPageSettings }

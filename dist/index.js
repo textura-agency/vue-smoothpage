@@ -1,29 +1,29 @@
-var V = Object.defineProperty;
-var G = (s, t, e) => t in s ? V(s, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : s[t] = e;
-var l = (s, t, e) => (G(s, typeof t != "symbol" ? t + "" : t, e), e), w = (s, t, e) => {
-  if (!t.has(s))
-    throw TypeError("Cannot " + e);
+var $ = Object.defineProperty;
+var j = (e, t, o) => t in e ? $(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
+var r = (e, t, o) => (j(e, typeof t != "symbol" ? t + "" : t, o), o), M = (e, t, o) => {
+  if (!t.has(e))
+    throw TypeError("Cannot " + o);
 };
-var i = (s, t, e) => (w(s, t, "read from private field"), e ? e.call(s) : t.get(s)), u = (s, t, e) => {
-  if (t.has(s))
+var i = (e, t, o) => (M(e, t, "read from private field"), o ? o.call(e) : t.get(e)), y = (e, t, o) => {
+  if (t.has(e))
     throw TypeError("Cannot add the same private member more than once");
-  t instanceof WeakSet ? t.add(s) : t.set(s, e);
-}, z = (s, t, e, o) => (w(s, t, "write to private field"), o ? o.call(s, e) : t.set(s, e), e);
-var d = (s, t, e) => (w(s, t, "access private method"), e);
-import { ref as c, onMounted as $, onUnmounted as j, defineComponent as J, inject as Q, watchEffect as X, computed as Z, openBlock as ee, createElementBlock as te, normalizeClass as H, createElementVNode as se, normalizeStyle as oe, unref as ne, renderSlot as ie } from "vue";
-import { defineStore as le } from "pinia";
-class ae {
-  constructor(t, e, o) {
-    l(this, "element");
-    l(this, "cb");
-    l(this, "settings");
-    l(this, "listener", function(t) {
+  t instanceof WeakSet ? t.add(e) : t.set(e, o);
+}, B = (e, t, o, l) => (M(e, t, "write to private field"), l ? l.call(e, o) : t.set(e, o), o);
+var b = (e, t, o) => (M(e, t, "access private method"), o);
+import { ref as d, onMounted as q, onUnmounted as O, defineComponent as F, inject as K, computed as x, watchEffect as W, openBlock as U, createElementBlock as V, normalizeClass as R, unref as w, createElementVNode as G, normalizeStyle as J, renderSlot as Q } from "vue";
+import { defineStore as A } from "pinia";
+class X {
+  constructor(t, o, l) {
+    r(this, "element");
+    r(this, "cb");
+    r(this, "settings");
+    r(this, "listener", function(t) {
       typeof this.cb == "function" && t.deltaY && this.cb({
         dir: t.deltaY / Math.abs(t.deltaY),
         wheel: t.deltaY * this.settings.wheelIntensity
       });
     }.bind(this));
-    this.element = t, this.cb = e, this.settings = o, this.subscribe();
+    this.element = t, this.cb = o, this.settings = l, this.subscribe();
   }
   subscribe() {
     this.element.addEventListener("wheel", this.listener);
@@ -32,27 +32,27 @@ class ae {
     this.element.removeEventListener("wheel", this.listener);
   }
 }
-var a, h, S, F, v, E, y, C, P, Y;
-class re {
-  constructor(t, e, o) {
-    u(this, S);
-    u(this, v);
-    u(this, y);
-    u(this, P);
-    u(this, a, {
+var c, m, T, z, E, _, I, g, C, L;
+class Z {
+  constructor(t, o, l) {
+    y(this, T);
+    y(this, E);
+    y(this, I);
+    y(this, C);
+    y(this, c, {
       sY: 0,
       eY: 0
     });
-    l(this, "prevY", 0);
-    u(this, h, void 0);
-    l(this, "cb");
-    l(this, "deltaY");
-    l(this, "minDelta");
-    l(this, "settings");
-    this.cb = e, z(this, h, t), d(this, S, F).call(this), this.settings = o, this.minDelta = o.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.destroy = this.destroy.bind(this);
+    r(this, "prevY", 0);
+    y(this, m, void 0);
+    r(this, "cb");
+    r(this, "deltaY");
+    r(this, "minDelta");
+    r(this, "settings");
+    this.cb = o, B(this, m, t), b(this, T, z).call(this), this.settings = l, this.minDelta = l.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.destroy = this.destroy.bind(this);
   }
   destroy() {
-    i(this, h).removeEventListener("touchstart", d(this, v, E), !1), i(this, h).removeEventListener("touchmove", d(this, y, C), !1), i(this, h).removeEventListener("touchend", d(this, P, Y), !1);
+    i(this, m).removeEventListener("touchstart", b(this, E, _), !1), i(this, m).removeEventListener("touchmove", b(this, I, g), !1), i(this, m).removeEventListener("touchend", b(this, C, L), !1);
   }
   useCallback(t) {
     typeof this.cb == "function" && t && this.cb({
@@ -61,36 +61,36 @@ class re {
     });
   }
 }
-a = new WeakMap(), h = new WeakMap(), S = new WeakSet(), F = function() {
-  i(this, h).addEventListener("touchstart", d(this, v, E).bind(this), !1), i(this, h).addEventListener("touchmove", d(this, y, C).bind(this), !1), i(this, h).addEventListener("touchend", d(this, P, Y).bind(this), !1);
-}, v = new WeakSet(), E = function(t) {
-  const e = t.touches[0];
-  i(this, a).sY = e.screenY, this.prevY = i(this, a).sY, i(this, a).eY = i(this, a).sY;
-}, y = new WeakSet(), C = function(t) {
-  const e = t.touches[0];
-  this.prevY = i(this, a).eY, i(this, a).eY = e.screenY, this.deltaY = i(this, a).sY - i(this, a).eY;
-  const o = i(this, a).sY - this.prevY;
-  Math.abs(o) > Math.abs(this.deltaY) && (i(this, a).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
-}, P = new WeakSet(), Y = function(t) {
+c = new WeakMap(), m = new WeakMap(), T = new WeakSet(), z = function() {
+  i(this, m).addEventListener("touchstart", b(this, E, _).bind(this), !1), i(this, m).addEventListener("touchmove", b(this, I, g).bind(this), !1), i(this, m).addEventListener("touchend", b(this, C, L).bind(this), !1);
+}, E = new WeakSet(), _ = function(t) {
+  const o = t.touches[0];
+  i(this, c).sY = o.screenY, this.prevY = i(this, c).sY, i(this, c).eY = i(this, c).sY;
+}, I = new WeakSet(), g = function(t) {
+  const o = t.touches[0];
+  this.prevY = i(this, c).eY, i(this, c).eY = o.screenY, this.deltaY = i(this, c).sY - i(this, c).eY;
+  const l = i(this, c).sY - this.prevY;
+  Math.abs(l) > Math.abs(this.deltaY) && (i(this, c).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
+}, C = new WeakSet(), L = function(t) {
   Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
 };
-class ce {
-  constructor(t, e, o) {
-    l(this, "swipe");
-    l(this, "scroll");
-    l(this, "keyboard");
-    l(this, "callback");
+class ee {
+  constructor(t, o, l) {
+    r(this, "swipe");
+    r(this, "scroll");
+    r(this, "keyboard");
+    r(this, "callback");
     if (!t) {
       console.error("[Detector]: dom element is required");
       return;
     }
     const n = {
-      wheelIntensity: o.wheelIntensity || 1,
-      touchmoveIntensity: o.touchmoveIntensity || 1,
-      minTouchmoveDistance: o.minTouchmoveDistance || 40
+      wheelIntensity: l.wheelIntensity || 1,
+      touchmoveIntensity: l.touchmoveIntensity || 1,
+      minTouchmoveDistance: l.minTouchmoveDistance || 40
     };
-    this.callback = e || (() => {
-    }), this.scroll = new ae(t, this.controlScroll.bind(this), n), this.swipe = new re(t, this.controlScroll.bind(this), n), this.destroy = this.destroy.bind(this);
+    this.callback = o || (() => {
+    }), this.scroll = new X(t, this.controlScroll.bind(this), n), this.swipe = new Z(t, this.controlScroll.bind(this), n), this.destroy = this.destroy.bind(this);
   }
   controlScroll(t) {
     this.callback(t);
@@ -99,113 +99,163 @@ class ce {
     this.scroll.unsubscribe(), this.swipe.destroy();
   }
 }
-const he = (s, t = 0) => {
-  const e = c(!0), o = c(performance.now());
-  $(() => n(0)), j(() => e.value = !1);
-  function n(m) {
-    e.value && (m - o.value > t && (s(), o.value = performance.now()), requestAnimationFrame(n));
+const te = (e, t = 0) => {
+  const o = d(!0), l = d(performance.now());
+  q(() => n(0)), O(() => o.value = !1);
+  function n(s) {
+    o.value && (s - l.value > t && (e(), l.value = performance.now()), requestAnimationFrame(n));
   }
-}, de = (s, t, e = 0.2) => s + (t - s) * e, ue = le("smoothPage", () => {
-  const s = c(0), t = c(0), e = c(!1), o = c(!1);
+}, oe = (e, t, o = 0.2) => e + (t - e) * o, H = A("privateSmoothPage", () => {
+  const e = d(0), t = d(0), o = d(!1), l = d(!1), n = d(!1), s = d(!1), v = d("desktop"), P = d(!1), S = (a) => {
+    e.value = a;
+  }, Y = (a) => {
+    l.value = a;
+  }, D = (a) => {
+    t.value = a;
+  }, N = (a) => {
+    o.value = a;
+  }, k = (a) => {
+    n.value = a;
+  }, h = (a) => {
+    s.value = a;
+  }, u = (a) => {
+    v.value = a;
+  }, f = (a) => {
+    P.value = a;
+  };
   return {
-    currentScrollPosition: s,
-    isEnabled: o,
+    currentScrollPosition: e,
+    isEnabled: l,
     nextScrollPosition: t,
-    isTriggeringScrollPosition: e,
-    setCurrentScrollPosition: (r) => {
-      s.value = r;
-    },
-    setIsEnabled: (r) => {
-      o.value = r;
-    },
-    setNextScrollPosition: (r) => {
-      t.value = r;
-    },
-    setIsTriggeringScrollPosition: (r) => {
-      e.value = r;
+    isTriggeringScrollPosition: o,
+    isMounted: n,
+    isInited: s,
+    deviceType: v,
+    needReload: P,
+    setCurrentScrollPosition: S,
+    setIsEnabled: Y,
+    setNextScrollPosition: D,
+    setIsTriggeringScrollPosition: N,
+    setIsMounted: k,
+    setIsInited: h,
+    setDeviceType: u,
+    setNeedReload: f,
+    reload: (a = !1) => {
+      f(!0), a && (S(0), D(0));
     }
   };
 });
-function me() {
-  const s = navigator.userAgent;
-  return /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(s) ? "tablet" : /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(s) ? "mobile" : "desktop";
+function se() {
+  const e = navigator.userAgent;
+  return /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(e) ? "tablet" : /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(e) ? "mobile" : "desktop";
 }
-const be = /* @__PURE__ */ J({
+const ne = (e) => {
+  var t, o, l, n, s, v;
+  return {
+    smoothness: (e == null ? void 0 : e.smoothness) || 0.075,
+    wheelIntensity: (e == null ? void 0 : e.wheelIntensity) || 4,
+    touchmoveIntensity: (e == null ? void 0 : e.touchmoveIntensity) || 4,
+    minTouchmoveDistance: (e == null ? void 0 : e.minTouchmoveDistance) || 40,
+    minWidth: (e == null ? void 0 : e.minWidth) || 0,
+    renderDelay: (e == null ? void 0 : e.renderDelay) || 0,
+    enableOnTouchDevices: (e == null ? void 0 : e.enableOnTouchDevices) || !0,
+    defaultClassNames: {
+      smoothPage: ((t = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : t.smoothPage) || "t-smoothpage",
+      smoothPageBody: ((o = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : o.smoothPageBody) || "t-smoothpage--body",
+      smoothPageEnabled: ((l = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : l.smoothPageEnabled) || "t-smoothpage--enabled"
+    },
+    additionalClassNames: {
+      smoothPage: ((n = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : n.smoothPage) || "",
+      smoothPageBody: ((s = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : s.smoothPageBody) || "",
+      smoothPageEnabled: ((v = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : v.smoothPageEnabled) || ""
+    }
+  };
+}, le = /* @__PURE__ */ F({
   __name: "index",
   props: {
-    preventScroll: { type: Boolean, default: !1 }
+    preventScroll: { type: Boolean, default: !1 },
+    settings: null
   },
-  setup(s) {
-    var I, k, T, _, L, M;
-    const t = s, e = Q("smoothPageSettings"), o = {
-      smoothness: (e == null ? void 0 : e.smoothness) || 0.075,
-      wheelIntensity: (e == null ? void 0 : e.wheelIntensity) || 4,
-      touchmoveIntensity: (e == null ? void 0 : e.touchmoveIntensity) || 4,
-      minTouchmoveDistance: (e == null ? void 0 : e.minTouchmoveDistance) || 40,
-      minWidth: (e == null ? void 0 : e.minWidth) || 0,
-      renderDelay: (e == null ? void 0 : e.renderDelay) || 0,
-      enableOnTouchDevices: (e == null ? void 0 : e.enableOnTouchDevices) || !0,
-      defaultClassNames: {
-        smoothPage: ((I = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : I.smoothPage) || "t-smoothpage",
-        smoothPageBody: ((k = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : k.smoothPageBody) || "t-smoothpage--body",
-        smoothPageEnabled: ((T = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : T.smoothPageEnabled) || "t-smoothpage--enabled"
-      },
-      additionalClassNames: {
-        smoothPage: ((_ = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : _.smoothPage) || "",
-        smoothPageBody: ((L = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : L.smoothPageBody) || "",
-        smoothPageEnabled: ((M = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : M.smoothPageEnabled) || ""
-      }
-    }, n = ue(), m = c(!1), g = c(null), p = c(null), r = c(!1), D = c("desktop");
-    $(() => {
-      D.value = me(), n.setIsEnabled(N()), m.value = !0;
-    }), j(() => {
-      m.value = !1;
-    }), X(() => {
-      var b, f, x, B, W, q, O, A, R;
-      if (n.isEnabled && !r.value) {
-        o.defaultClassNames.smoothPageEnabled && ((f = (b = document.querySelector("html")) == null ? void 0 : b.classList) == null || f.add(o.defaultClassNames.smoothPageEnabled)), o.additionalClassNames.smoothPageEnabled && ((B = (x = document.querySelector("html")) == null ? void 0 : x.classList) == null || B.add(o.additionalClassNames.smoothPageEnabled)), g.value = new ce(document, K, {
-          wheelIntensity: o.wheelIntensity,
-          touchmoveIntensity: o.touchmoveIntensity,
-          minTouchmoveDistance: o.minTouchmoveDistance
-        }), r.value = !0;
+  setup(e) {
+    const t = e, o = K("smoothPageSettings"), l = ne(o), n = x(() => ({
+      ...l,
+      ...t == null ? void 0 : t.settings
+    })), s = H(), v = d(null), P = d(null);
+    q(() => {
+      s.setDeviceType(se()), s.setIsEnabled(N()), s.setIsMounted(!0);
+    }), O(() => {
+      s.setIsMounted(!1);
+    }), W(() => {
+      if (s.isEnabled && !s.isInited) {
+        S();
         return;
       }
-      !n.isEnabled && r.value && (o.defaultClassNames.smoothPageEnabled && ((q = (W = document.querySelector("html")) == null ? void 0 : W.classList) == null || q.remove(o.defaultClassNames.smoothPageEnabled)), o.additionalClassNames.smoothPageEnabled && ((A = (O = document.querySelector("html")) == null ? void 0 : O.classList) == null || A.remove(o.additionalClassNames.smoothPageEnabled)), (R = g.value) == null || R.destroy(), r.value = !1);
+      !s.isEnabled && s.isInited && Y();
     });
-    function K(b) {
-      if (t.preventScroll || !p.value)
+    function S() {
+      var h, u, f, p;
+      n.value.defaultClassNames.smoothPageEnabled && ((u = (h = document.querySelector("html")) == null ? void 0 : h.classList) == null || u.add(n.value.defaultClassNames.smoothPageEnabled)), n.value.additionalClassNames.smoothPageEnabled && ((p = (f = document.querySelector("html")) == null ? void 0 : f.classList) == null || p.add(n.value.additionalClassNames.smoothPageEnabled)), v.value = new ee(document, D, {
+        wheelIntensity: n.value.wheelIntensity,
+        touchmoveIntensity: n.value.touchmoveIntensity,
+        minTouchmoveDistance: n.value.minTouchmoveDistance
+      }), s.setIsInited(!0);
+    }
+    function Y() {
+      var h, u, f, p, a;
+      n.value.defaultClassNames.smoothPageEnabled && ((u = (h = document.querySelector("html")) == null ? void 0 : h.classList) == null || u.remove(n.value.defaultClassNames.smoothPageEnabled)), n.value.additionalClassNames.smoothPageEnabled && ((p = (f = document.querySelector("html")) == null ? void 0 : f.classList) == null || p.remove(n.value.additionalClassNames.smoothPageEnabled)), (a = v.value) == null || a.destroy(), s.setIsInited(!1);
+    }
+    W(() => {
+      s.needReload && (Y(), setTimeout(() => {
+        S(), s.setNeedReload(!1);
+      }, 0));
+    });
+    function D(h) {
+      if (t.preventScroll || !P.value)
         return;
-      const f = p.value.getBoundingClientRect().height - window.innerHeight;
-      n.setNextScrollPosition(Math.max(0, Math.min(n.currentScrollPosition + b.wheel, f)));
+      const u = P.value.getBoundingClientRect().height - window.innerHeight;
+      s.setNextScrollPosition(Math.max(0, Math.min(s.currentScrollPosition + h.wheel, u)));
     }
-    he(() => {
-      t.preventScroll || m.value && (n.isTriggeringScrollPosition || (n.setIsEnabled(N()), n.isEnabled ? n.setCurrentScrollPosition(de(n.currentScrollPosition, n.nextScrollPosition, o.smoothness)) : (n.setCurrentScrollPosition(window.scrollY), n.setNextScrollPosition(window.scrollY))));
-    }, o.renderDelay);
+    te(() => {
+      t.preventScroll || s.isMounted && (s.isTriggeringScrollPosition || (s.setIsEnabled(N()), s.isEnabled ? s.setCurrentScrollPosition(oe(s.currentScrollPosition, s.nextScrollPosition, n.value.smoothness)) : (s.setCurrentScrollPosition(window.scrollY), s.setNextScrollPosition(window.scrollY))));
+    }, n.value.renderDelay);
     function N() {
-      return (o.enableOnTouchDevices || D.value === "desktop") && window.innerWidth >= o.minWidth;
+      return (n.value.enableOnTouchDevices || s.deviceType === "desktop") && window.innerWidth >= n.value.minWidth;
     }
-    const U = Z(() => n.isEnabled ? {
-      transform: `translate3d(0, ${-n.currentScrollPosition}px, 0)`
+    const k = x(() => s.isEnabled ? {
+      transform: `translate3d(0, ${-s.currentScrollPosition}px, 0)`
     } : {});
-    return (b, f) => (ee(), te("div", {
-      class: H([o.defaultClassNames.smoothPage, o.additionalClassNames.smoothPage])
+    return (h, u) => (U(), V("div", {
+      class: R([w(n).defaultClassNames.smoothPage, w(n).additionalClassNames.smoothPage])
     }, [
-      se("div", {
+      G("div", {
         ref_key: "contentRef",
-        ref: p,
-        style: oe(ne(U)),
-        class: H([o.defaultClassNames.smoothPageBody, o.additionalClassNames.smoothPageBody])
+        ref: P,
+        style: J(w(k)),
+        class: R([w(n).defaultClassNames.smoothPageBody, w(n).additionalClassNames.smoothPageBody])
       }, [
-        ie(b.$slots, "default")
+        Q(h.$slots, "default")
       ], 6)
     ], 2));
   }
 });
-const Pe = {
-  install(s, t) {
-    s.component("SmoothPage", be), s.provide("smoothPageSettings", t || {});
+const ce = A("publicSmoothPage", () => {
+  const e = H();
+  return {
+    currentScrollPosition: e.currentScrollPosition,
+    isEnabled: e.isEnabled,
+    isTriggeringScrollPosition: e.isTriggeringScrollPosition,
+    isMounted: e.isMounted,
+    isInited: e.isInited,
+    deviceType: e.deviceType,
+    reload: e.reload
+  };
+}), de = {
+  install(e, t) {
+    e.component("SmoothPage", le), e.provide("smoothPageSettings", t || {});
   }
 };
 export {
-  Pe as default
+  le as SmoothPage,
+  de as default,
+  ce as useSmoothPage
 };
