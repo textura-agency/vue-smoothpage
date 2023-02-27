@@ -56,7 +56,7 @@ yarn add vue-smoothpage
     const pinia = createPinia()
 
     app.use(pinia)
-    app.use(SmoothPage, settings: SmoothPageSettings)
+    app.use(SmoothPage, {}: SmoothPageSettings)
     app.mount('#app')
 
 Available settings
