@@ -3,20 +3,24 @@
   "private": false,
   "version": "0.0.3",
   "type": "module",
-  "files": ["dist"],
-  "main": "./dist/vue-smoothpage.umd.cjs",
-  "module": "./dist/vue-smoothpage.es.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./styles.css": "./dist/style.css"
+  },
+  "browser": {
+    "./styles.css": "./dist/style.css"
+  },
+  "types": "dist/SmoothPage.d.ts",
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
   "author": {
     "name": "Textura Agency / Den Kravchu",
     "url": "https://textura.agency",
     "email": "projects@textura.agency"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/vue-smoothpage.es.js",
-      "require": "./dist/vue-smoothpage.umd.cjs"
-    },
-    "./dist/style.css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
@@ -28,7 +32,10 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/tsconfig": "^0.1.3",
+    "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vue-tsc": "^1.0.11"

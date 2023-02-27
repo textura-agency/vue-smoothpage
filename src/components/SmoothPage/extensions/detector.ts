@@ -1,6 +1,6 @@
 import DetectWheel from './detectWheel';
 import DetectSwipe from './detectSwipe';
-import { DetectorSettings } from './detector.interface';
+import type { DetectorSettings } from './detector.interface';
 
 class Detector {
   swipe: any

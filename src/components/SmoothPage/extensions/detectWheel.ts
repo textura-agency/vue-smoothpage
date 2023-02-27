@@ -1,5 +1,5 @@
-import { OnScrollProps } from "./detector.interface"
-import { DetectorSettings } from "./detector.interface"
+import type { OnScrollProps } from "./detector.interface"
+import type { DetectorSettings } from "./detector.interface"
 class DetectWheel {
     element
     cb

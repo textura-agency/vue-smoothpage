@@ -1,6 +1,6 @@
 <template>
-    <div class="t-smoothpage">
-        <div ref="contentRef" :style="style" class="t-smoothpage--body">
+    <div :class="[settingsWithDefaults.defaultClassNames.smoothPage , settingsWithDefaults.additionalClassNames.smoothPage]">
+        <div ref="contentRef" :style="style" :class="[settingsWithDefaults.defaultClassNames.smoothPageBody, settingsWithDefaults.additionalClassNames.smoothPageBody]">
             <slot></slot>
         </div>
     </div>
@@ -9,26 +9,36 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, watchEffect, computed, ref, withDefaults, inject } from 'vue'
 import Detector from './extensions/detector'
-import { OnScrollProps } from './extensions/detector.interface'
+import type { OnScrollProps } from './extensions/detector.interface'
 import { useLoop } from './hooks/useLoop'
 import { lerp } from './utils/lerp'
 import { useSmoothPageStore } from './store'
 import { getDeviceType } from './utils/getDeviceType'
-import { DeviceType } from './utils/getDeviceType'
+import type { DeviceType } from './utils/getDeviceType'
 import type { SmoothPageSettings } from './interfaces/settings.interface'
 
 interface SmoothScrollProps {
     preventScroll?: boolean;
 }
-const settings: SmoothPageSettings | undefined = inject('settings')
+const settings: SmoothPageSettings | undefined = inject('smoothPageSettings')
 const settingsWithDefaults = {
-    smooth: settings?.smooth ||  0.2,
-    wheelIntensity: settings?.wheelIntensity || 2,
-    touchmoveIntensity: settings?.touchmoveIntensity || 2,
+    smoothness: settings?.smoothness || 0.075,
+    wheelIntensity: settings?.wheelIntensity || 4,
+    touchmoveIntensity: settings?.touchmoveIntensity || 4,
     minTouchmoveDistance: settings?.minTouchmoveDistance || 40,
     minWidth: settings?.minWidth || 0,
     renderDelay: settings?.renderDelay || 0,
-    enableOnTouchDevices: settings?.enableOnTouchDevices || false
+    enableOnTouchDevices: settings?.enableOnTouchDevices || true,
+    defaultClassNames: {
+        smoothPage: settings?.defaultClassNames?.smoothPage || 't-smoothpage',
+        smoothPageBody: settings?.defaultClassNames?.smoothPageBody || 't-smoothpage--body',
+        smoothPageEnabled: settings?.defaultClassNames?.smoothPageEnabled || 't-smoothpage--enabled',
+    },
+    additionalClassNames: {
+        smoothPage: settings?.additionalClassNames?.smoothPage || '',
+        smoothPageBody: settings?.additionalClassNames?.smoothPageBody || '',
+        smoothPageEnabled: settings?.additionalClassNames?.smoothPageEnabled || '',
+    }
 }
 
 const props = withDefaults(defineProps<SmoothScrollProps>(), {
@@ -50,7 +60,8 @@ onUnmounted(() => {
 })
 watchEffect(() => {
     if (store.isEnabled && !isInited.value) {
-        document.querySelector('html')?.classList?.add('t-smoothscroll--enabled')
+        settingsWithDefaults.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(settingsWithDefaults.defaultClassNames.smoothPageEnabled)
+        settingsWithDefaults.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(settingsWithDefaults.additionalClassNames.smoothPageEnabled)
         detector.value = new Detector(document, onScroll, { 
             wheelIntensity: settingsWithDefaults.wheelIntensity,
             touchmoveIntensity: settingsWithDefaults.touchmoveIntensity,
@@ -60,7 +71,8 @@ watchEffect(() => {
         return
     }
     if (!store.isEnabled && isInited.value) {
-        document.querySelector('html')?.classList?.remove('t-smoothscroll--enabled')
+        settingsWithDefaults.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(settingsWithDefaults.defaultClassNames.smoothPageEnabled)
+        settingsWithDefaults.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(settingsWithDefaults.additionalClassNames.smoothPageEnabled)
         detector.value?.destroy()
         isInited.value = false
     }
@@ -77,7 +89,7 @@ useLoop(() => {
     if (store.isTriggeringScrollPosition) { return }
     store.setIsEnabled(getIsEnabled())
     if (store.isEnabled) {
-        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, settingsWithDefaults.smooth))
+        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, settingsWithDefaults.smoothness))
     } else {
         store.setCurrentScrollPosition(window.scrollY)
         store.setNextScrollPosition(window.scrollY)
@@ -98,3 +110,5 @@ const style = computed(() => {
     return {}
 })
 </script>
+
+<style src="./index.css"></style>

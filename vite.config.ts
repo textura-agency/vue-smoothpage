@@ -1,28 +1,45 @@
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+
+import vue from "@vitejs/plugin-vue";
+import typescript2 from "rollup-plugin-typescript2";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [
+    vue(),
+    typescript2({
+      check: false,
+      include: ["src/components/*/*.vue", "src/SmoothPage.ts"],
+      tsconfigOverride: {
+        compilerOptions: {
+          sourceMap: true,
+          declaration: true,
+          declarationMap: true,
+        },
+        exclude: ["vite.config.ts", "main.ts"],
+      },
+    }),
+  ],
+  // resolve: {
+  //   alias: {
+  //     "@": fileURLToPath(new URL("./src", import.meta.url)),
+  //   },
+  // },
   build: {
+    cssCodeSplit: false,
     lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: [resolve(__dirname, 'src/index.js')],
-      name: 'vue-smoothpage',
-      fileName: (format) => `vue-smoothpage.${format}.js`,
+      entry: "./src/SmoothPage.ts",
+      formats: ["es", "cjs"],
+      name: "SmoothPage",
+      fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
-      external: ['vue', 'pinia'],
+      external: ["vue", "pinia"],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
-          vue: 'Vue',
+          vue: "Vue",
         },
       },
     },
   },
-  plugins: [Vue()],
-})
+});

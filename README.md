@@ -26,3 +26,71 @@ Library contains such configurable components for convinient work with smooth sc
 
 ### Examples of Websites using SmoothPage Library
 - https://chat-liker.vercel.app/
+
+## Quick start
+
+### Installation
+
+#### npm
+
+For module bundlers such as Webpack or Browserify.
+
+```shell
+npm i vue-smoothpage
+```
+
+```shell
+yarn add vue-smoothpage
+```
+
+**1. First install package in main file**
+
+    <!-- main.ts -->
+    import { createApp } from "vue";
+    import App from "./App.vue";
+    import SmoothPage from "vue-smoothpage";
+    import { createPinia } from "pinia"; // pinia is required (may be would be deleted in future)
+    import 'vue-smoothpage/styles.css' // styles is required for correct displaying
+
+    const app = createApp(App)
+    const pinia = createPinia()
+
+    app.use(pinia)
+    app.use(SmoothPage, settings: SmoothPageSettings)
+    app.mount('#app')
+
+Available settings
+
+    interface SmoothPageSettings {
+        smoothness?: number; // 0.075 by default
+        wheelIntensity?: number; // 4 by default
+        minWidth?: number; // 0 by default
+        renderDelay?: number; // 0 by default
+        enableOnTouchDevices?: boolean; // true by default
+        touchmoveIntensity?: number; // 4 by default
+        minTouchmoveDistance?: number; // 40 (px) by default
+        defaultClassNames?: {
+            smoothPage?: string; // 't-smoothpage' by default
+            smoothPageBody?: string; // 't-smoothpage--body' by default
+            smoothPageEnabled?: string; // 't-smoothpage--enabled' by default
+        },
+        additionalClassNames?: {
+            smoothPage?: string; // '' by default
+            smoothPageBody?: string; // '' by default
+            smoothPageEnabled?: string; // '' by default
+        }
+    }
+
+**2. Then use component in layout or smth like that**
+
+    <!-- layout.ts -->
+    <template>
+        <header/>
+        <smooth-page :prevent-scroll="isPageLoaded">
+            <slot/>
+        </smooth-page>
+    </template>
+
+preventScroll is a dynamic prop
+
+
