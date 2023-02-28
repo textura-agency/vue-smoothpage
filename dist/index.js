@@ -105,7 +105,7 @@ const ie = (e, t = 0) => {
   function n(o) {
     s.value && (o - l.value > t && (e(), l.value = performance.now()), requestAnimationFrame(n));
   }
-}, le = (e, t, s = 0.2) => e + (t - e) * s, z = A("privateSmoothPage", () => {
+}, le = (e, t, s = 0.2) => t === 0 && e < 0.1 ? 0 : e + (t - e) * s, z = A("privateSmoothPage", () => {
   const e = c(0), t = c(0), s = c(!1), l = c(!1), n = c(!1), o = c(!1), f = c("desktop"), S = c(!1), N = c(!1), C = c(0), p = (i) => {
     e.value = i;
   }, T = (i) => {

@@ -114,7 +114,7 @@ function getIsEnabled() {
     }
 
     if (mergedSettings.enableOnTouchDevices) { 
-        return  window.innerWidth >= mergedSettings.minWidth
+        return window.innerWidth >= mergedSettings.minWidth
     }
 
     return store.deviceType === 'desktop' && window.innerWidth >= mergedSettings.minWidth

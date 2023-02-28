@@ -1,5 +1,5 @@
 <template>
-    <smooth-page :settings="{ minWidth: 1000, resetScrollPositionOnStateChanging: true }">
+    <smooth-page :settings="{ minWidth: 1000, smoothness: 0.2 }">
         <div class="container">
             <div @click="reload()"  class="button">Reload</div>
             <div @click="destroy()"  class="button">Destroy</div>
