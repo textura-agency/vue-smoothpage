@@ -9,6 +9,7 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
         minWidth: settings?.minWidth || 0,
         renderDelay: settings?.renderDelay || 0,
         enableOnTouchDevices: settings?.enableOnTouchDevices || true,
+        resetScrollPositionOnStateChanging: settings?.resetScrollPositionOnStateChanging || false,
         defaultClassNames: {
             smoothPage: settings?.defaultClassNames?.smoothPage || 't-smoothpage',
             smoothPageBody: settings?.defaultClassNames?.smoothPageBody || 't-smoothpage--body',

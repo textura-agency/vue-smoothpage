@@ -6,6 +6,7 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     minWidth: any;
     renderDelay: any;
     enableOnTouchDevices: any;
+    resetScrollPositionOnStateChanging: any;
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;

@@ -6,6 +6,7 @@ interface SmoothPageSettings {
     enableOnTouchDevices?: boolean;
     touchmoveIntensity?: number;
     minTouchmoveDistance?: number;
+    resetScrollPositionOnStateChanging?: boolean;
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;

@@ -31,10 +31,6 @@ Library contains such configurable components for convinient work with smooth sc
 
 ### Installation
 
-#### npm
-
-For module bundlers such as Webpack or Browserify.
-
 ```shell
 npm i vue-smoothpage
 ```
@@ -69,6 +65,7 @@ Available settings
         enableOnTouchDevices?: boolean; // true by default
         touchmoveIntensity?: number; // 4 by default
         minTouchmoveDistance?: number; // 40 (px) by default
+        resetScrollPositionOnStateChanging?: boolean; // false by default
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default
@@ -128,6 +125,8 @@ That hook provide you opportunity to read almost all states of the SmoothPage (f
     } = useSmoothPage()
 
 Methods "reload( resetPosition?: boolean )", "destroy( resetPosition?: boolean )", "init( resetPosition?: boolean )" accept prop "resetPosition" (by default is false), which reset scroll position (set position to 0 instantly)
+
+**if "resetScrollPositionOnStateChanging" set to "true" the scroll position will reset anyway**
 
 
 

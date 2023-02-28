@@ -63,6 +63,11 @@ function init() {
         touchmoveIntensity: mergedSettings.touchmoveIntensity,
         minTouchmoveDistance: mergedSettings.minTouchmoveDistance
     })
+    if (mergedSettings.resetScrollPositionOnStateChanging) {
+        store.setCurrentScrollPosition(0)
+        store.setNextScrollPosition(0)
+        window.scroll(0, 0)
+    }
     store.setIsInited(true)
     store.setNeedReload(false)
 }
@@ -70,7 +75,13 @@ function destroy() {
     mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.defaultClassNames.smoothPageEnabled)
     mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.additionalClassNames.smoothPageEnabled)
     detector.value?.destroy()
-    window.scroll(0, store.savedCurrentScrollPositionForDestroy)
+    if (mergedSettings.resetScrollPositionOnStateChanging) {
+        store.setCurrentScrollPosition(0)
+        store.setNextScrollPosition(0)
+        window.scroll(0, 0)
+    } else {
+        window.scroll(0, store.savedCurrentScrollPositionForDestroy)
+    }
     store.setIsInited(false)
 }
 watchEffect(() => {
