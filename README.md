@@ -122,9 +122,12 @@ That hook provide you opportunity to read almost all states of the SmoothPage (f
         isInited, // readonly
         deviceType, // readonly (could be "desktop", "laptop", "mobile")
 
-        reload // method, reload SmoothScroll
+        reload // method reloads SmoothPage
+        destroy // method destroys SmoothPage
+        init // method init SmoothPage (to get effect SmoothPage has to be destroyed before)
     } = useSmoothPage()
 
+Methods "reload( resetPosition?: boolean )", "destroy( resetPosition?: boolean )", "init( resetPosition?: boolean )" accept prop "resetPosition" (by default is false), which reset scroll position (set position to 0 instantly)
 
 
 

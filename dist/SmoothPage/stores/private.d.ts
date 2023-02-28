@@ -7,6 +7,8 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isInited: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<string>;
     needReload: import("vue").Ref<boolean>;
+    isDestroyedByUser: import("vue").Ref<boolean>;
+    savedCurrentScrollPositionForDestroy: import("vue").Ref<number>;
     setCurrentScrollPosition: (value: any) => void;
     setIsEnabled: (value: any) => void;
     setNextScrollPosition: (value: any) => void;
@@ -15,8 +17,11 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsInited: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
+    setSavedCurrentScrollPositionForDestroy: (value: any) => void;
     reload: (resetPosition?: boolean) => void;
-}, "currentScrollPosition" | "isEnabled" | "nextScrollPosition" | "isTriggeringScrollPosition" | "isMounted" | "isInited" | "deviceType" | "needReload">>, Pick<{
+    destroy: (resetPosition?: boolean) => void;
+    init: (resetPosition?: boolean) => void;
+}, "currentScrollPosition" | "isEnabled" | "nextScrollPosition" | "isTriggeringScrollPosition" | "isMounted" | "isInited" | "deviceType" | "needReload" | "isDestroyedByUser" | "savedCurrentScrollPositionForDestroy">>, Pick<{
     currentScrollPosition: import("vue").Ref<number>;
     isEnabled: import("vue").Ref<boolean>;
     nextScrollPosition: import("vue").Ref<number>;
@@ -25,6 +30,8 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isInited: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<string>;
     needReload: import("vue").Ref<boolean>;
+    isDestroyedByUser: import("vue").Ref<boolean>;
+    savedCurrentScrollPositionForDestroy: import("vue").Ref<number>;
     setCurrentScrollPosition: (value: any) => void;
     setIsEnabled: (value: any) => void;
     setNextScrollPosition: (value: any) => void;
@@ -33,7 +40,10 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsInited: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
+    setSavedCurrentScrollPositionForDestroy: (value: any) => void;
     reload: (resetPosition?: boolean) => void;
+    destroy: (resetPosition?: boolean) => void;
+    init: (resetPosition?: boolean) => void;
 }, never>, Pick<{
     currentScrollPosition: import("vue").Ref<number>;
     isEnabled: import("vue").Ref<boolean>;
@@ -43,6 +53,8 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isInited: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<string>;
     needReload: import("vue").Ref<boolean>;
+    isDestroyedByUser: import("vue").Ref<boolean>;
+    savedCurrentScrollPositionForDestroy: import("vue").Ref<number>;
     setCurrentScrollPosition: (value: any) => void;
     setIsEnabled: (value: any) => void;
     setNextScrollPosition: (value: any) => void;
@@ -51,6 +63,9 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsInited: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
+    setSavedCurrentScrollPositionForDestroy: (value: any) => void;
     reload: (resetPosition?: boolean) => void;
-}, "setCurrentScrollPosition" | "setIsEnabled" | "setNextScrollPosition" | "setIsTriggeringScrollPosition" | "setIsMounted" | "setIsInited" | "setDeviceType" | "setNeedReload" | "reload">>;
+    destroy: (resetPosition?: boolean) => void;
+    init: (resetPosition?: boolean) => void;
+}, "setCurrentScrollPosition" | "setIsEnabled" | "setNextScrollPosition" | "setIsTriggeringScrollPosition" | "setIsMounted" | "setIsInited" | "setDeviceType" | "setNeedReload" | "setSavedCurrentScrollPositionForDestroy" | "reload" | "destroy" | "init">>;
 //# sourceMappingURL=private.d.ts.map

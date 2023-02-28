@@ -10,6 +10,6 @@
      },
   },
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["src/main.ts"],
+  "exclude": ["src/main.ts", "src/App.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

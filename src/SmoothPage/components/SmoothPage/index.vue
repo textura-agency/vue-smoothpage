@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, watchEffect, computed, ref, withDefaults, inject } from 'vue'
+import { onMounted, onUnmounted, watchEffect, reactive, computed, ref, withDefaults, inject } from 'vue'
 import Detector from './extensions/detector'
 import type { OnScrollProps } from './extensions/detector.interface'
 import { useLoop } from '../../hooks/useLoop'
@@ -28,12 +28,10 @@ const props = withDefaults(defineProps<SmoothScrollProps>(), {
 
 const settings: SmoothPageSettings | undefined = inject('smoothPageSettings')
 const settingsWithDefaults = getSettingsWithDefaults(settings)
-// todo: fix merged settings, now that doesnt work
-const mergedSettings = computed(() => {
-    return {
-        ...settingsWithDefaults,
-        ...props?.settings
-    }
+// todo: fix reload issue, when u change "settings" prop in component directly
+const mergedSettings = reactive({
+    ...settingsWithDefaults,
+    ...(props?.settings || {}) //mb should de removed?
 })
 
 const store = useSmoothPageStore()
@@ -58,28 +56,26 @@ watchEffect(() => {
     }
 })
 function init() {
-    mergedSettings.value.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.value.defaultClassNames.smoothPageEnabled)
-    mergedSettings.value.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.value.additionalClassNames.smoothPageEnabled)
+    mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.defaultClassNames.smoothPageEnabled)
+    mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.additionalClassNames.smoothPageEnabled)
     detector.value = new Detector(document, onScroll, { 
-        wheelIntensity: mergedSettings.value.wheelIntensity,
-        touchmoveIntensity: mergedSettings.value.touchmoveIntensity,
-        minTouchmoveDistance: mergedSettings.value.minTouchmoveDistance
+        wheelIntensity: mergedSettings.wheelIntensity,
+        touchmoveIntensity: mergedSettings.touchmoveIntensity,
+        minTouchmoveDistance: mergedSettings.minTouchmoveDistance
     })
     store.setIsInited(true)
+    store.setNeedReload(false)
 }
 function destroy() {
-    mergedSettings.value.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.value.defaultClassNames.smoothPageEnabled)
-    mergedSettings.value.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.value.additionalClassNames.smoothPageEnabled)
+    mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.defaultClassNames.smoothPageEnabled)
+    mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.additionalClassNames.smoothPageEnabled)
     detector.value?.destroy()
+    window.scroll(0, store.savedCurrentScrollPositionForDestroy)
     store.setIsInited(false)
 }
 watchEffect(() => {
     if (store.needReload) {
         destroy()
-        setTimeout(() => {
-            init()
-            store.setNeedReload(false)
-        }, 0)
     }
 })
 function onScroll(scrollProps: OnScrollProps) {
@@ -94,17 +90,23 @@ useLoop(() => {
     if (store.isTriggeringScrollPosition) { return }
     store.setIsEnabled(getIsEnabled())
     if (store.isEnabled) {
-        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, mergedSettings.value.smoothness))
+        store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, mergedSettings.smoothness))
+        store.setSavedCurrentScrollPositionForDestroy(store.currentScrollPosition) 
     } else {
         store.setCurrentScrollPosition(window.scrollY)
         store.setNextScrollPosition(window.scrollY)
     }
-}, mergedSettings.value.renderDelay)
+}, mergedSettings.renderDelay)
 function getIsEnabled() {
-    if (mergedSettings.value.enableOnTouchDevices) { 
-        return window.innerWidth >= mergedSettings.value.minWidth
+    if (store.isDestroyedByUser) {
+        return false
     }
-    return store.deviceType === 'desktop' && window.innerWidth >= mergedSettings.value.minWidth
+
+    if (mergedSettings.enableOnTouchDevices) { 
+        return  window.innerWidth >= mergedSettings.minWidth
+    }
+
+    return store.deviceType === 'desktop' && window.innerWidth >= mergedSettings.minWidth
 }
 const style = computed(() => {
     if (store.isEnabled) {

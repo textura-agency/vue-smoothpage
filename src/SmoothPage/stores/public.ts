@@ -10,7 +10,9 @@ export const useSmoothPage = defineStore('publicSmoothPage', () => {
         isMounted: store.isMounted,
         isInited: store.isInited,
         deviceType: store.deviceType,
-        
-        reload: store.reload
+
+        reload: store.reload,
+        destroy: store.destroy,
+        init: store.init,
     }
 })

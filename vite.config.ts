@@ -20,11 +20,6 @@ export default defineConfig({
       },
     }),
   ],
-  // resolve: {
-  //   alias: {
-  //     "@": fileURLToPath(new URL("./src", import.meta.url)),
-  //   },
-  // },
   build: {
     cssCodeSplit: false,
     lib: {
@@ -41,5 +36,10 @@ export default defineConfig({
         },
       },
     },
+  },
+  resolve: {
+    dedupe: [
+      'vue'
+    ]
   },
 });
