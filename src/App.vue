@@ -1,16 +1,25 @@
 <template>
-    <smooth-page :settings="{ minWidth: 1000, smoothness: 0.2 }">
+    <smooth-page :settings="{ minWidth: 1000, smoothness: 0.2, chromeWheelIntensity: 10, safariWheelIntensity: 7 }">
         <div class="container">
-            <div @click="reload()"  class="button">Reload</div>
-            <div @click="destroy()"  class="button">Destroy</div>
-            <div @click="init()"  class="button">Init</div>
+            <div @click="store.reload()"  class="button">Reload</div>
+            <div @click="store.destroy()"  class="button">Destroy</div>
+            <div @click="store.init()"  class="button">Init</div>
+            <div @click="store.preventScroll(!store.isPreventScroll)"  class="button">Prevent</div>
         </div>
     </smooth-page>
 </template>
 
 <script lang="ts" setup>
+import { onMounted, watchEffect } from 'vue';
 import { SmoothPage, useSmoothPage } from '../dist/index.js';
-const { reload, destroy, init, currentScrollPosition } = useSmoothPage()
+const store = useSmoothPage()
+console.log(store.browser)
+onMounted(() => {
+    console.log(store.browser)
+})
+watchEffect(() => {
+    // console.log(store.currentScrollPosition)
+})
 </script>
 
 <style>

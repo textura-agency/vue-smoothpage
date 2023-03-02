@@ -1,10 +1,24 @@
 interface SmoothPageSettings {
     smoothness?: number; 
     wheelIntensity?: number; 
+    touchmoveIntensity?: number;
+
+    // experimental features
+    safariWheelIntensity?: number;
+    safariTouchmoveIntensity?: number;
+    chromeWheelIntensity?: number;
+    chromeTouchmoveIntensity?: number;
+    operaWheelIntensity?: number;
+    operaTouchmoveIntensity?: number;
+    edgeWheelIntensity?: number;
+    edgeTouchmoveIntensity?: number;
+    mozillaWheelIntensity?: number;
+    mozillaTouchmoveIntensity?: number;
+    // 
+
     minWidth?: number; 
     renderDelay?: number;
     enableOnTouchDevices?: boolean;
-    touchmoveIntensity?: number;
     minTouchmoveDistance?: number;
     resetScrollPositionOnStateChanging?: boolean;
     defaultClassNames?: {

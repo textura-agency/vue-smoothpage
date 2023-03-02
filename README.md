@@ -4,7 +4,7 @@ Ease to use, light, adaptive & configurable smooth page scroll for Vue 3. **no g
 
 SmoothPage provide you a full control of scroll behavior. When it disabled (may be you want disable it on mobile devices for optimization porpose) it uses built-in browser html/css solutions to reach the same effectm(for example horizontal scroll) as during the SmoothPage scroll enabled
 
-## *SmoothPage library now in development*
+## *SmoothPage library is in development*
 
 ### Features at release:
 Library contains such configurable components for convinient work with smooth scroll:
@@ -60,10 +60,24 @@ Available settings
     interface SmoothPageSettings {
         smoothness?: number; // 0.075 by default
         wheelIntensity?: number; // 4 by default
+        touchmoveIntensity?: number; // 4 by default
+
+        // experimental features
+        safariWheelIntensity?: number; // equals wheelIntensity by default
+        safariTouchmoveIntensity?: number; // equals touchmoveIntensity by default
+        chromeWheelIntensity?: number; // equals wheelIntensity by default
+        chromeTouchmoveIntensity?: number; // equals touchmoveIntensity by default
+        operaWheelIntensity?: number; // equals wheelIntensity by default
+        operaTouchmoveIntensity?: number; // equals touchmoveIntensity by default
+        edgeWheelIntensity?: number; // equals wheelIntensity by default
+        edgeTouchmoveIntensity?: number; // equals touchmoveIntensity by default
+        mozillaWheelIntensity?: number; // equals wheelIntensity by default
+        mozillaTouchmoveIntensity?: number; // equals touchmoveIntensity by default
+        // 
+
         minWidth?: number; // 0 by default
         renderDelay?: number; // 0 by default
         enableOnTouchDevices?: boolean; // true by default
-        touchmoveIntensity?: number; // 4 by default
         minTouchmoveDistance?: number; // 40 (px) by default
         resetScrollPositionOnStateChanging?: boolean; // false by default
         defaultClassNames?: {
@@ -83,12 +97,10 @@ Available settings
     <!-- layout.ts -->
     <template>
         <header/>
-        <smooth-page :prevent-scroll="isPageLoaded">
+        <smooth-page>
             <slot/>
         </smooth-page>
     </template>
-
-preventScroll is a dynamic prop
 
 **If you dont want to set up SmoothPage via app.use(), you can directly import it**
 
@@ -97,7 +109,7 @@ Most of them can work dynamicaly, for example "minWidth".
 
     <template>
         <header/>
-        <smooth-page :prevent-scroll="isPageLoaded" :settings={...}>
+        <smooth-page :settings={...}>
             <slot/>
         </smooth-page>
     </template>
@@ -112,12 +124,18 @@ Most of them can work dynamicaly, for example "minWidth".
 That hook provide you opportunity to read almost all states of the SmoothPage (for example current smooth scroll position) & some methods.
 
     const {
+        settings, // readonly (SmoothPageSettings type)
+
         currentScrollPosition, // readonly current scroll position
         isEnabled,  // readonly if scroll is enabled (depends on props "minWidth" & "enableOnTouchDevices")
-        isTriggeringScrollPosition, // readonly (used by AnchorLink component)
+        isTriggeringScrollPosition, // readonly (will be used by AnchorLink component)
         isMounted, // readonly
         isInited, // readonly
-        deviceType, // readonly (could be "desktop", "laptop", "mobile")
+        deviceType, // readonly ( "DESKTOP" | "LAPTOP" | "MOBILE" )
+        browser, // readonly ( "MS_EDGE" | "EDGE_CHROMIUM_BASED" | "OPERA" | "CHROME" | "MS_IE" | "MOZILLA_FIREFOX" | "SAFARI" | "OTHER" )
+
+        isPreventScroll, // readonly (true | false)
+        preventScroll, // method set preventScroll
 
         reload // method reloads SmoothPage
         destroy // method destroys SmoothPage
@@ -125,6 +143,8 @@ That hook provide you opportunity to read almost all states of the SmoothPage (f
     } = useSmoothPage()
 
 Methods "reload( resetPosition?: boolean )", "destroy( resetPosition?: boolean )", "init( resetPosition?: boolean )" accept prop "resetPosition" (by default is false), which reset scroll position (set position to 0 instantly)
+
+Method "preventScroll( value: boolean )" accept "true" or "false" parameteries
 
 **if "resetScrollPositionOnStateChanging" set to "true" the scroll position will reset anyway**
 

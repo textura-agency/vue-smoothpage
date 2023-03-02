@@ -1,11 +1,11 @@
 import type { OnScrollProps } from "./detector.interface"
-import type { DetectorSettings } from "./detector.interface"
+import type { BrowserSettings } from "./detector.interface"
 class DetectWheel {
     element
     cb
-    settings: DetectorSettings
+    settings: BrowserSettings
 
-    constructor(element: any, cb: any, settings: DetectorSettings) {
+    constructor(element: any, cb: any, settings: BrowserSettings) {
         this.element = element
         this.cb = cb
         this.settings = settings

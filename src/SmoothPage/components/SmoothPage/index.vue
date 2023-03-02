@@ -16,31 +16,41 @@ import { useSmoothPageStore } from '../../stores/private'
 import { getDeviceType } from '../../utils/getDeviceType'
 import type { SmoothPageSettings } from '../../interfaces/settings.interface'
 import { getSettingsWithDefaults } from '../../utils/getSettingsWithDefaults'
+import { getBrowser } from '../../utils/getBrowser'
+import { DeviceTypes } from '../../utils/getDeviceType'
 
 interface SmoothScrollProps {
-    preventScroll?: boolean;
+    // preventScroll?: boolean;
     settings?: SmoothPageSettings;
 }
 
 const props = withDefaults(defineProps<SmoothScrollProps>(), {
-    preventScroll: false,
+    // preventScroll: false,
 })
+
+const store = useSmoothPageStore()
 
 const settings: SmoothPageSettings | undefined = inject('smoothPageSettings')
 const settingsWithDefaults = getSettingsWithDefaults(settings)
 // todo: fix reload issue, when u change "settings" prop in component directly
+// todo: update defaults, to extend wheels from props.settings
 const mergedSettings = reactive({
     ...settingsWithDefaults,
     ...(props?.settings || {}) //mb should de removed?
 })
 
-const store = useSmoothPageStore()
+watchEffect(() => {
+    store.setSettings(mergedSettings)
+})
+
 const detector = ref(null as any)
 const contentRef = ref(null as any)
 
 onMounted(() => {
+    store.setSettings(mergedSettings)
     store.setDeviceType(getDeviceType())
     store.setIsEnabled(getIsEnabled())
+    store.setBrowser(getBrowser())
     store.setIsMounted(true)
 })
 onUnmounted(() => {
@@ -58,11 +68,7 @@ watchEffect(() => {
 function init() {
     mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.defaultClassNames.smoothPageEnabled)
     mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.additionalClassNames.smoothPageEnabled)
-    detector.value = new Detector(document, onScroll, { 
-        wheelIntensity: mergedSettings.wheelIntensity,
-        touchmoveIntensity: mergedSettings.touchmoveIntensity,
-        minTouchmoveDistance: mergedSettings.minTouchmoveDistance
-    })
+    detector.value = new Detector(document, onScroll, mergedSettings, store.browser)
     if (mergedSettings.resetScrollPositionOnStateChanging) {
         store.setCurrentScrollPosition(0)
         store.setNextScrollPosition(0)
@@ -90,13 +96,13 @@ watchEffect(() => {
     }
 })
 function onScroll(scrollProps: OnScrollProps) {
-    if (props.preventScroll) { return }
+    if (store.isPreventScroll) { return }
     if (!contentRef.value) { return }
     const contentHeight = contentRef.value.getBoundingClientRect().height - window.innerHeight
     store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, contentHeight)))
 }
 useLoop(() => {
-    if (props.preventScroll) { return }
+    if (store.isPreventScroll) { return }
     if (!store.isMounted) { return }
     if (store.isTriggeringScrollPosition) { return }
     store.setIsEnabled(getIsEnabled())
@@ -117,7 +123,7 @@ function getIsEnabled() {
         return window.innerWidth >= mergedSettings.minWidth
     }
 
-    return store.deviceType === 'desktop' && window.innerWidth >= mergedSettings.minWidth
+    return store.deviceType === DeviceTypes.DESKTOP && window.innerWidth >= mergedSettings.minWidth
 }
 const style = computed(() => {
     if (store.isEnabled) {

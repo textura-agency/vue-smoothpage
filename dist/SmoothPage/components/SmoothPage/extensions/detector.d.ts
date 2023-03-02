@@ -5,7 +5,7 @@ declare class Detector {
     scroll: DetectWheel | undefined;
     keyboard: any;
     callback: any;
-    constructor(dom: any, callback: any, settings: any);
+    constructor(dom: any, callback: any, settings: any, browser: any);
     controlScroll(props: any): void;
     destroy(): void;
 }

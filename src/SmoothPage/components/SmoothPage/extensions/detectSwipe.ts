@@ -1,5 +1,5 @@
 import type { OnScrollProps } from "./detector.interface"
-import type { DetectorSettings } from "./detector.interface"
+import type { BrowserSettings } from "./detector.interface"
 class DetectSwipe {
     #swipe_det = {
         sY: 0,
@@ -10,9 +10,9 @@ class DetectSwipe {
     cb
     deltaY: any
     minDelta
-    settings: DetectorSettings
+    settings: BrowserSettings
 
-    constructor(element: any, callbalck: any, settings: DetectorSettings) {
+    constructor(element: any, callbalck: any, settings: BrowserSettings) {
         this.cb = callbalck
         this.#element = element
         this.#start()

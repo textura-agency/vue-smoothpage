@@ -1,1 +1,1 @@
-{"version":3,"file":"getDeviceType.d.ts","sourceRoot":"","sources":["../../../src/SmoothPage/utils/getDeviceType.ts"],"names":[],"mappings":"AAAA,wBAAgB,aAAa,oCAQ5B"}
+{"version":3,"file":"getDeviceType.d.ts","sourceRoot":"","sources":["../../../src/SmoothPage/utils/getDeviceType.ts"],"names":[],"mappings":"AAAA,eAAO,IAAI,WAAW,KAKD,CAAC;AACtB,wBAAgB,aAAa,oCAQ5B"}
