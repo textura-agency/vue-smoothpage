@@ -12,11 +12,13 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     edgeTouchmoveIntensity: any;
     mozillaWheelIntensity: any;
     mozillaTouchmoveIntensity: any;
+    watchIsEnabledOn: any;
     minTouchmoveDistance: any;
     minWidth: any;
     renderDelay: any;
     enableOnTouchDevices: any;
     resetScrollPositionOnStateChanging: any;
+    reloadPageOnStateChanging: any;
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;

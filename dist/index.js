@@ -1,19 +1,19 @@
-var ee = Object.defineProperty;
-var oe = (e, t, o) => t in e ? ee(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
-var d = (e, t, o) => (oe(e, typeof t != "symbol" ? t + "" : t, o), o), A = (e, t, o) => {
+var te = Object.defineProperty;
+var ne = (e, t, o) => t in e ? te(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
+var d = (e, t, o) => (ne(e, typeof t != "symbol" ? t + "" : t, o), o), A = (e, t, o) => {
   if (!t.has(e))
     throw TypeError("Cannot " + o);
 };
-var s = (e, t, o) => (A(e, t, "read from private field"), o ? o.call(e) : t.get(e)), D = (e, t, o) => {
+var c = (e, t, o) => (A(e, t, "read from private field"), o ? o.call(e) : t.get(e)), T = (e, t, o) => {
   if (t.has(e))
     throw TypeError("Cannot add the same private member more than once");
   t instanceof WeakSet ? t.add(e) : t.set(e, o);
-}, G = (e, t, o, l) => (A(e, t, "write to private field"), l ? l.call(e, o) : t.set(e, o), o);
+}, G = (e, t, o, a) => (A(e, t, "write to private field"), a ? a.call(e, o) : t.set(e, o), o);
 var E = (e, t, o) => (A(e, t, "access private method"), o);
-import { ref as c, onMounted as $, onUnmounted as q, defineComponent as te, inject as ne, reactive as le, watchEffect as L, computed as S, openBlock as ae, createElementBlock as re, normalizeClass as U, createElementVNode as ie, normalizeStyle as se, unref as ce, renderSlot as he } from "vue";
+import { ref as s, onMounted as $, onUnmounted as q, defineComponent as ae, inject as le, reactive as re, watchEffect as L, computed as S, openBlock as ie, createElementBlock as se, normalizeClass as U, createElementVNode as ce, normalizeStyle as he, unref as de, renderSlot as ue } from "vue";
 import { defineStore as K } from "pinia";
-class de {
-  constructor(t, o, l) {
+class me {
+  constructor(t, o, a) {
     d(this, "element");
     d(this, "cb");
     d(this, "settings");
@@ -23,7 +23,7 @@ class de {
         wheel: t.deltaY * this.settings.wheelIntensity
       });
     }.bind(this));
-    this.element = t, this.cb = o, this.settings = l, this.subscribe();
+    this.element = t, this.cb = o, this.settings = a, this.subscribe();
   }
   subscribe() {
     this.element.addEventListener("wheel", this.listener);
@@ -32,27 +32,27 @@ class de {
     this.element.removeEventListener("wheel", this.listener);
   }
 }
-var y, P, Y, X, p, B, N, x, _, F;
-class ue {
-  constructor(t, o, l) {
-    D(this, Y);
-    D(this, p);
-    D(this, N);
-    D(this, _);
-    D(this, y, {
+var I, P, Y, X, N, B, _, x, W, F;
+class ye {
+  constructor(t, o, a) {
+    T(this, Y);
+    T(this, N);
+    T(this, _);
+    T(this, W);
+    T(this, I, {
       sY: 0,
       eY: 0
     });
     d(this, "prevY", 0);
-    D(this, P, void 0);
+    T(this, P, void 0);
     d(this, "cb");
     d(this, "deltaY");
     d(this, "minDelta");
     d(this, "settings");
-    this.cb = o, G(this, P, t), E(this, Y, X).call(this), this.settings = l, this.minDelta = l.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.destroy = this.destroy.bind(this);
+    this.cb = o, G(this, P, t), E(this, Y, X).call(this), this.settings = a, this.minDelta = a.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.destroy = this.destroy.bind(this);
   }
   destroy() {
-    s(this, P).removeEventListener("touchstart", E(this, p, B), !1), s(this, P).removeEventListener("touchmove", E(this, N, x), !1), s(this, P).removeEventListener("touchend", E(this, _, F), !1);
+    c(this, P).removeEventListener("touchstart", E(this, N, B), !1), c(this, P).removeEventListener("touchmove", E(this, _, x), !1), c(this, P).removeEventListener("touchend", E(this, W, F), !1);
   }
   useCallback(t) {
     typeof this.cb == "function" && t && this.cb({
@@ -61,21 +61,21 @@ class ue {
     });
   }
 }
-y = new WeakMap(), P = new WeakMap(), Y = new WeakSet(), X = function() {
-  s(this, P).addEventListener("touchstart", E(this, p, B).bind(this), !1), s(this, P).addEventListener("touchmove", E(this, N, x).bind(this), !1), s(this, P).addEventListener("touchend", E(this, _, F).bind(this), !1);
-}, p = new WeakSet(), B = function(t) {
+I = new WeakMap(), P = new WeakMap(), Y = new WeakSet(), X = function() {
+  c(this, P).addEventListener("touchstart", E(this, N, B).bind(this), !1), c(this, P).addEventListener("touchmove", E(this, _, x).bind(this), !1), c(this, P).addEventListener("touchend", E(this, W, F).bind(this), !1);
+}, N = new WeakSet(), B = function(t) {
   const o = t.touches[0];
-  s(this, y).sY = o.screenY, this.prevY = s(this, y).sY, s(this, y).eY = s(this, y).sY;
-}, N = new WeakSet(), x = function(t) {
+  c(this, I).sY = o.screenY, this.prevY = c(this, I).sY, c(this, I).eY = c(this, I).sY;
+}, _ = new WeakSet(), x = function(t) {
   const o = t.touches[0];
-  this.prevY = s(this, y).eY, s(this, y).eY = o.screenY, this.deltaY = s(this, y).sY - s(this, y).eY;
-  const l = s(this, y).sY - this.prevY;
-  Math.abs(l) > Math.abs(this.deltaY) && (s(this, y).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
-}, _ = new WeakSet(), F = function(t) {
+  this.prevY = c(this, I).eY, c(this, I).eY = o.screenY, this.deltaY = c(this, I).sY - c(this, I).eY;
+  const a = c(this, I).sY - this.prevY;
+  Math.abs(a) > Math.abs(this.deltaY) && (c(this, I).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
+}, W = new WeakSet(), F = function(t) {
   Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
 };
 var b = /* @__PURE__ */ ((e) => (e.MS_EDGE = "MS_EDGE", e.EDGE_CHROMIUM_BASED = "EDGE_CHROMIUM_BASED", e.OPERA = "OPERA", e.CHROME = "CHROME", e.MS_IE = "MS_IE", e.MOZILLA_FIREFOX = "MOZILLA_FIREFOX", e.SAFARI = "SAFARI", e.OTHER = "OTHER", e))(b || {});
-const me = () => {
+const Ie = () => {
   const e = window.navigator.userAgent.toLowerCase();
   switch (!0) {
     case e.indexOf("edge") > -1:
@@ -96,8 +96,8 @@ const me = () => {
       return "OTHER";
   }
 };
-class ye {
-  constructor(t, o, l, h) {
+class fe {
+  constructor(t, o, a, h) {
     d(this, "swipe");
     d(this, "scroll");
     d(this, "keyboard");
@@ -107,25 +107,25 @@ class ye {
       return;
     }
     const n = {
-      wheelIntensity: l.wheelIntensity,
-      touchmoveIntensity: l.touchmoveIntensity,
-      minTouchmoveDistance: l.minTouchmoveDistance,
-      safariWheelIntensity: l.safariWheelIntensity,
-      safariTouchmoveIntensity: l.safariTouchmoveIntensity,
-      chromeWheelIntensity: l.chromeWheelIntensity,
-      chromeTouchmoveIntensity: l.chromeTouchmoveIntensity,
-      operaWheelIntensity: l.operaWheelIntensity,
-      operaTouchmoveIntensity: l.operaTouchmoveIntensity,
-      edgeWheelIntensity: l.edgeWheelIntensity,
-      edgeTouchmoveIntensity: l.edgeTouchmoveIntensity,
-      mozillaWheelIntensity: l.mozillaWheelIntensity,
-      mozillaTouchmoveIntensity: l.mozillaTouchmoveIntensity
+      wheelIntensity: a.wheelIntensity,
+      touchmoveIntensity: a.touchmoveIntensity,
+      minTouchmoveDistance: a.minTouchmoveDistance,
+      safariWheelIntensity: a.safariWheelIntensity,
+      safariTouchmoveIntensity: a.safariTouchmoveIntensity,
+      chromeWheelIntensity: a.chromeWheelIntensity,
+      chromeTouchmoveIntensity: a.chromeTouchmoveIntensity,
+      operaWheelIntensity: a.operaWheelIntensity,
+      operaTouchmoveIntensity: a.operaTouchmoveIntensity,
+      edgeWheelIntensity: a.edgeWheelIntensity,
+      edgeTouchmoveIntensity: a.edgeTouchmoveIntensity,
+      mozillaWheelIntensity: a.mozillaWheelIntensity,
+      mozillaTouchmoveIntensity: a.mozillaTouchmoveIntensity
     }, u = {
-      wheelIntensity: I("WheelIntensity"),
-      touchmoveIntensity: I("TouchmoveIntensity"),
+      wheelIntensity: f("WheelIntensity"),
+      touchmoveIntensity: f("TouchmoveIntensity"),
       minTouchmoveDistance: n.minTouchmoveDistance
     };
-    function I(m) {
+    function f(m) {
       switch (h) {
         case b.SAFARI:
           return n[`safari${m}`];
@@ -142,7 +142,7 @@ class ye {
       }
     }
     this.callback = o || (() => {
-    }), this.scroll = new de(t, this.controlScroll.bind(this), u), this.swipe = new ue(t, this.controlScroll.bind(this), u), this.destroy = this.destroy.bind(this);
+    }), this.scroll = new me(t, this.controlScroll.bind(this), u), this.swipe = new ye(t, this.controlScroll.bind(this), u), this.destroy = this.destroy.bind(this);
   }
   controlScroll(t) {
     this.callback(t);
@@ -151,84 +151,88 @@ class ye {
     this.scroll.unsubscribe(), this.swipe.destroy();
   }
 }
-const fe = (e, t = 0) => {
-  const o = c(!0), l = c(performance.now());
+const ve = (e, t = 0) => {
+  const o = s(!0), a = s(performance.now());
   $(() => h(0)), q(() => o.value = !1);
   function h(n) {
-    o.value && (n - l.value > t && (e(), l.value = performance.now()), requestAnimationFrame(h));
+    o.value && (n - a.value > t && (e(), a.value = performance.now()), requestAnimationFrame(h));
   }
-}, Ie = (e, t, o) => t === 0 && e < 0.1 ? 0 : e + (t - e) * o;
+}, Se = (e, t, o) => t === 0 && e < 0.1 ? 0 : e + (t - e) * o;
 var k = /* @__PURE__ */ ((e) => (e.DESKTOP = "DESKTOP", e.TABLET = "TABLET", e.MOBILE = "MOBILE", e))(k || {});
-function ve() {
+function Pe() {
   const e = navigator.userAgent;
   return /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(e) ? "TABLET" : /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(e) ? "MOBILE" : "DESKTOP";
 }
 const Z = K("privateSmoothPage", () => {
-  const e = c(null), t = c(0), o = c(0), l = c(!1), h = c(!1), n = c(!1), u = c(!1), I = c(k.DESKTOP), m = c(b.OTHER), w = c(!1), O = c(!1), T = c(!1), M = c(0), f = (a) => {
-    e.value = a;
-  }, i = (a) => {
-    t.value = a;
-  }, C = (a) => {
-    h.value = a;
-  }, v = (a) => {
-    o.value = a;
-  }, W = (a) => {
-    l.value = a;
-  }, V = (a) => {
-    n.value = a;
-  }, j = (a) => {
-    u.value = a;
-  }, J = (a) => {
-    I.value = a;
-  }, Q = (a) => {
-    m.value = a;
-  }, H = (a) => {
-    O.value = a;
-  }, z = (a) => {
-    w.value = a;
-  }, g = (a) => {
-    T.value = a;
-  }, R = (a) => {
-    M.value = a;
+  const e = s(null), t = s(0), o = s(0), a = s(!1), h = s(!1), n = s(!1), u = s(!1), f = s(!1), m = s(k.DESKTOP), w = s(b.OTHER), M = s(!1), D = s(!1), p = s(!1), y = s(0), i = (l) => {
+    e.value = l;
+  }, v = (l) => {
+    t.value = l;
+  }, C = (l) => {
+    h.value = l;
+  }, O = (l) => {
+    o.value = l;
+  }, V = (l) => {
+    a.value = l;
+  }, j = (l) => {
+    n.value = l;
+  }, J = (l) => {
+    f.value = l;
+  }, Q = (l) => {
+    u.value = l;
+  }, g = (l) => {
+    m.value = l;
+  }, ee = (l) => {
+    w.value = l;
+  }, H = (l) => {
+    D.value = l;
+  }, z = (l) => {
+    M.value = l;
+  }, oe = (l) => {
+    p.value = l;
+  }, R = (l) => {
+    y.value = l;
   };
   return {
     settings: e,
     currentScrollPosition: t,
     isEnabled: h,
     nextScrollPosition: o,
-    isTriggeringScrollPosition: l,
+    isTriggeringScrollPosition: a,
     isMounted: n,
-    isInited: u,
-    deviceType: I,
-    needReload: O,
-    isDestroyedByUser: w,
-    browser: m,
-    isPreventScroll: T,
-    savedCurrentScrollPositionForDestroy: M,
-    setSettings: f,
-    setCurrentScrollPosition: i,
+    isInited: f,
+    isEarlierMounted: u,
+    deviceType: m,
+    needReload: D,
+    isDestroyedByUser: M,
+    browser: w,
+    isPreventScroll: p,
+    savedCurrentScrollPositionForDestroy: y,
+    setSettings: i,
+    setCurrentScrollPosition: v,
     setIsEnabled: C,
-    setNextScrollPosition: v,
-    setIsTriggeringScrollPosition: W,
-    setIsMounted: V,
-    setIsInited: j,
-    setDeviceType: J,
+    setNextScrollPosition: O,
+    setIsTriggeringScrollPosition: V,
+    setIsMounted: j,
+    setIsInited: J,
+    setIsEarlierMounted: Q,
+    setDeviceType: g,
     setNeedReload: H,
-    setBrowser: Q,
-    preventScroll: g,
+    setBrowser: ee,
+    preventScroll: oe,
     setSavedCurrentScrollPositionForDestroy: R,
-    reload: (a = !1) => {
-      H(!0), a && (i(0), v(0), R(0));
+    reload: (l = !1) => {
+      H(!0), l && (v(0), O(0), R(0));
     },
-    destroy: (a = !1) => {
-      z(!0), a && (i(0), v(0), R(0));
+    destroy: (l = !1) => {
+      z(!0), l && (v(0), O(0), R(0));
     },
-    init: (a = !1) => {
-      z(!1), a && (i(0), v(0), R(0));
+    init: (l = !1) => {
+      z(!1), l && (v(0), O(0), R(0));
     }
   };
-}), Se = (e) => {
-  var t, o, l, h, n, u;
+}), Ee = (e) => {
+  var t, o, a, h, n, u;
   return {
     smoothness: (e == null ? void 0 : e.smoothness) || r.smoothness,
     wheelIntensity: (e == null ? void 0 : e.wheelIntensity) || r.wheelIntensity,
@@ -245,15 +249,17 @@ const Z = K("privateSmoothPage", () => {
     mozillaWheelIntensity: (e == null ? void 0 : e.mozillaWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || r.wheelIntensity,
     mozillaTouchmoveIntensity: (e == null ? void 0 : e.mozillaTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || r.wheelIntensity,
     // 
+    watchIsEnabledOn: (e == null ? void 0 : e.watchIsEnabledOn) || r.watchIsEnabledOn,
     minTouchmoveDistance: (e == null ? void 0 : e.minTouchmoveDistance) || r.minTouchmoveDistance,
     minWidth: (e == null ? void 0 : e.minWidth) || r.minWidth,
     renderDelay: (e == null ? void 0 : e.renderDelay) || r.renderDelay,
     enableOnTouchDevices: (e == null ? void 0 : e.enableOnTouchDevices) || r.enableOnTouchDevices,
     resetScrollPositionOnStateChanging: (e == null ? void 0 : e.resetScrollPositionOnStateChanging) || r.resetScrollPositionOnStateChanging,
+    reloadPageOnStateChanging: (e == null ? void 0 : e.reloadPageOnStateChanging) || r.reloadPageOnStateChanging,
     defaultClassNames: {
       smoothPage: ((t = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : t.smoothPage) || r.defaultClassNames.smoothPage,
       smoothPageBody: ((o = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : o.smoothPageBody) || r.defaultClassNames.smoothPageBody,
-      smoothPageEnabled: ((l = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : l.smoothPageEnabled) || r.defaultClassNames.smoothPageEnabled
+      smoothPageEnabled: ((a = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : a.smoothPageEnabled) || r.defaultClassNames.smoothPageEnabled
     },
     additionalClassNames: {
       smoothPage: ((h = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : h.smoothPage) || r.additionalClassNames.smoothPage,
@@ -266,10 +272,12 @@ const Z = K("privateSmoothPage", () => {
   wheelIntensity: 4,
   touchmoveIntensity: 4,
   minTouchmoveDistance: 40,
+  watchIsEnabledOn: "load-resize",
   minWidth: 0,
   renderDelay: 0,
   enableOnTouchDevices: !0,
   resetScrollPositionOnStateChanging: !1,
+  reloadPageOnStateChanging: !1,
   defaultClassNames: {
     smoothPage: "t-smoothpage",
     smoothPageBody: "t-smoothpage--body",
@@ -280,13 +288,13 @@ const Z = K("privateSmoothPage", () => {
     smoothPageBody: "",
     smoothPageEnabled: ""
   }
-}, Pe = /* @__PURE__ */ te({
+}, be = /* @__PURE__ */ ae({
   __name: "index",
   props: {
     settings: null
   },
   setup(e) {
-    const t = e, o = Z(), l = ne("smoothPageSettings"), h = Se(l), n = le({
+    const t = e, o = Z(), a = le("smoothPageSettings", void 0), h = Ee(a), n = re({
       ...h,
       ...(t == null ? void 0 : t.settings) || {}
       //mb should de removed?
@@ -294,9 +302,9 @@ const Z = K("privateSmoothPage", () => {
     L(() => {
       o.setSettings(n);
     });
-    const u = c(null), I = c(null);
+    const u = s(null), f = s(null);
     $(() => {
-      o.setSettings(n), o.setDeviceType(ve()), o.setIsEnabled(T()), o.setBrowser(me()), o.setIsMounted(!0);
+      o.setSettings(n), o.setDeviceType(Pe()), o.setIsEnabled(D()), o.setBrowser(Ie()), o.setIsMounted(!0), setTimeout(() => o.setIsEarlierMounted(!0), 100);
     }), q(() => {
       o.setIsMounted(!1);
     }), L(() => {
@@ -307,55 +315,55 @@ const Z = K("privateSmoothPage", () => {
       !o.isEnabled && o.isInited && w();
     });
     function m() {
-      var f, i, C, v;
-      n.defaultClassNames.smoothPageEnabled && ((i = (f = document.querySelector("html")) == null ? void 0 : f.classList) == null || i.add(n.defaultClassNames.smoothPageEnabled)), n.additionalClassNames.smoothPageEnabled && ((v = (C = document.querySelector("html")) == null ? void 0 : C.classList) == null || v.add(n.additionalClassNames.smoothPageEnabled)), u.value = new ye(document, O, n, o.browser), n.resetScrollPositionOnStateChanging && (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)), o.setIsInited(!0), o.setNeedReload(!1);
+      var y, i, v, C;
+      n.defaultClassNames.smoothPageEnabled && ((i = (y = document.querySelector("html")) == null ? void 0 : y.classList) == null || i.add(n.defaultClassNames.smoothPageEnabled)), n.additionalClassNames.smoothPageEnabled && ((C = (v = document.querySelector("html")) == null ? void 0 : v.classList) == null || C.add(n.additionalClassNames.smoothPageEnabled)), u.value = new fe(document, M, n, o.browser), n.resetScrollPositionOnStateChanging && (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)), o.setIsInited(!0), o.setNeedReload(!1), n.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100);
     }
     function w() {
-      var f, i, C, v, W;
-      n.defaultClassNames.smoothPageEnabled && ((i = (f = document.querySelector("html")) == null ? void 0 : f.classList) == null || i.remove(n.defaultClassNames.smoothPageEnabled)), n.additionalClassNames.smoothPageEnabled && ((v = (C = document.querySelector("html")) == null ? void 0 : C.classList) == null || v.remove(n.additionalClassNames.smoothPageEnabled)), (W = u.value) == null || W.destroy(), n.resetScrollPositionOnStateChanging ? (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)) : window.scroll(0, o.savedCurrentScrollPositionForDestroy), o.setIsInited(!1);
+      var y, i, v, C, O;
+      n.defaultClassNames.smoothPageEnabled && ((i = (y = document.querySelector("html")) == null ? void 0 : y.classList) == null || i.remove(n.defaultClassNames.smoothPageEnabled)), n.additionalClassNames.smoothPageEnabled && ((C = (v = document.querySelector("html")) == null ? void 0 : v.classList) == null || C.remove(n.additionalClassNames.smoothPageEnabled)), (O = u.value) == null || O.destroy(), n.resetScrollPositionOnStateChanging ? (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)) : window.scroll(0, o.savedCurrentScrollPositionForDestroy), o.setIsInited(!1), n.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100);
     }
     L(() => {
       o.needReload && w();
     });
-    function O(f) {
-      if (o.isPreventScroll || !I.value)
+    function M(y) {
+      if (o.isPreventScroll || !f.value)
         return;
-      const i = I.value.getBoundingClientRect().height - window.innerHeight;
-      o.setNextScrollPosition(Math.max(0, Math.min(o.currentScrollPosition + f.wheel, i)));
+      const i = f.value.getBoundingClientRect().height - window.innerHeight;
+      o.setNextScrollPosition(Math.max(0, Math.min(o.currentScrollPosition + y.wheel, i)));
     }
-    fe(() => {
-      o.isPreventScroll || o.isMounted && (o.isTriggeringScrollPosition || (o.setIsEnabled(T()), o.isEnabled ? (o.setCurrentScrollPosition(Ie(o.currentScrollPosition, o.nextScrollPosition, n.smoothness)), o.setSavedCurrentScrollPositionForDestroy(o.currentScrollPosition)) : (o.setCurrentScrollPosition(window.scrollY), o.setNextScrollPosition(window.scrollY))));
+    ve(() => {
+      o.isPreventScroll || o.isMounted && (o.isTriggeringScrollPosition || (n.watchIsEnabledOn === "load-resize" && o.setIsEnabled(D()), o.isEnabled ? (o.setCurrentScrollPosition(Se(o.currentScrollPosition, o.nextScrollPosition, n.smoothness)), o.setSavedCurrentScrollPositionForDestroy(o.currentScrollPosition)) : (o.setCurrentScrollPosition(window.scrollY), o.setNextScrollPosition(window.scrollY))));
     }, n.renderDelay);
-    function T() {
+    function D() {
       return o.isDestroyedByUser ? !1 : (n.enableOnTouchDevices || o.deviceType === k.DESKTOP) && window.innerWidth >= n.minWidth;
     }
-    const M = S(() => o.isEnabled ? {
+    const p = S(() => o.isEnabled ? {
       transform: `translate3d(0, ${-o.currentScrollPosition}px, 0)`
     } : {});
-    return (f, i) => (ae(), re("div", {
+    return (y, i) => (ie(), se("div", {
       class: U([n.defaultClassNames.smoothPage, n.additionalClassNames.smoothPage])
     }, [
-      ie("div", {
+      ce("div", {
         ref_key: "contentRef",
-        ref: I,
-        style: se(ce(M)),
+        ref: f,
+        style: he(de(p)),
         class: U([n.defaultClassNames.smoothPageBody, n.additionalClassNames.smoothPageBody])
       }, [
-        he(f.$slots, "default")
+        ue(y.$slots, "default")
       ], 6)
     ], 2));
   }
 });
-const Oe = K("publicSmoothPage", () => {
-  const e = Z(), t = S(() => e.settings), o = S(() => e.currentScrollPosition), l = S(() => e.isEnabled), h = S(() => e.isTriggeringScrollPosition), n = S(() => e.isMounted), u = S(() => e.isInited), I = S(() => e.deviceType), m = S(() => e.browser), w = S(() => e.isPreventScroll);
+const pe = K("publicSmoothPage", () => {
+  const e = Z(), t = S(() => e.settings), o = S(() => e.currentScrollPosition), a = S(() => e.isEnabled), h = S(() => e.isTriggeringScrollPosition), n = S(() => e.isMounted), u = S(() => e.isInited), f = S(() => e.deviceType), m = S(() => e.browser), w = S(() => e.isPreventScroll);
   return {
     settings: t,
     currentScrollPosition: o,
-    isEnabled: l,
+    isEnabled: a,
     isTriggeringScrollPosition: h,
     isMounted: n,
     isInited: u,
-    deviceType: I,
+    deviceType: f,
     browser: m,
     isPreventScroll: w,
     preventScroll: (i) => e.preventScroll(i),
@@ -363,13 +371,13 @@ const Oe = K("publicSmoothPage", () => {
     destroy: (i = !1) => e.destroy(i),
     init: (i = !1) => e.init(i)
   };
-}), Me = {
+}), Ne = {
   install(e, t) {
-    e.component("SmoothPage", Pe), e.provide("smoothPageSettings", t || {});
+    e.component("SmoothPage", be), e.provide("smoothPageSettings", t || {});
   }
 };
 export {
-  Pe as SmoothPage,
-  Me as default,
-  Oe as useSmoothPage
+  be as SmoothPage,
+  Ne as default,
+  pe as useSmoothPage
 };

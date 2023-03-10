@@ -75,11 +75,14 @@ Available settings
         mozillaTouchmoveIntensity?: number; // equals touchmoveIntensity by default
         // 
 
+        watchIsEnabledOn?: 'load-resize' | 'load'; // 'load-resize' by default
         minWidth?: number; // 0 by default
         renderDelay?: number; // 0 by default
         enableOnTouchDevices?: boolean; // true by default
         minTouchmoveDistance?: number; // 40 (px) by default
         resetScrollPositionOnStateChanging?: boolean; // false by default
+        reloadPageOnStateChanging?: boolean; // false by default
+        
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default

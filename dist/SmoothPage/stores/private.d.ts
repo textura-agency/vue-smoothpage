@@ -8,6 +8,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isTriggeringScrollPosition: import("vue").Ref<boolean>;
     isMounted: import("vue").Ref<boolean>;
     isInited: import("vue").Ref<boolean>;
+    isEarlierMounted: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<DeviceTypes>;
     needReload: import("vue").Ref<boolean>;
     isDestroyedByUser: import("vue").Ref<boolean>;
@@ -21,6 +22,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsTriggeringScrollPosition: (value: any) => void;
     setIsMounted: (value: any) => void;
     setIsInited: (value: any) => void;
+    setIsEarlierMounted: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
     setBrowser: (value: any) => void;
@@ -29,7 +31,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     reload: (resetPosition?: boolean) => void;
     destroy: (resetPosition?: boolean) => void;
     init: (resetPosition?: boolean) => void;
-}, "settings" | "currentScrollPosition" | "isEnabled" | "nextScrollPosition" | "isTriggeringScrollPosition" | "isMounted" | "isInited" | "deviceType" | "needReload" | "isDestroyedByUser" | "browser" | "isPreventScroll" | "savedCurrentScrollPositionForDestroy">>, Pick<{
+}, "settings" | "currentScrollPosition" | "isEnabled" | "nextScrollPosition" | "isTriggeringScrollPosition" | "isMounted" | "isInited" | "isEarlierMounted" | "deviceType" | "needReload" | "isDestroyedByUser" | "browser" | "isPreventScroll" | "savedCurrentScrollPositionForDestroy">>, Pick<{
     settings: import("vue").Ref<null>;
     currentScrollPosition: import("vue").Ref<number>;
     isEnabled: import("vue").Ref<boolean>;
@@ -37,6 +39,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isTriggeringScrollPosition: import("vue").Ref<boolean>;
     isMounted: import("vue").Ref<boolean>;
     isInited: import("vue").Ref<boolean>;
+    isEarlierMounted: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<DeviceTypes>;
     needReload: import("vue").Ref<boolean>;
     isDestroyedByUser: import("vue").Ref<boolean>;
@@ -50,6 +53,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsTriggeringScrollPosition: (value: any) => void;
     setIsMounted: (value: any) => void;
     setIsInited: (value: any) => void;
+    setIsEarlierMounted: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
     setBrowser: (value: any) => void;
@@ -66,6 +70,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     isTriggeringScrollPosition: import("vue").Ref<boolean>;
     isMounted: import("vue").Ref<boolean>;
     isInited: import("vue").Ref<boolean>;
+    isEarlierMounted: import("vue").Ref<boolean>;
     deviceType: import("vue").Ref<DeviceTypes>;
     needReload: import("vue").Ref<boolean>;
     isDestroyedByUser: import("vue").Ref<boolean>;
@@ -79,6 +84,7 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     setIsTriggeringScrollPosition: (value: any) => void;
     setIsMounted: (value: any) => void;
     setIsInited: (value: any) => void;
+    setIsEarlierMounted: (value: any) => void;
     setDeviceType: (value: any) => void;
     setNeedReload: (value: any) => void;
     setBrowser: (value: any) => void;
@@ -87,5 +93,5 @@ export declare const useSmoothPageStore: import("pinia").StoreDefinition<"privat
     reload: (resetPosition?: boolean) => void;
     destroy: (resetPosition?: boolean) => void;
     init: (resetPosition?: boolean) => void;
-}, "setSettings" | "setCurrentScrollPosition" | "setIsEnabled" | "setNextScrollPosition" | "setIsTriggeringScrollPosition" | "setIsMounted" | "setIsInited" | "setDeviceType" | "setNeedReload" | "setBrowser" | "preventScroll" | "setSavedCurrentScrollPositionForDestroy" | "reload" | "destroy" | "init">>;
+}, "setSettings" | "setCurrentScrollPosition" | "setIsEnabled" | "setNextScrollPosition" | "setIsTriggeringScrollPosition" | "setIsMounted" | "setIsInited" | "setIsEarlierMounted" | "setDeviceType" | "setNeedReload" | "setBrowser" | "preventScroll" | "setSavedCurrentScrollPositionForDestroy" | "reload" | "destroy" | "init">>;
 //# sourceMappingURL=private.d.ts.map

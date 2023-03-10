@@ -18,6 +18,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
+        reloadPageOnStateChanging?: boolean | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
@@ -61,6 +62,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
+        reloadPageOnStateChanging?: boolean | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
@@ -104,6 +106,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
+        reloadPageOnStateChanging?: boolean | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;

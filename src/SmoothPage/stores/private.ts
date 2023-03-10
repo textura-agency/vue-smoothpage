@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import type { DeviceType } from '../utils/getDeviceType'
 import type { BrowserType } from "../utils/getBrowser"
 import { BrowserTypes } from "../utils/getBrowser"
@@ -16,6 +16,7 @@ export const useSmoothPageStore = defineStore('privateSmoothPage', () => {
     const isEnabled = ref<boolean>(false)
 
     const isMounted = ref<boolean>(false)
+    const isEarlierMounted = ref<boolean>(false)
     const isInited = ref<boolean>(false)
     const deviceType = ref<DeviceType>(DeviceTypes.DESKTOP)
     const browser = ref<BrowserType>(BrowserTypes.OTHER)
@@ -36,6 +37,7 @@ export const useSmoothPageStore = defineStore('privateSmoothPage', () => {
     
     const setIsMounted = (value: boolean): void => { isMounted.value = value }
     const setIsInited = (value: boolean): void => { isInited.value = value }
+    const setIsEarlierMounted = (value: boolean): void => { isEarlierMounted.value = value }
     const setDeviceType = (value: DeviceType): void => { deviceType.value = value }
     const setBrowser = (value: BrowserType): void => { browser.value = value }
 
@@ -81,6 +83,7 @@ export const useSmoothPageStore = defineStore('privateSmoothPage', () => {
         isTriggeringScrollPosition,
         isMounted,
         isInited,
+        isEarlierMounted,
         deviceType,
         needReload,
         isDestroyedByUser,
@@ -97,6 +100,7 @@ export const useSmoothPageStore = defineStore('privateSmoothPage', () => {
         setIsTriggeringScrollPosition,
         setIsMounted,
         setIsInited,
+        setIsEarlierMounted,
         setDeviceType,
         setNeedReload,
         setBrowser,

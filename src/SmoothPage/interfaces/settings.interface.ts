@@ -1,3 +1,5 @@
+type WatchIsEnabledOnType = 'load' | 'load-resize'
+
 interface SmoothPageSettings {
     smoothness?: number; 
     wheelIntensity?: number; 
@@ -16,11 +18,14 @@ interface SmoothPageSettings {
     mozillaTouchmoveIntensity?: number;
     // 
 
+    watchIsEnabledOn?: WatchIsEnabledOnType;
     minWidth?: number; 
     renderDelay?: number;
     enableOnTouchDevices?: boolean;
     minTouchmoveDistance?: number;
     resetScrollPositionOnStateChanging?: boolean;
+    reloadPageOnStateChanging?: boolean;
+
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
@@ -33,4 +38,4 @@ interface SmoothPageSettings {
     }
 }
 
-export type { SmoothPageSettings }
+export type { SmoothPageSettings, WatchIsEnabledOnType }

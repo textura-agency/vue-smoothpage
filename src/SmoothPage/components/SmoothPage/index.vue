@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<SmoothScrollProps>(), {
 
 const store = useSmoothPageStore()
 
-const settings: SmoothPageSettings | undefined = inject('smoothPageSettings')
+const settings: SmoothPageSettings | undefined = inject('smoothPageSettings', undefined)
 const settingsWithDefaults = getSettingsWithDefaults(settings)
 // todo: fix reload issue, when u change "settings" prop in component directly
 // todo: update defaults, to extend wheels from props.settings
@@ -52,6 +52,7 @@ onMounted(() => {
     store.setIsEnabled(getIsEnabled())
     store.setBrowser(getBrowser())
     store.setIsMounted(true)
+    setTimeout(() => store.setIsEarlierMounted(true), 100) 
 })
 onUnmounted(() => {
     store.setIsMounted(false)
@@ -76,6 +77,10 @@ function init() {
     }
     store.setIsInited(true)
     store.setNeedReload(false)
+
+    if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
+        setTimeout(() => location.reload(), 100)
+    }
 }
 function destroy() {
     mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.defaultClassNames.smoothPageEnabled)
@@ -89,6 +94,10 @@ function destroy() {
         window.scroll(0, store.savedCurrentScrollPositionForDestroy)
     }
     store.setIsInited(false)
+
+    if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
+        setTimeout(() => location.reload(), 100)
+    }
 }
 watchEffect(() => {
     if (store.needReload) {
@@ -105,7 +114,9 @@ useLoop(() => {
     if (store.isPreventScroll) { return }
     if (!store.isMounted) { return }
     if (store.isTriggeringScrollPosition) { return }
-    store.setIsEnabled(getIsEnabled())
+    if (mergedSettings.watchIsEnabledOn === 'load-resize') {
+        store.setIsEnabled(getIsEnabled())
+    }
     if (store.isEnabled) {
         store.setCurrentScrollPosition(lerp(store.currentScrollPosition, store.nextScrollPosition, mergedSettings.smoothness))
         store.setSavedCurrentScrollPositionForDestroy(store.currentScrollPosition) 

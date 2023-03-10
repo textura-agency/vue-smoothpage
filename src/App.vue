@@ -1,5 +1,12 @@
 <template>
-    <smooth-page :settings="{ minWidth: 1000, smoothness: 0.2, chromeWheelIntensity: 10, safariWheelIntensity: 7 }">
+    <smooth-page :settings="{ 
+        minWidth: 1000, 
+        smoothness: 0.2, 
+        chromeWheelIntensity: 10, 
+        safariWheelIntensity: 7,
+        reloadPageOnStateChanging: true,
+        watchIsEnabledOn: 'load-resize',
+    }">
         <div class="container">
             <div @click="store.reload()"  class="button">Reload</div>
             <div @click="store.destroy()"  class="button">Destroy</div>
