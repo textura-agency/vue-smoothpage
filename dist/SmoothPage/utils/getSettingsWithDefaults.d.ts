@@ -20,6 +20,12 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     enableOnTouchDevices: any;
     resetScrollPositionOnStateChanging: any;
     reloadPageOnStateChanging: any;
+    enableScrollOnKeyboard: any;
+    scrollDownOnKeys: any;
+    scrollUpOnKeys: any;
+    scrollRightOnKeys: any;
+    scrollLeftOnKeys: any;
+    preventScrollOnHoldKeys: any;
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;

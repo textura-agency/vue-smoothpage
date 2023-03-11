@@ -1,5 +1,14 @@
 type WatchIsEnabledOnType = 'load' | 'load-resize';
 type ModeType = 'horizontal' | 'vertical';
+type PreventScrollKeyType = {
+    code: number[];
+};
+type PreventScrollKeysType = Array<PreventScrollKeyType>;
+type ScrollKeyType = {
+    code: number;
+    distance: number;
+};
+type ScrollKeysType = Array<ScrollKeyType>;
 interface SmoothPageSettings {
     mode?: ModeType;
     smoothness?: number;
@@ -22,6 +31,12 @@ interface SmoothPageSettings {
     minTouchmoveDistance?: number;
     resetScrollPositionOnStateChanging?: boolean;
     reloadPageOnStateChanging?: boolean;
+    enableScrollOnKeyboard?: boolean;
+    scrollDownOnKeys?: ScrollKeysType;
+    scrollUpOnKeys?: ScrollKeysType;
+    scrollRightOnKeys?: ScrollKeysType;
+    scrollLeftOnKeys?: ScrollKeysType;
+    preventScrollOnHoldKeys?: PreventScrollKeysType;
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
@@ -37,5 +52,5 @@ interface SmoothPageSettings {
         smoothPageHorizontal?: string;
     };
 }
-export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType };
+export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, ScrollKeyType, PreventScrollKeyType, PreventScrollKeysType };
 //# sourceMappingURL=settings.interface.d.ts.map

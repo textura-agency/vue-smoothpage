@@ -15,24 +15,24 @@ class DetectSwipe {
     constructor(element: any, callbalck: any, settings: BrowserSettings) {
         this.cb = callbalck
         this.#element = element
-        this.#start()
+        this.subscribe()
         this.settings = settings
         this.minDelta = settings.minTouchmoveDistance
         this.useCallback = this.useCallback.bind(this)
-        this.destroy = this.destroy.bind(this)
+        this.unsubscribe = this.unsubscribe.bind(this)
     }
 
-    #start() {
+    subscribe = function(this: DetectSwipe) {
         this.#element.addEventListener('touchstart', this.#touchstart.bind(this), false)
         this.#element.addEventListener('touchmove', this.#touchmove.bind(this), false)
         this.#element.addEventListener('touchend', this.#touchend.bind(this), false)
-    }
+    }.bind(this)
 
-    destroy() {
+    unsubscribe = function(this: DetectSwipe) {
         this.#element.removeEventListener('touchstart', this.#touchstart, false)
         this.#element.removeEventListener('touchmove', this.#touchmove, false)
         this.#element.removeEventListener('touchend', this.#touchend, false)
-    }
+    }.bind(this)
 
     #touchstart(e: any) {
         const t = e.touches[0]

@@ -84,13 +84,13 @@ Available settings
         resetScrollPositionOnStateChanging?: boolean; // false by default (make sense only in vertical mode)
         reloadPageOnStateChanging?: boolean; // false by default
 
-        // TODO
         enableScrollOnKeyboard?: boolean; // true by default
-        scrollDownOnKeys?: Array<number> | Array<{ key: number; distance: number; }>; // [...] by default
-        scrollUpOnKeys?: Array<number> | Array<{ key: number; distance: number; }; // [...] by default
-        inheritHorizontalScrollOnShiftHold?: boolean; // true by default
-        //
-        
+        scrollDownOnKeys?: Array<{ code: number; distance: number; }>; // [ { code: 40, distance: 100 }, { code: 32, distance: 200 } ] by default
+        scrollUpOnKeys?: Array<{ code: number; distance: number; }>; // [ { code: 38, distance: 100 } ] by default
+        scrollRightOnKeys?: Array<{ code: number; distance: number; }>; // [ { code: 40, distance: 100 }, { code: 39, distance: 100 }, { code: 32, distance: 200 } ] by default
+        scrollLeftOnKeys?: Array<{ code: number; distance: number; }>; // [ { code: 38, distance: 100 }, { code: 37, distance: 100 } ] by default
+        preventScrollOnHoldKeys?: Array<{ code: number[] }> // [ { code: [ 16 ] } ] by default
+
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default

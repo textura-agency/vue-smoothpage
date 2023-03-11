@@ -1,5 +1,6 @@
 export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoothPage", import("pinia")._UnwrapAll<Pick<{
     settings: import("vue").ComputedRef<{
+        mode?: import("../interfaces/settings.interface").ModeType | undefined;
         smoothness?: number | undefined;
         wheelIntensity?: number | undefined;
         touchmoveIntensity?: number | undefined;
@@ -13,21 +14,46 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         edgeTouchmoveIntensity?: number | undefined;
         mozillaWheelIntensity?: number | undefined;
         mozillaTouchmoveIntensity?: number | undefined;
+        watchIsEnabledOn?: import("../interfaces/settings.interface").WatchIsEnabledOnType | undefined;
         minWidth?: number | undefined;
         renderDelay?: number | undefined;
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
         reloadPageOnStateChanging?: boolean | undefined;
+        enableScrollOnKeyboard?: boolean | undefined;
+        scrollDownOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollUpOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollRightOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollLeftOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        preventScrollOnHoldKeys?: {
+            code: number[];
+        }[] | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;
@@ -44,6 +70,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
     init: (resetPosition?: boolean) => void;
 }, never>>, Pick<{
     settings: import("vue").ComputedRef<{
+        mode?: import("../interfaces/settings.interface").ModeType | undefined;
         smoothness?: number | undefined;
         wheelIntensity?: number | undefined;
         touchmoveIntensity?: number | undefined;
@@ -57,21 +84,46 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         edgeTouchmoveIntensity?: number | undefined;
         mozillaWheelIntensity?: number | undefined;
         mozillaTouchmoveIntensity?: number | undefined;
+        watchIsEnabledOn?: import("../interfaces/settings.interface").WatchIsEnabledOnType | undefined;
         minWidth?: number | undefined;
         renderDelay?: number | undefined;
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
         reloadPageOnStateChanging?: boolean | undefined;
+        enableScrollOnKeyboard?: boolean | undefined;
+        scrollDownOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollUpOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollRightOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollLeftOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        preventScrollOnHoldKeys?: {
+            code: number[];
+        }[] | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;
@@ -88,6 +140,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
     init: (resetPosition?: boolean) => void;
 }, "settings" | "currentScrollPosition" | "isEnabled" | "isTriggeringScrollPosition" | "isMounted" | "isInited" | "deviceType" | "browser" | "isPreventScroll">, Pick<{
     settings: import("vue").ComputedRef<{
+        mode?: import("../interfaces/settings.interface").ModeType | undefined;
         smoothness?: number | undefined;
         wheelIntensity?: number | undefined;
         touchmoveIntensity?: number | undefined;
@@ -101,21 +154,46 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
         edgeTouchmoveIntensity?: number | undefined;
         mozillaWheelIntensity?: number | undefined;
         mozillaTouchmoveIntensity?: number | undefined;
+        watchIsEnabledOn?: import("../interfaces/settings.interface").WatchIsEnabledOnType | undefined;
         minWidth?: number | undefined;
         renderDelay?: number | undefined;
         enableOnTouchDevices?: boolean | undefined;
         minTouchmoveDistance?: number | undefined;
         resetScrollPositionOnStateChanging?: boolean | undefined;
         reloadPageOnStateChanging?: boolean | undefined;
+        enableScrollOnKeyboard?: boolean | undefined;
+        scrollDownOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollUpOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollRightOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        scrollLeftOnKeys?: {
+            code: number;
+            distance: number;
+        }[] | undefined;
+        preventScrollOnHoldKeys?: {
+            code: number[];
+        }[] | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
             smoothPageEnabled?: string | undefined;
+            smoothPageVertical?: string | undefined;
+            smoothPageHorizontal?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;

@@ -1,3 +1,5 @@
+import type { ScrollKeysType, ModeType } from "../../../interfaces/settings.interface";
+
 interface OnScrollProps {
     dir: number;
     wheel: number;
@@ -28,4 +30,13 @@ interface BrowserSettings {
     minTouchmoveDistance: number;
 }
 
-export type { OnScrollProps, DetectorSettings, BrowserSettings }
+interface KeyboardSettings {
+    mode: ModeType;
+    enableScrollOnKeyboard: boolean;
+    scrollDownOnKeys: ScrollKeysType;
+    scrollUpOnKeys: ScrollKeysType;
+    scrollLeftOnKeys: ScrollKeysType;
+    scrollRightOnKeys: ScrollKeysType;
+}
+
+export type { OnScrollProps, DetectorSettings, BrowserSettings, KeyboardSettings }

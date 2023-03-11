@@ -1,0 +1,1 @@
+{"version":3,"file":"detectKeyboard.d.ts","sourceRoot":"","sources":["../../../../../src/SmoothPage/components/SmoothPage/extensions/detectKeyboard.ts"],"names":[],"mappings":"AAAA,cAAM,cAAc;IAClB,OAAO,MAAC;IACR,QAAQ,MAAC;IACT,QAAQ,MAAC;gBACG,OAAO,KAAA,EAAE,QAAQ,KAAA,EAAE,QAAQ,KAAA;IAMvC,SAAS,aAEI;IACb,WAAW,aAEE;IACb,QAAQ,mBAwBK;CACd;AACD,eAAe,cAAc,CAAC"}

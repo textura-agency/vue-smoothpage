@@ -6,7 +6,8 @@ declare class DetectSwipe {
     minDelta: any;
     settings: any;
     constructor(element: any, callbalck: any, settings: any);
-    destroy(): void;
+    subscribe: () => void;
+    unsubscribe: () => void;
     useCallback(deltaY: any): void;
 }
 export default DetectSwipe;

@@ -12,13 +12,13 @@ class DetectWheel {
         this.subscribe()
     }
 
-    subscribe() {
+    subscribe = function(this: DetectWheel) {
         this.element.addEventListener('wheel', this.listener)
-    }
+    }.bind(this)
 
-    unsubscribe() {
+    unsubscribe = function(this: DetectWheel) {
         this.element.removeEventListener('wheel', this.listener)
-    }
+    }.bind(this)
 
     listener = function(this: DetectWheel, e: any) {
         if (typeof this.cb === 'function') { 

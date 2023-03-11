@@ -1,4 +1,4 @@
-import type { SmoothPageSettings, WatchIsEnabledOnType, ModeType } from "../interfaces/settings.interface"
+import type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, PreventScrollKeysType } from "../interfaces/settings.interface"
 
 export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined) => {
     return {
@@ -27,6 +27,13 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
         enableOnTouchDevices: settings?.enableOnTouchDevices || dfs.enableOnTouchDevices,
         resetScrollPositionOnStateChanging: settings?.resetScrollPositionOnStateChanging || dfs.resetScrollPositionOnStateChanging,
         reloadPageOnStateChanging: settings?.reloadPageOnStateChanging || dfs.reloadPageOnStateChanging,
+
+        enableScrollOnKeyboard: settings?.enableScrollOnKeyboard || dfs.enableScrollOnKeyboard, 
+        scrollDownOnKeys: settings?.scrollDownOnKeys || dfs.scrollDownOnKeys as ScrollKeysType,
+        scrollUpOnKeys: settings?.scrollUpOnKeys || dfs.scrollUpOnKeys as ScrollKeysType,
+        scrollRightOnKeys: settings?.scrollRightOnKeys || dfs.scrollRightOnKeys as ScrollKeysType,
+        scrollLeftOnKeys: settings?.scrollLeftOnKeys || dfs.scrollLeftOnKeys as ScrollKeysType,
+        preventScrollOnHoldKeys: settings?.preventScrollOnHoldKeys || dfs.preventScrollOnHoldKeys as PreventScrollKeysType,
 
         defaultClassNames: {
             smoothPage: settings?.defaultClassNames?.smoothPage || dfs.defaultClassNames.smoothPage,
@@ -57,6 +64,12 @@ const dfs = {
     enableOnTouchDevices: true,
     resetScrollPositionOnStateChanging: false,
     reloadPageOnStateChanging: false,
+    enableScrollOnKeyboard: true,
+    scrollUpOnKeys: [ { code: 38, distance: 100 } ],
+    scrollDownOnKeys: [ { code: 40, distance: 100 }, { code: 32, distance: 200 } ],
+    scrollLeftOnKeys: [ { code: 38, distance: 100 }, { code: 37, distance: 100 } ],
+    scrollRightOnKeys: [ { code: 40, distance: 100 }, { code: 39, distance: 100 }, { code: 32, distance: 200 } ],
+    preventScrollOnHoldKeys: [ { code: [ 16 ] } ],
     defaultClassNames: {
         smoothPage: 't-smoothpage',
         smoothPageBody: 't-smoothpage--body',
