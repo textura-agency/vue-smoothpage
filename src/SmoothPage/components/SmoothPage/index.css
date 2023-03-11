@@ -14,12 +14,21 @@ html.t-smoothpage--enabled .t-smoothpage {
     overflow: hidden;
 }
 
-html.t-smoothpage--enabled .t-smoothpage .t-smoothpage--body {
+html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: auto;
+    overflow: auto;
+    will-change: transform;
+}
+html.t-smoothpage--enabled.t-smoothpage--horizontal .t-smoothpage .t-smoothpage--body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
     overflow: auto;
     will-change: transform;
 }

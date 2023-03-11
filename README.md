@@ -58,6 +58,7 @@ yarn add vue-smoothpage
 Available settings
 
     interface SmoothPageSettings {
+        mode?: 'vertical' | 'horizontal'; // 'vertical' by default
         smoothness?: number; // 0.075 by default
         wheelIntensity?: number; // 4 by default
         touchmoveIntensity?: number; // 4 by default
@@ -80,18 +81,29 @@ Available settings
         renderDelay?: number; // 0 by default
         enableOnTouchDevices?: boolean; // true by default
         minTouchmoveDistance?: number; // 40 (px) by default
-        resetScrollPositionOnStateChanging?: boolean; // false by default
+        resetScrollPositionOnStateChanging?: boolean; // false by default (make sense only in vertical mode)
         reloadPageOnStateChanging?: boolean; // false by default
+
+        // TODO
+        enableScrollOnKeyboard?: boolean; // true by default
+        scrollDownOnKeys?: Array<number> | Array<{ key: number; distance: number; }>; // [...] by default
+        scrollUpOnKeys?: Array<number> | Array<{ key: number; distance: number; }; // [...] by default
+        inheritHorizontalScrollOnShiftHold?: boolean; // true by default
+        //
         
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default
             smoothPageEnabled?: string; // 't-smoothpage--enabled' by default
+            smoothPageVertical?: string; // 't-smoothpage--vertical' by default
+            smoothPageHorizontal?: string; // 't-smoothpage--horizontal' by default
         },
         additionalClassNames?: {
             smoothPage?: string; // '' by default
             smoothPageBody?: string; // '' by default
             smoothPageEnabled?: string; // '' by default
+            smoothPageVertical?: string; // '' by default
+            smoothPageHorizontal?: string; // '' by default
         }
     }
 

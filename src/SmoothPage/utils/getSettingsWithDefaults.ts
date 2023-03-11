@@ -1,7 +1,8 @@
-import type { SmoothPageSettings, WatchIsEnabledOnType } from "../interfaces/settings.interface"
+import type { SmoothPageSettings, WatchIsEnabledOnType, ModeType } from "../interfaces/settings.interface"
 
 export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined) => {
     return {
+        mode: settings?.mode || dfs.mode as ModeType,
         smoothness: settings?.smoothness || dfs.smoothness,
         wheelIntensity: settings?.wheelIntensity || dfs.wheelIntensity,
         touchmoveIntensity: settings?.touchmoveIntensity || dfs.touchmoveIntensity,
@@ -31,16 +32,21 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
             smoothPage: settings?.defaultClassNames?.smoothPage || dfs.defaultClassNames.smoothPage,
             smoothPageBody: settings?.defaultClassNames?.smoothPageBody || dfs.defaultClassNames.smoothPageBody,
             smoothPageEnabled: settings?.defaultClassNames?.smoothPageEnabled || dfs.defaultClassNames.smoothPageEnabled,
+            smoothPageVertical: settings?.defaultClassNames?.smoothPageVertical || dfs.defaultClassNames.smoothPageVertical,
+            smoothPageHorizontal: settings?.defaultClassNames?.smoothPageHorizontal || dfs.defaultClassNames.smoothPageHorizontal,
         },
         additionalClassNames: {
             smoothPage: settings?.additionalClassNames?.smoothPage || dfs.additionalClassNames.smoothPage,
             smoothPageBody: settings?.additionalClassNames?.smoothPageBody || dfs.additionalClassNames.smoothPageBody,
             smoothPageEnabled: settings?.additionalClassNames?.smoothPageEnabled || dfs.additionalClassNames.smoothPageEnabled,
+            smoothPageVertical: settings?.additionalClassNames?.smoothPageVertical || dfs.additionalClassNames.smoothPageVertical,
+            smoothPageHorizontal: settings?.additionalClassNames?.smoothPageHorizontal || dfs.additionalClassNames.smoothPageHorizontal,
         }
     }
 }
 
 const dfs = {
+    mode: 'vertical',
     smoothness: 0.075,
     wheelIntensity: 4,
     touchmoveIntensity: 4,
@@ -55,10 +61,14 @@ const dfs = {
         smoothPage: 't-smoothpage',
         smoothPageBody: 't-smoothpage--body',
         smoothPageEnabled: 't-smoothpage--enabled',
+        smoothPageVertical: 't-smoothpage--vertical',
+        smoothPageHorizontal: 't-smoothpage--horizontal',
     },
     additionalClassNames: {
         smoothPage: '',
         smoothPageBody: '',
         smoothPageEnabled: '',
+        smoothPageVertical: '',
+        smoothPageHorizontal: '',
     }
 }

@@ -1,6 +1,8 @@
 type WatchIsEnabledOnType = 'load' | 'load-resize'
+type ModeType = 'horizontal' | 'vertical'
 
 interface SmoothPageSettings {
+    mode?: ModeType;
     smoothness?: number; 
     wheelIntensity?: number; 
     touchmoveIntensity?: number;
@@ -30,12 +32,16 @@ interface SmoothPageSettings {
         smoothPage?: string;
         smoothPageBody?: string;
         smoothPageEnabled?: string;
+        smoothPageVertical?: string;
+        smoothPageHorizontal?: string;
     },
     additionalClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
         smoothPageEnabled?: string;
+        smoothPageVertical?: string;
+        smoothPageHorizontal?: string;
     }
 }
 
-export type { SmoothPageSettings, WatchIsEnabledOnType }
+export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType }

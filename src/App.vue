@@ -4,8 +4,9 @@
         smoothness: 0.2, 
         chromeWheelIntensity: 10, 
         safariWheelIntensity: 7,
-        reloadPageOnStateChanging: true,
+        reloadPageOnStateChanging: false,
         watchIsEnabledOn: 'load-resize',
+        mode: 'vertical',
     }">
         <div class="container">
             <div @click="store.reload()"  class="button">Reload</div>
@@ -42,10 +43,17 @@ html, body {
     height: 300vh;
     width: 100vw;
     background: linear-gradient(0deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%);
+
+    /* for horizontal */
+    /* height: 100vh; */
+    /* width: 300vw; */
+    /* background: linear-gradient(90deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%); */
 }
 
 .button {
     color: white;
     transform: translate(50vh, 100vh);
+    /* transform: translate(120vw, 50vh); */
+
 }
 </style>

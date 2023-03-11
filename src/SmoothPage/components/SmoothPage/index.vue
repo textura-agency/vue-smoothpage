@@ -60,31 +60,28 @@ onUnmounted(() => {
 watchEffect(() => {
     if (store.isEnabled && !store.isInited) {
         init()
-        return
     }
-    if (!store.isEnabled && store.isInited) {
+    else if (!store.isEnabled && store.isInited) {
         destroy()
     }
 })
 function init() {
-    mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.defaultClassNames.smoothPageEnabled)
-    mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.add(mergedSettings.additionalClassNames.smoothPageEnabled)
     detector.value = new Detector(document, onScroll, mergedSettings, store.browser)
     if (mergedSettings.resetScrollPositionOnStateChanging) {
         store.setCurrentScrollPosition(0)
         store.setNextScrollPosition(0)
         window.scroll(0, 0)
     }
-    store.setIsInited(true)
-    store.setNeedReload(false)
 
     if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
         setTimeout(() => location.reload(), 100)
     }
+
+    store.setIsInited(true)
+    store.setNeedReload(false)
+    toggleClassNames(true)
 }
 function destroy() {
-    mergedSettings.defaultClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.defaultClassNames.smoothPageEnabled)
-    mergedSettings.additionalClassNames.smoothPageEnabled && document.querySelector('html')?.classList?.remove(mergedSettings.additionalClassNames.smoothPageEnabled)
     detector.value?.destroy()
     if (mergedSettings.resetScrollPositionOnStateChanging) {
         store.setCurrentScrollPosition(0)
@@ -93,10 +90,39 @@ function destroy() {
     } else {
         window.scroll(0, store.savedCurrentScrollPositionForDestroy)
     }
-    store.setIsInited(false)
-
+    
     if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
         setTimeout(() => location.reload(), 100)
+    }
+    
+    store.setIsInited(false)
+    toggleClassNames(false)
+}
+function toggleClassNames(add: boolean) {
+    const html = document.querySelector('html')
+    if (!html) { return }
+
+    if (add) {
+        mergedSettings.defaultClassNames.smoothPageEnabled && html.classList.add(mergedSettings.defaultClassNames.smoothPageEnabled)
+        mergedSettings.additionalClassNames.smoothPageEnabled && html.classList.add(mergedSettings.additionalClassNames.smoothPageEnabled)
+        if (mergedSettings.mode === 'vertical') {
+            mergedSettings.defaultClassNames.smoothPageVertical && html.classList.add(mergedSettings.defaultClassNames.smoothPageVertical)
+            mergedSettings.additionalClassNames.smoothPageVertical && html.classList.add(mergedSettings.additionalClassNames.smoothPageVertical)
+        } else {
+            mergedSettings.defaultClassNames.smoothPageHorizontal && html.classList.add(mergedSettings.defaultClassNames.smoothPageHorizontal)
+            mergedSettings.additionalClassNames.smoothPageHorizontal && html.classList.add(mergedSettings.additionalClassNames.smoothPageHorizontal)
+        }
+        return
+    }
+
+    mergedSettings.defaultClassNames.smoothPageEnabled && html.classList.remove(mergedSettings.defaultClassNames.smoothPageEnabled)
+    mergedSettings.additionalClassNames.smoothPageEnabled && html.classList.remove(mergedSettings.additionalClassNames.smoothPageEnabled)
+    if (mergedSettings.mode === 'vertical') {
+        mergedSettings.defaultClassNames.smoothPageVertical && html.classList.remove(mergedSettings.defaultClassNames.smoothPageVertical)
+        mergedSettings.additionalClassNames.smoothPageVertical && html.classList.remove(mergedSettings.additionalClassNames.smoothPageVertical)
+    } else {
+        mergedSettings.defaultClassNames.smoothPageHorizontal && html.classList.remove(mergedSettings.defaultClassNames.smoothPageHorizontal)
+        mergedSettings.additionalClassNames.smoothPageHorizontal && html.classList.remove(mergedSettings.additionalClassNames.smoothPageHorizontal)
     }
 }
 watchEffect(() => {
@@ -108,7 +134,9 @@ function onScroll(scrollProps: OnScrollProps) {
     if (store.isPreventScroll) { return }
     if (!contentRef.value) { return }
     const contentHeight = contentRef.value.getBoundingClientRect().height - window.innerHeight
-    store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, contentHeight)))
+    const contentWidth = contentRef.value.getBoundingClientRect().width - window.innerWidth
+    const maxScroll = mergedSettings.mode === 'vertical' ? contentHeight : contentWidth
+    store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
 }
 useLoop(() => {
     if (store.isPreventScroll) { return }
@@ -138,8 +166,15 @@ function getIsEnabled() {
 }
 const style = computed(() => {
     if (store.isEnabled) {
-        return {
-            transform: `translate3d(0, ${-store.currentScrollPosition}px, 0)`
+        if (mergedSettings.mode === 'vertical') {
+            return {
+                transform: `translate3d(0, ${-store.currentScrollPosition}px, 0)`
+            }
+        }
+        if (mergedSettings.mode === 'horizontal') {
+            return {
+                transform: `translate3d(${-store.currentScrollPosition}px, 0, 0)`
+            }
         }
     }
     return {}

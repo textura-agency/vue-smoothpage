@@ -1,4 +1,5 @@
 export declare const getSettingsWithDefaults: (settings: any) => {
+    mode: any;
     smoothness: any;
     wheelIntensity: any;
     touchmoveIntensity: any;
@@ -23,11 +24,15 @@ export declare const getSettingsWithDefaults: (settings: any) => {
         smoothPage: any;
         smoothPageBody: any;
         smoothPageEnabled: any;
+        smoothPageVertical: any;
+        smoothPageHorizontal: any;
     };
     additionalClassNames: {
         smoothPage: any;
         smoothPageBody: any;
         smoothPageEnabled: any;
+        smoothPageVertical: any;
+        smoothPageHorizontal: any;
     };
 };
 //# sourceMappingURL=getSettingsWithDefaults.d.ts.map
