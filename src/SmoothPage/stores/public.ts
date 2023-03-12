@@ -1,9 +1,10 @@
 import { defineStore } from "pinia"
 import { useSmoothPageStore } from "./private"
 import { computed } from "vue"
+import type { PublicStore } from "../interfaces/store.interface"
 
 // todo: fix reactivity public store problem
-export const useSmoothPage = defineStore('publicSmoothPage', () => {
+export const useSmoothPage = defineStore('publicSmoothPage', (): PublicStore => {
     const store = useSmoothPageStore()
 
     const settings = computed(() => store.settings)

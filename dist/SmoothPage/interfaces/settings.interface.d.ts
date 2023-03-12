@@ -1,3 +1,4 @@
+import type { Component } from "vue";
 type WatchIsEnabledOnType = 'load' | 'load-resize';
 type ModeType = 'horizontal' | 'horizontal-reverse' | 'vertical' | 'vertical-reverse';
 type PreventScrollKeyType = {
@@ -37,6 +38,9 @@ interface SmoothPageSettings {
     scrollRightOnKeys?: ScrollKeysType;
     scrollLeftOnKeys?: ScrollKeysType;
     preventScrollOnHoldKeys?: PreventScrollKeysType;
+    enableScrollbar?: boolean;
+    scrollbarComponent?: Component;
+    scrollbarProps?: {};
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
@@ -58,5 +62,5 @@ interface SmoothPageSettings {
         smoothPageHorizontalReverse?: string;
     };
 }
-export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, ScrollKeyType, PreventScrollKeyType, PreventScrollKeysType };
+export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, ScrollKeyType, PreventScrollKeyType, PreventScrollKeysType, };
 //# sourceMappingURL=settings.interface.d.ts.map

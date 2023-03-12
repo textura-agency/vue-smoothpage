@@ -1,12 +1,13 @@
 import { defineStore } from "pinia"
-import { ref, watch } from "vue"
+import { ref } from "vue"
 import type { DeviceType } from '../utils/getDeviceType'
 import type { BrowserType } from "../utils/getBrowser"
 import { BrowserTypes } from "../utils/getBrowser"
 import { DeviceTypes } from "../utils/getDeviceType"
 import type { SmoothPageSettings } from "../interfaces/settings.interface"
+import type { PrivateStore } from '../interfaces/store.interface'
 
-export const useSmoothPageStore = defineStore('privateSmoothPage', () => {
+export const useSmoothPageStore = defineStore('privateSmoothPage', (): PrivateStore => {
 
     const settings = ref<SmoothPageSettings | null>(null)
 

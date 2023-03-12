@@ -1,3 +1,5 @@
+import type { Component } from "vue";
+
 type WatchIsEnabledOnType = 'load' | 'load-resize'
 type ModeType = 'horizontal' | 'horizontal-reverse' | 'vertical' | 'vertical-reverse'
 type PreventScrollKeyType = { code: number[]; }
@@ -39,6 +41,10 @@ interface SmoothPageSettings {
     scrollLeftOnKeys?: ScrollKeysType;
     preventScrollOnHoldKeys?: PreventScrollKeysType;
 
+    enableScrollbar?: boolean;
+    scrollbarComponent?: Component;
+    scrollbarProps?: {};
+
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
@@ -68,5 +74,5 @@ export type {
     ScrollKeysType, 
     ScrollKeyType,
     PreventScrollKeyType,
-    PreventScrollKeysType
+    PreventScrollKeysType,
 }

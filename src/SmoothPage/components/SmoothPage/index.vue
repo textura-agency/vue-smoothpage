@@ -1,10 +1,11 @@
 <template>
     <div :class="[mergedSettings.defaultClassNames.smoothPage , mergedSettings.additionalClassNames.smoothPage]">
-            <div ref="contentRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
-                <div :class="[mergedSettings.defaultClassNames.smoothPageBodyPosition, mergedSettings.additionalClassNames.smoothPageBodyPosition]">
-                    <slot></slot>
-                </div>
+        <div ref="contentRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
+            <div :class="[mergedSettings.defaultClassNames.smoothPageBodyPosition, mergedSettings.additionalClassNames.smoothPageBodyPosition]">
+                <slot></slot>
             </div>
+        </div>
+        <mergedSettings.scrollbarComponent v-if="mergedSettings.enableScrollbar && mergedSettings.scrollbarComponent" :settings="mergedSettings" :store="store" />
     </div>
 </template>
 
@@ -36,10 +37,10 @@ const settings: SmoothPageSettings | undefined = inject('smoothPageSettings', un
 const settingsWithDefaults = getSettingsWithDefaults(settings)
 // todo: fix reload issue, when u change "settings" prop in component directly
 // todo: update defaults, to extend wheels from props.settings
-const mergedSettings = reactive({
+const mergedSettings = {
     ...settingsWithDefaults,
     ...(props?.settings || {}) //mb should de removed?
-})
+}
 
 watchEffect(() => {
     store.setSettings(mergedSettings)
@@ -68,6 +69,10 @@ watchEffect(() => {
     }
 })
 function init() {
+    store.setIsInited(true)
+    store.setNeedReload(false)
+    toggleClassNames(true)
+
     detector.value = new Detector(document, onScroll, mergedSettings, store.browser)
     if (mergedSettings.resetScrollPositionOnStateChanging) {
         store.setCurrentScrollPosition(0)
@@ -78,13 +83,14 @@ function init() {
     if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
         setTimeout(() => location.reload(), 100)
     }
-
-    store.setIsInited(true)
-    store.setNeedReload(false)
-    toggleClassNames(true)
 }
 function destroy() {
+    // !dont change order, bc of scroll position reset!
+    store.setIsInited(false)
+    toggleClassNames(false)
+
     detector.value?.destroy()
+    console.log(mergedSettings.resetScrollPositionOnStateChanging)
     if (mergedSettings.resetScrollPositionOnStateChanging) {
         store.setCurrentScrollPosition(0)
         store.setNextScrollPosition(0)
@@ -96,9 +102,6 @@ function destroy() {
     if (mergedSettings.reloadPageOnStateChanging && store.isEarlierMounted) {
         setTimeout(() => location.reload(), 100)
     }
-    
-    store.setIsInited(false)
-    toggleClassNames(false)
 }
 function toggleClassNames(add: boolean) {
     const html = document.querySelector('html')

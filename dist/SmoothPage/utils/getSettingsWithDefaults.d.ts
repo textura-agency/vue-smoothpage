@@ -26,6 +26,9 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     scrollRightOnKeys: any;
     scrollLeftOnKeys: any;
     preventScrollOnHoldKeys: any;
+    enableScrollbar: any;
+    scrollbarComponent: any;
+    scrollbarProps: any;
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;

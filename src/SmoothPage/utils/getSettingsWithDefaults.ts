@@ -1,4 +1,5 @@
 import type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, PreventScrollKeysType } from "../interfaces/settings.interface"
+import SmoothScrollbar from "../components/SmoothScrollbar/index.vue"
 
 export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined) => {
     return {
@@ -34,6 +35,10 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
         scrollRightOnKeys: settings?.scrollRightOnKeys || dfs.scrollRightOnKeys as ScrollKeysType,
         scrollLeftOnKeys: settings?.scrollLeftOnKeys || dfs.scrollLeftOnKeys as ScrollKeysType,
         preventScrollOnHoldKeys: settings?.preventScrollOnHoldKeys || dfs.preventScrollOnHoldKeys as PreventScrollKeysType,
+
+        enableScrollbar: settings?.enableScrollbar || dfs.enableScrollbar,
+        scrollbarComponent: settings?.scrollbarComponent || dfs.scrollbarComponent,
+        scrollbarProps: settings?.scrollbarProps || dfs.scrollbarProps,
 
         defaultClassNames: {
             smoothPage: settings?.defaultClassNames?.smoothPage || dfs.defaultClassNames.smoothPage,
@@ -76,6 +81,9 @@ const dfs = {
     scrollLeftOnKeys: [ { code: 38, distance: 100 }, { code: 37, distance: 100 } ],
     scrollRightOnKeys: [ { code: 40, distance: 100 }, { code: 39, distance: 100 }, { code: 32, distance: 200 } ],
     preventScrollOnHoldKeys: [ { code: [ 16 ] } ],
+    enableScrollbar: true,
+    scrollbarComponent: SmoothScrollbar,
+    scrollbarProps: {},
     defaultClassNames: {
         smoothPage: 't-smoothpage',
         smoothPageBody: 't-smoothpage--body',
