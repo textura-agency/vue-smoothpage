@@ -2,9 +2,11 @@
 class DetectShotcuts {
     element
     pressed: any = {}
+    onKeys
 
-    constructor(element: any) {
+    constructor(element: any, onKeys: any) {
         this.element = element
+        this.onKeys = onKeys
         this.subscribe()
     }
 
@@ -25,11 +27,13 @@ class DetectShotcuts {
     keydown = function(this: DetectShotcuts, e: any) {
         const key = e.keyCode
         if ( !this.pressed[key] ) { this.pressed[key] = true }
+        this.onKeys()
     }.bind(this)
 
     keyup = function(this: DetectShotcuts, e: any) {
         const key = e.keyCode
         if ( this.pressed[key] ) { this.pressed[key] = false }
+        this.onKeys()
     }.bind(this)
 
     isHolding() {}

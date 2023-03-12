@@ -24,7 +24,6 @@ class DetectKeyboard {
         if (!this.settings.enableScrollOnKeyboard) { return }
         if (typeof this.callback !== 'function') { return }
         const key = e.keyCode
-        console.log(key)
 
         if (this.settings.mode === 'vertical' || this.settings.mode === 'vertical-reverse') {
             this.settings.scrollDownOnKeys.forEach((_: ScrollKeyType) => {

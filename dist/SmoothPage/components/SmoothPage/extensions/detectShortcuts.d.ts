@@ -1,7 +1,8 @@
 declare class DetectShotcuts {
     element: any;
     pressed: {};
-    constructor(element: any);
+    onKeys: any;
+    constructor(element: any, onKeys: any);
     subscribe: () => void;
     unsubscribe: () => void;
     isHold: (key: any) => boolean;

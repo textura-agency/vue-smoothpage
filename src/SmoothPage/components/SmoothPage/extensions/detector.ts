@@ -77,14 +77,15 @@ class Detector {
     this.scroll = new DetectWheel(dom, this.controlScroll.bind(this), browserSettings);
     this.swipe = new DetectSwipe(dom, this.controlScroll.bind(this), browserSettings);
     this.keyboard = new DetectKeyboard(dom, this.controlScroll.bind(this), keyboardSettings);
-    this.shotcuts = new DetectShotcuts(dom);
+    this.shotcuts = new DetectShotcuts(dom, this.onKeysHold.bind(this));
   }
 
   controlScroll(props: OnScrollProps) {
     if (!this.callback) { return }
+    this.callback(props)
+  }
 
-    // detect hold keys
-    // TODO: допилить эту логику через событие кейапа и дауна, чтобы избежать резкой промотки при отпускании клавиши
+  onKeysHold() {
     let isAnyHolders = false
     this.settings.preventScrollOnHoldKeys?.forEach(_ => {
       let holdingKeysCount = 0
@@ -93,11 +94,7 @@ class Detector {
       })
       if (holdingKeysCount === _.code.length) { this.unsubscribe(); isAnyHolders = true }
     })
-    console.log(isAnyHolders, this.isSubscribed)
     if (!isAnyHolders && !this.isSubscribed) { this.subscribe() }
-    // 
-
-    this.callback(props)
   }
 
   subscribe = function(this: Detector) {
