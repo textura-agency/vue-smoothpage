@@ -1,8 +1,10 @@
 <template>
     <div :class="[mergedSettings.defaultClassNames.smoothPage , mergedSettings.additionalClassNames.smoothPage]">
-        <div ref="contentRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
-            <slot></slot>
-        </div>
+            <div ref="contentRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
+                <div :class="[mergedSettings.defaultClassNames.smoothPageBodyPosition, mergedSettings.additionalClassNames.smoothPageBodyPosition]">
+                    <slot></slot>
+                </div>
+            </div>
     </div>
 </template>
 
@@ -108,9 +110,18 @@ function toggleClassNames(add: boolean) {
         if (mergedSettings.mode === 'vertical') {
             mergedSettings.defaultClassNames.smoothPageVertical && html.classList.add(mergedSettings.defaultClassNames.smoothPageVertical)
             mergedSettings.additionalClassNames.smoothPageVertical && html.classList.add(mergedSettings.additionalClassNames.smoothPageVertical)
-        } else {
+        } else
+        if (mergedSettings.mode === 'vertical-reverse') {
+            mergedSettings.defaultClassNames.smoothPageVerticalReverse && html.classList.add(mergedSettings.defaultClassNames.smoothPageVerticalReverse)
+            mergedSettings.additionalClassNames.smoothPageVerticalReverse && html.classList.add(mergedSettings.additionalClassNames.smoothPageVerticalReverse)
+        } else
+        if (mergedSettings.mode === 'horizontal') {
             mergedSettings.defaultClassNames.smoothPageHorizontal && html.classList.add(mergedSettings.defaultClassNames.smoothPageHorizontal)
             mergedSettings.additionalClassNames.smoothPageHorizontal && html.classList.add(mergedSettings.additionalClassNames.smoothPageHorizontal)
+        } else 
+        if (mergedSettings.mode === 'horizontal-reverse') {
+            mergedSettings.defaultClassNames.smoothPageHorizontalReverse && html.classList.add(mergedSettings.defaultClassNames.smoothPageHorizontalReverse)
+            mergedSettings.additionalClassNames.smoothPageHorizontalReverse && html.classList.add(mergedSettings.additionalClassNames.smoothPageHorizontalReverse)
         }
         return
     }
@@ -120,9 +131,18 @@ function toggleClassNames(add: boolean) {
     if (mergedSettings.mode === 'vertical') {
         mergedSettings.defaultClassNames.smoothPageVertical && html.classList.remove(mergedSettings.defaultClassNames.smoothPageVertical)
         mergedSettings.additionalClassNames.smoothPageVertical && html.classList.remove(mergedSettings.additionalClassNames.smoothPageVertical)
-    } else {
+    } else
+    if (mergedSettings.mode === 'vertical-reverse') {
+        mergedSettings.defaultClassNames.smoothPageVerticalReverse && html.classList.remove(mergedSettings.defaultClassNames.smoothPageVerticalReverse)
+        mergedSettings.additionalClassNames.smoothPageVerticalReverse && html.classList.remove(mergedSettings.additionalClassNames.smoothPageVerticalReverse)
+    } else
+    if (mergedSettings.mode === 'horizontal') {
         mergedSettings.defaultClassNames.smoothPageHorizontal && html.classList.remove(mergedSettings.defaultClassNames.smoothPageHorizontal)
         mergedSettings.additionalClassNames.smoothPageHorizontal && html.classList.remove(mergedSettings.additionalClassNames.smoothPageHorizontal)
+    } else 
+    if (mergedSettings.mode === 'horizontal-reverse') {
+        mergedSettings.defaultClassNames.smoothPageHorizontalReverse && html.classList.remove(mergedSettings.defaultClassNames.smoothPageHorizontalReverse)
+        mergedSettings.additionalClassNames.smoothPageHorizontalReverse && html.classList.remove(mergedSettings.additionalClassNames.smoothPageHorizontalReverse)
     }
 }
 watchEffect(() => {
@@ -132,11 +152,21 @@ watchEffect(() => {
 })
 function onScroll(scrollProps: OnScrollProps) {
     if (store.isPreventScroll) { return }
-    if (!contentRef.value) { return }
+    const maxScroll = getMaxScroll()
+    if ( !maxScroll ) { return }
+    store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
+}
+function getMaxScroll(): number {
+    if (!contentRef.value) { return 0 }
     const contentHeight = contentRef.value.getBoundingClientRect().height - window.innerHeight
     const contentWidth = contentRef.value.getBoundingClientRect().width - window.innerWidth
-    const maxScroll = mergedSettings.mode === 'vertical' ? contentHeight : contentWidth
-    store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
+    if ( mergedSettings.mode === 'vertical' || mergedSettings.mode === 'vertical-reverse' ) {
+        return contentHeight
+    }
+    if ( mergedSettings.mode === 'horizontal' || mergedSettings.mode === 'horizontal-reverse' ) {
+        return contentWidth
+    }
+    return 0
 }
 useLoop(() => {
     if (store.isPreventScroll) { return }
@@ -171,9 +201,20 @@ const style = computed(() => {
                 transform: `translate3d(0, ${-store.currentScrollPosition}px, 0)`
             }
         }
+        if (mergedSettings.mode === 'vertical-reverse') {
+            console.log('vertical-reverse', store.currentScrollPosition)
+            return {
+                transform: `translate3d(0, ${store.currentScrollPosition}px, 0)`
+            }
+        }
         if (mergedSettings.mode === 'horizontal') {
             return {
                 transform: `translate3d(${-store.currentScrollPosition}px, 0, 0)`
+            }
+        }
+        if (mergedSettings.mode === 'horizontal-reverse') {
+            return {
+                transform: `translate3d(${store.currentScrollPosition}px, 0, 0)`
             }
         }
     }

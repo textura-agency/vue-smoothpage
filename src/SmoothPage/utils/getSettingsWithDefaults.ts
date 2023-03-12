@@ -38,16 +38,22 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
         defaultClassNames: {
             smoothPage: settings?.defaultClassNames?.smoothPage || dfs.defaultClassNames.smoothPage,
             smoothPageBody: settings?.defaultClassNames?.smoothPageBody || dfs.defaultClassNames.smoothPageBody,
+            smoothPageBodyPosition: settings?.defaultClassNames?.smoothPageBodyPosition || dfs.defaultClassNames.smoothPageBodyPosition,
             smoothPageEnabled: settings?.defaultClassNames?.smoothPageEnabled || dfs.defaultClassNames.smoothPageEnabled,
             smoothPageVertical: settings?.defaultClassNames?.smoothPageVertical || dfs.defaultClassNames.smoothPageVertical,
+            smoothPageVerticalReverse: settings?.defaultClassNames?.smoothPageVerticalReverse || dfs.defaultClassNames.smoothPageVerticalReverse,
             smoothPageHorizontal: settings?.defaultClassNames?.smoothPageHorizontal || dfs.defaultClassNames.smoothPageHorizontal,
+            smoothPageHorizontalReverse: settings?.defaultClassNames?.smoothPageHorizontalReverse || dfs.defaultClassNames.smoothPageHorizontalReverse,
         },
         additionalClassNames: {
             smoothPage: settings?.additionalClassNames?.smoothPage || dfs.additionalClassNames.smoothPage,
             smoothPageBody: settings?.additionalClassNames?.smoothPageBody || dfs.additionalClassNames.smoothPageBody,
+            smoothPageBodyPosition: settings?.additionalClassNames?.smoothPageBodyPosition || dfs.additionalClassNames.smoothPageBodyPosition,
             smoothPageEnabled: settings?.additionalClassNames?.smoothPageEnabled || dfs.additionalClassNames.smoothPageEnabled,
             smoothPageVertical: settings?.additionalClassNames?.smoothPageVertical || dfs.additionalClassNames.smoothPageVertical,
+            smoothPageVerticalReverse: settings?.additionalClassNames?.smoothPageVerticalReverse || dfs.additionalClassNames.smoothPageVerticalReverse,
             smoothPageHorizontal: settings?.additionalClassNames?.smoothPageHorizontal || dfs.additionalClassNames.smoothPageHorizontal,
+            smoothPageHorizontalReverse: settings?.additionalClassNames?.smoothPageHorizontalReverse || dfs.additionalClassNames.smoothPageHorizontalReverse,
         }
     }
 }
@@ -73,15 +79,21 @@ const dfs = {
     defaultClassNames: {
         smoothPage: 't-smoothpage',
         smoothPageBody: 't-smoothpage--body',
+        smoothPageBodyPosition: 't-smoothpage--body-position',
         smoothPageEnabled: 't-smoothpage--enabled',
         smoothPageVertical: 't-smoothpage--vertical',
+        smoothPageVerticalReverse: 't-smoothpage--vertical-reverse',
         smoothPageHorizontal: 't-smoothpage--horizontal',
+        smoothPageHorizontalReverse: 't-smoothpage--horizontal-reverse',
     },
     additionalClassNames: {
         smoothPage: '',
         smoothPageBody: '',
+        smoothPageBodyPosition: '',
         smoothPageEnabled: '',
         smoothPageVertical: '',
+        smoothPageVerticalReverse: '',
         smoothPageHorizontal: '',
+        smoothPageHorizontalReverse: '',
     }
 }

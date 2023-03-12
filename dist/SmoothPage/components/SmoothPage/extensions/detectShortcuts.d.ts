@@ -7,6 +7,7 @@ declare class DetectShotcuts {
     isHold: (key: any) => boolean;
     keydown: (e: any) => void;
     keyup: (e: any) => void;
+    isHolding(): void;
 }
 export default DetectShotcuts;
 //# sourceMappingURL=detectShortcuts.d.ts.map

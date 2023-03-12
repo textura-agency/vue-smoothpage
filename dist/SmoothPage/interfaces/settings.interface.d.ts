@@ -1,5 +1,5 @@
 type WatchIsEnabledOnType = 'load' | 'load-resize';
-type ModeType = 'horizontal' | 'vertical';
+type ModeType = 'horizontal' | 'horizontal-reverse' | 'vertical' | 'vertical-reverse';
 type PreventScrollKeyType = {
     code: number[];
 };
@@ -40,16 +40,22 @@ interface SmoothPageSettings {
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
+        smoothPageBodyPosition?: string;
         smoothPageEnabled?: string;
         smoothPageVertical?: string;
+        smoothPageVerticalReverse?: string;
         smoothPageHorizontal?: string;
+        smoothPageHorizontalReverse?: string;
     };
     additionalClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
+        smoothPageBodyPosition?: string;
         smoothPageEnabled?: string;
         smoothPageVertical?: string;
+        smoothPageVerticalReverse?: string;
         smoothPageHorizontal?: string;
+        smoothPageHorizontalReverse?: string;
     };
 }
 export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, ScrollKeyType, PreventScrollKeyType, PreventScrollKeysType };

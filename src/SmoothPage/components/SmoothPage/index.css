@@ -14,7 +14,8 @@ html.t-smoothpage--enabled .t-smoothpage {
     overflow: hidden;
 }
 
-html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body {
+html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body,
+html.t-smoothpage--enabled.t-smoothpage--vertical-reverse .t-smoothpage .t-smoothpage--body {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,11 +23,30 @@ html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--b
     height: auto;
     will-change: transform;
 }
-html.t-smoothpage--enabled.t-smoothpage--horizontal .t-smoothpage .t-smoothpage--body {
+html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body .t-smoothpage--body-position {
+    width: 100%;
+    height: auto;
+}
+html.t-smoothpage--enabled.t-smoothpage--vertical-reverse .t-smoothpage .t-smoothpage--body .t-smoothpage--body-position {
+    width: 100%;
+    height: auto;
+    transform: translateY(calc(-100% + 100vh));
+}
+html.t-smoothpage--enabled.t-smoothpage--horizontal .t-smoothpage .t-smoothpage--body,
+html.t-smoothpage--enabled.t-smoothpage--horizontal-reverse .t-smoothpage .t-smoothpage--body {
     position: absolute;
     top: 0;
     left: 0;
     width: auto;
     height: 100%;
     will-change: transform;
+}
+html.t-smoothpage--enabled.t-smoothpage--horizontal .t-smoothpage .t-smoothpage--body .t-smoothpage--body-position {
+    width: auto;
+    height: 100%;
+}
+html.t-smoothpage--enabled.t-smoothpage--horizontal-reverse .t-smoothpage .t-smoothpage--body .t-smoothpage--body-position {
+    width: auto;
+    height: 100%;
+    transform: translateX(calc(-100% + 100vw));
 }

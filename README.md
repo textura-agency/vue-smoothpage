@@ -58,7 +58,7 @@ yarn add vue-smoothpage
 Available settings
 
     interface SmoothPageSettings {
-        mode?: 'vertical' | 'horizontal'; // 'vertical' by default
+        mode?: 'vertical' | 'vertical-reverse' | 'horizontal' | 'horizontal-reverse'; // 'vertical' by default
         smoothness?: number; // 0.075 by default
         wheelIntensity?: number; // 4 by default
         touchmoveIntensity?: number; // 4 by default
@@ -94,16 +94,22 @@ Available settings
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default
+            smoothPageBodyPosition?: string; // 't-smoothpage--body-position' by default
             smoothPageEnabled?: string; // 't-smoothpage--enabled' by default
             smoothPageVertical?: string; // 't-smoothpage--vertical' by default
+            smoothPageVerticalReverse?: string; // 't-smoothpage--vertical-reverse' by default
             smoothPageHorizontal?: string; // 't-smoothpage--horizontal' by default
+            smoothPageHorizontalReverse?: string; // 't-smoothpage--horizontal-reverse' by default
         },
         additionalClassNames?: {
             smoothPage?: string; // '' by default
             smoothPageBody?: string; // '' by default
+            smoothPageBodyPosition?: string; // '' by default
             smoothPageEnabled?: string; // '' by default
             smoothPageVertical?: string; // '' by default
+            smoothPageVerticalReverse?: string; // '' by default
             smoothPageHorizontal?: string; // '' by default
+            smoothPageHorizontalReverse?: string; // '' by default
         }
     }
 

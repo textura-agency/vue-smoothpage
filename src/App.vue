@@ -6,7 +6,7 @@
         safariWheelIntensity: 7,
         reloadPageOnStateChanging: false,
         watchIsEnabledOn: 'load-resize',
-        mode: 'horizontal',
+        mode: 'vertical',
         preventScrollOnHoldKeys: [ { code: [ 16, 91 ] } ]
     }">
         <div class="container">
@@ -41,20 +41,20 @@ html, body {
 }
 
 .container {
-    /* height: 300vh;
+    height: 300vh;
     width: 100vw;
-    background: linear-gradient(0deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%); */
+    background: linear-gradient(0deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%);
 
     /* for horizontal */
-    height: 100vh;
+    /* height: 100vh;
     width: 300vw;
-    background: linear-gradient(90deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%);
+    background: linear-gradient(90deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%); */
 }
 
 .button {
     color: white;
-    /* transform: translate(50vh, 100vh); */
-    transform: translate(120vw, 50vh);
+    transform: translate(50vh, 100vh);
+    /* transform: translate(120vw, 50vh); */
 
 }
 </style>

@@ -29,16 +29,22 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;
+        smoothPageBodyPosition: any;
         smoothPageEnabled: any;
         smoothPageVertical: any;
+        smoothPageVerticalReverse: any;
         smoothPageHorizontal: any;
+        smoothPageHorizontalReverse: any;
     };
     additionalClassNames: {
         smoothPage: any;
         smoothPageBody: any;
+        smoothPageBodyPosition: any;
         smoothPageEnabled: any;
         smoothPageVertical: any;
+        smoothPageVerticalReverse: any;
         smoothPageHorizontal: any;
+        smoothPageHorizontalReverse: any;
     };
 };
 //# sourceMappingURL=getSettingsWithDefaults.d.ts.map

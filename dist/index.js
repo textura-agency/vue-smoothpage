@@ -1,60 +1,60 @@
-var ee = Object.defineProperty;
-var oe = (e, l, o) => l in e ? ee(e, l, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[l] = o;
-var s = (e, l, o) => (oe(e, typeof l != "symbol" ? l + "" : l, o), o), R = (e, l, o) => {
+var oe = Object.defineProperty;
+var ae = (e, l, o) => l in e ? oe(e, l, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[l] = o;
+var n = (e, l, o) => (ae(e, typeof l != "symbol" ? l + "" : l, o), o), M = (e, l, o) => {
   if (!l.has(e))
     throw TypeError("Cannot " + o);
 };
-var m = (e, l, o) => (R(e, l, "read from private field"), o ? o.call(e) : l.get(e)), p = (e, l, o) => {
+var u = (e, l, o) => (M(e, l, "read from private field"), o ? o.call(e) : l.get(e)), R = (e, l, o) => {
   if (l.has(e))
     throw TypeError("Cannot add the same private member more than once");
   l instanceof WeakSet ? l.add(e) : l.set(e, o);
-}, x = (e, l, o, a) => (R(e, l, "write to private field"), a ? a.call(e, o) : l.set(e, o), o);
-var O = (e, l, o) => (R(e, l, "access private method"), o);
-import { ref as h, onMounted as F, onUnmounted as U, defineComponent as le, inject as te, reactive as ae, watchEffect as H, computed as P, openBlock as ne, createElementBlock as se, normalizeClass as V, createElementVNode as ie, normalizeStyle as re, unref as ce, renderSlot as he } from "vue";
+}, x = (e, l, o, s) => (M(e, l, "write to private field"), s ? s.call(e, o) : l.set(e, o), o);
+var p = (e, l, o) => (M(e, l, "access private method"), o);
+import { ref as d, onMounted as U, onUnmounted as $, defineComponent as le, inject as se, reactive as te, watchEffect as K, computed as I, openBlock as ne, createElementBlock as re, normalizeClass as k, createElementVNode as F, normalizeStyle as ie, unref as ce, renderSlot as de } from "vue";
 import { defineStore as G } from "pinia";
-class de {
-  constructor(l, o, a) {
-    s(this, "element");
-    s(this, "cb");
-    s(this, "settings");
-    s(this, "subscribe", function() {
+class he {
+  constructor(l, o, s) {
+    n(this, "element");
+    n(this, "cb");
+    n(this, "settings");
+    n(this, "subscribe", function() {
       this.element.addEventListener("wheel", this.listener);
     }.bind(this));
-    s(this, "unsubscribe", function() {
+    n(this, "unsubscribe", function() {
       this.element.removeEventListener("wheel", this.listener);
     }.bind(this));
-    s(this, "listener", function(l) {
+    n(this, "listener", function(l) {
       typeof this.cb == "function" && l.deltaY && this.cb({
         dir: l.deltaY / Math.abs(l.deltaY),
         wheel: l.deltaY * this.settings.wheelIntensity
       });
     }.bind(this));
-    this.element = l, this.cb = o, this.settings = a, this.subscribe();
+    this.element = l, this.cb = o, this.settings = s, this.subscribe();
   }
 }
-var f, I, T, W, M, z, L, Y;
-class ue {
-  constructor(l, o, a) {
-    p(this, T);
-    p(this, M);
-    p(this, L);
-    p(this, f, {
+var b, S, D, B, L, W, T, V;
+class me {
+  constructor(l, o, s) {
+    R(this, D);
+    R(this, L);
+    R(this, T);
+    R(this, b, {
       sY: 0,
       eY: 0
     });
-    s(this, "prevY", 0);
-    p(this, I, void 0);
-    s(this, "cb");
-    s(this, "deltaY");
-    s(this, "minDelta");
-    s(this, "settings");
-    s(this, "subscribe", function() {
-      m(this, I).addEventListener("touchstart", O(this, T, W).bind(this), !1), m(this, I).addEventListener("touchmove", O(this, M, z).bind(this), !1), m(this, I).addEventListener("touchend", O(this, L, Y).bind(this), !1);
+    n(this, "prevY", 0);
+    R(this, S, void 0);
+    n(this, "cb");
+    n(this, "deltaY");
+    n(this, "minDelta");
+    n(this, "settings");
+    n(this, "subscribe", function() {
+      u(this, S).addEventListener("touchstart", p(this, D, B).bind(this), !1), u(this, S).addEventListener("touchmove", p(this, L, W).bind(this), !1), u(this, S).addEventListener("touchend", p(this, T, V).bind(this), !1);
     }.bind(this));
-    s(this, "unsubscribe", function() {
-      m(this, I).removeEventListener("touchstart", O(this, T, W), !1), m(this, I).removeEventListener("touchmove", O(this, M, z), !1), m(this, I).removeEventListener("touchend", O(this, L, Y), !1);
+    n(this, "unsubscribe", function() {
+      u(this, S).removeEventListener("touchstart", p(this, D, B), !1), u(this, S).removeEventListener("touchmove", p(this, L, W), !1), u(this, S).removeEventListener("touchend", p(this, T, V), !1);
     }.bind(this));
-    this.cb = o, x(this, I, l), this.subscribe(), this.settings = a, this.minDelta = a.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.unsubscribe = this.unsubscribe.bind(this);
+    this.cb = o, x(this, S, l), this.subscribe(), this.settings = s, this.minDelta = s.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.unsubscribe = this.unsubscribe.bind(this);
   }
   useCallback(l) {
     typeof this.cb == "function" && l && this.cb({
@@ -63,71 +63,73 @@ class ue {
     });
   }
 }
-f = new WeakMap(), I = new WeakMap(), T = new WeakSet(), W = function(l) {
+b = new WeakMap(), S = new WeakMap(), D = new WeakSet(), B = function(l) {
   const o = l.touches[0];
-  m(this, f).sY = o.screenY, this.prevY = m(this, f).sY, m(this, f).eY = m(this, f).sY;
-}, M = new WeakSet(), z = function(l) {
+  u(this, b).sY = o.screenY, this.prevY = u(this, b).sY, u(this, b).eY = u(this, b).sY;
+}, L = new WeakSet(), W = function(l) {
   const o = l.touches[0];
-  this.prevY = m(this, f).eY, m(this, f).eY = o.screenY, this.deltaY = m(this, f).sY - m(this, f).eY;
-  const a = m(this, f).sY - this.prevY;
-  Math.abs(a) > Math.abs(this.deltaY) && (m(this, f).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
-}, L = new WeakSet(), Y = function(l) {
+  this.prevY = u(this, b).eY, u(this, b).eY = o.screenY, this.deltaY = u(this, b).sY - u(this, b).eY;
+  const s = u(this, b).sY - this.prevY;
+  Math.abs(s) > Math.abs(this.deltaY) && (u(this, b).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
+}, T = new WeakSet(), V = function(l) {
   Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
 };
-class me {
-  constructor(l, o, a) {
-    s(this, "element");
-    s(this, "callback");
-    s(this, "settings");
-    s(this, "subscribe", function() {
+class ue {
+  constructor(l, o, s) {
+    n(this, "element");
+    n(this, "callback");
+    n(this, "settings");
+    n(this, "subscribe", function() {
       this.element.addEventListener("keydown", this.listener);
     }.bind(this));
-    s(this, "unsubscribe", function() {
+    n(this, "unsubscribe", function() {
       this.element.removeEventListener("keydown", this.listener);
     }.bind(this));
-    s(this, "listener", function(l) {
+    n(this, "listener", function(l) {
       if (!this.settings.enableScrollOnKeyboard || typeof this.callback != "function")
         return;
       const o = l.keyCode;
-      console.log(o), this.settings.mode === "vertical" ? (this.settings.scrollDownOnKeys.forEach((a) => {
-        a.code === o && this.callback({ dir: 1, wheel: a.distance });
-      }), this.settings.scrollUpOnKeys.forEach((a) => {
-        a.code === o && this.callback({ dir: -1, wheel: a.distance * -1 });
-      })) : this.settings.mode === "horizontal" && (this.settings.scrollRightOnKeys.forEach((a) => {
-        a.code === o && this.callback({ dir: 1, wheel: a.distance });
-      }), this.settings.scrollLeftOnKeys.forEach((a) => {
-        a.code === o && this.callback({ dir: -1, wheel: a.distance * -1 });
+      console.log(o), this.settings.mode === "vertical" ? (this.settings.scrollDownOnKeys.forEach((s) => {
+        s.code === o && this.callback({ dir: 1, wheel: s.distance });
+      }), this.settings.scrollUpOnKeys.forEach((s) => {
+        s.code === o && this.callback({ dir: -1, wheel: s.distance * -1 });
+      })) : this.settings.mode === "horizontal" && (this.settings.scrollRightOnKeys.forEach((s) => {
+        s.code === o && this.callback({ dir: 1, wheel: s.distance });
+      }), this.settings.scrollLeftOnKeys.forEach((s) => {
+        s.code === o && this.callback({ dir: -1, wheel: s.distance * -1 });
       }));
     }.bind(this));
-    this.element = l, this.callback = o, this.settings = a, this.subscribe();
+    this.element = l, this.callback = o, this.settings = s, this.subscribe();
   }
 }
-class be {
+class fe {
   constructor(l) {
-    s(this, "element");
-    s(this, "pressed", {});
-    s(this, "subscribe", function() {
+    n(this, "element");
+    n(this, "pressed", {});
+    n(this, "subscribe", function() {
       this.element.addEventListener("keydown", this.keydown), this.element.addEventListener("keyup", this.keyup);
     }.bind(this));
-    s(this, "unsubscribe", function() {
+    n(this, "unsubscribe", function() {
       this.element.removeEventListener("keydown", this.keydown), this.element.removeEventListener("keyup", this.keyup);
     }.bind(this));
-    s(this, "isHold", function(l) {
+    n(this, "isHold", function(l) {
       return !!this.pressed[l];
     }.bind(this));
-    s(this, "keydown", function(l) {
+    n(this, "keydown", function(l) {
       const o = l.keyCode;
       this.pressed[o] || (this.pressed[o] = !0);
     }.bind(this));
-    s(this, "keyup", function(l) {
+    n(this, "keyup", function(l) {
       const o = l.keyCode;
       this.pressed[o] && (this.pressed[o] = !1);
     }.bind(this));
     this.element = l, this.subscribe();
   }
+  isHolding() {
+  }
 }
-var E = /* @__PURE__ */ ((e) => (e.MS_EDGE = "MS_EDGE", e.EDGE_CHROMIUM_BASED = "EDGE_CHROMIUM_BASED", e.OPERA = "OPERA", e.CHROME = "CHROME", e.MS_IE = "MS_IE", e.MOZILLA_FIREFOX = "MOZILLA_FIREFOX", e.SAFARI = "SAFARI", e.OTHER = "OTHER", e))(E || {});
-const ye = () => {
+var N = /* @__PURE__ */ ((e) => (e.MS_EDGE = "MS_EDGE", e.EDGE_CHROMIUM_BASED = "EDGE_CHROMIUM_BASED", e.OPERA = "OPERA", e.CHROME = "CHROME", e.MS_IE = "MS_IE", e.MOZILLA_FIREFOX = "MOZILLA_FIREFOX", e.SAFARI = "SAFARI", e.OTHER = "OTHER", e))(N || {});
+const ve = () => {
   const e = window.navigator.userAgent.toLowerCase();
   switch (!0) {
     case e.indexOf("edge") > -1:
@@ -148,210 +150,216 @@ const ye = () => {
       return "OTHER";
   }
 };
-class fe {
-  constructor(l, o, a, d) {
-    s(this, "swipe");
-    s(this, "scroll");
-    s(this, "keyboard");
-    s(this, "shotcuts");
-    s(this, "settings");
-    s(this, "callback");
-    s(this, "isSubscribed", !1);
-    s(this, "subscribe", function() {
+class ye {
+  constructor(l, o, s, h) {
+    n(this, "swipe");
+    n(this, "scroll");
+    n(this, "keyboard");
+    n(this, "shotcuts");
+    n(this, "isSubscribed", !1);
+    n(this, "settings");
+    n(this, "callback");
+    n(this, "subscribe", function() {
       this.isSubscribed = !0, this.scroll.subscribe(), this.swipe.subscribe(), this.keyboard.subscribe();
     }.bind(this));
-    s(this, "unsubscribe", function() {
+    n(this, "unsubscribe", function() {
       this.isSubscribed = !1, this.scroll.unsubscribe(), this.swipe.unsubscribe(), this.keyboard.unsubscribe();
     }.bind(this));
-    const t = {
-      wheelIntensity: a.wheelIntensity,
-      touchmoveIntensity: a.touchmoveIntensity,
-      minTouchmoveDistance: a.minTouchmoveDistance,
-      safariWheelIntensity: a.safariWheelIntensity,
-      safariTouchmoveIntensity: a.safariTouchmoveIntensity,
-      chromeWheelIntensity: a.chromeWheelIntensity,
-      chromeTouchmoveIntensity: a.chromeTouchmoveIntensity,
-      operaWheelIntensity: a.operaWheelIntensity,
-      operaTouchmoveIntensity: a.operaTouchmoveIntensity,
-      edgeWheelIntensity: a.edgeWheelIntensity,
-      edgeTouchmoveIntensity: a.edgeTouchmoveIntensity,
-      mozillaWheelIntensity: a.mozillaWheelIntensity,
-      mozillaTouchmoveIntensity: a.mozillaTouchmoveIntensity
-    }, b = {
-      wheelIntensity: y("WheelIntensity"),
-      touchmoveIntensity: y("TouchmoveIntensity"),
-      minTouchmoveDistance: t.minTouchmoveDistance
+    n(this, "destroy", function() {
+      this.scroll.unsubscribe(), this.swipe.unsubscribe(), this.keyboard.unsubscribe(), this.shotcuts.unsubscribe();
+    }.bind(this));
+    const a = {
+      wheelIntensity: s.wheelIntensity,
+      touchmoveIntensity: s.touchmoveIntensity,
+      minTouchmoveDistance: s.minTouchmoveDistance,
+      safariWheelIntensity: s.safariWheelIntensity,
+      safariTouchmoveIntensity: s.safariTouchmoveIntensity,
+      chromeWheelIntensity: s.chromeWheelIntensity,
+      chromeTouchmoveIntensity: s.chromeTouchmoveIntensity,
+      operaWheelIntensity: s.operaWheelIntensity,
+      operaTouchmoveIntensity: s.operaTouchmoveIntensity,
+      edgeWheelIntensity: s.edgeWheelIntensity,
+      edgeTouchmoveIntensity: s.edgeTouchmoveIntensity,
+      mozillaWheelIntensity: s.mozillaWheelIntensity,
+      mozillaTouchmoveIntensity: s.mozillaTouchmoveIntensity
+    }, f = {
+      wheelIntensity: v("WheelIntensity"),
+      touchmoveIntensity: v("TouchmoveIntensity"),
+      minTouchmoveDistance: a.minTouchmoveDistance
     };
-    function y(u) {
-      switch (d) {
-        case E.SAFARI:
-          return t[`safari${u}`];
-        case E.CHROME:
-          return t[`chrome${u}`];
-        case E.OPERA:
-          return t[`opera${u}`];
-        case (E.MS_EDGE || E.EDGE_CHROMIUM_BASED):
-          return t[`edge${u}`];
-        case E.MOZILLA_FIREFOX:
-          return t[`mozilla${u}`];
+    function v(m) {
+      switch (h) {
+        case N.SAFARI:
+          return a[`safari${m}`];
+        case N.CHROME:
+          return a[`chrome${m}`];
+        case N.OPERA:
+          return a[`opera${m}`];
+        case (N.MS_EDGE || N.EDGE_CHROMIUM_BASED):
+          return a[`edge${m}`];
+        case N.MOZILLA_FIREFOX:
+          return a[`mozilla${m}`];
         default:
-          return u === "WheelIntensity" ? t.wheelIntensity : t.touchmoveIntensity;
+          return m === "WheelIntensity" ? a.wheelIntensity : a.touchmoveIntensity;
       }
     }
-    const v = {
-      mode: a.mode,
-      enableScrollOnKeyboard: a.enableScrollOnKeyboard,
-      scrollDownOnKeys: a.scrollDownOnKeys,
-      scrollUpOnKeys: a.scrollUpOnKeys,
-      scrollLeftOnKeys: a.scrollLeftOnKeys,
-      scrollRightOnKeys: a.scrollRightOnKeys
+    const P = {
+      mode: s.mode,
+      enableScrollOnKeyboard: s.enableScrollOnKeyboard,
+      scrollDownOnKeys: s.scrollDownOnKeys,
+      scrollUpOnKeys: s.scrollUpOnKeys,
+      scrollLeftOnKeys: s.scrollLeftOnKeys,
+      scrollRightOnKeys: s.scrollRightOnKeys
     };
-    this.callback = o, this.settings = a, this.scroll = new de(l, this.controlScroll.bind(this), b), this.swipe = new ue(l, this.controlScroll.bind(this), b), this.keyboard = new me(l, this.controlScroll.bind(this), v), this.shotcuts = new be(l), this.destroy = this.destroy.bind(this), this.isSubscribed = !0;
+    this.callback = o, this.settings = s, this.scroll = new he(l, this.controlScroll.bind(this), f), this.swipe = new me(l, this.controlScroll.bind(this), f), this.keyboard = new ue(l, this.controlScroll.bind(this), P), this.shotcuts = new fe(l);
   }
   controlScroll(l) {
-    var a;
+    var s;
     if (!this.callback)
       return;
     let o = !1;
-    (a = this.settings.preventScrollOnHoldKeys) == null || a.forEach((d) => {
-      let t = 0;
-      d.code.forEach((b) => {
-        this.shotcuts.isHold(b) && t++;
-      }), t === d.code.length && (this.unsubscribe(), o = !0);
+    (s = this.settings.preventScrollOnHoldKeys) == null || s.forEach((h) => {
+      let a = 0;
+      h.code.forEach((f) => {
+        this.shotcuts.isHold(f) && a++;
+      }), a === h.code.length && (this.unsubscribe(), o = !0);
     }), console.log(o, this.isSubscribed), !o && !this.isSubscribed && this.subscribe(), this.callback(l);
   }
-  destroy() {
-    this.scroll.unsubscribe(), this.swipe.unsubscribe(), this.keyboard.unsubscribe(), this.shotcuts.unsubscribe();
-  }
 }
-const ve = (e, l = 0) => {
-  const o = h(!0), a = h(performance.now());
-  F(() => d(0)), U(() => o.value = !1);
-  function d(t) {
-    o.value && (t - a.value > l && (e(), a.value = performance.now()), requestAnimationFrame(d));
+const be = (e, l = 0) => {
+  const o = d(!0), s = d(performance.now());
+  U(() => h(0)), $(() => o.value = !1);
+  function h(a) {
+    o.value && (a - s.value > l && (e(), s.value = performance.now()), requestAnimationFrame(h));
   }
 }, Pe = (e, l, o) => l === 0 && e < 0.1 ? 0 : e + (l - e) * o;
-var _ = /* @__PURE__ */ ((e) => (e.DESKTOP = "DESKTOP", e.TABLET = "TABLET", e.MOBILE = "MOBILE", e))(_ || {});
+var Y = /* @__PURE__ */ ((e) => (e.DESKTOP = "DESKTOP", e.TABLET = "TABLET", e.MOBILE = "MOBILE", e))(Y || {});
 function Ie() {
   const e = navigator.userAgent;
   return /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(e) ? "TABLET" : /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(e) ? "MOBILE" : "DESKTOP";
 }
-const $ = G("privateSmoothPage", () => {
-  const e = h(null), l = h(0), o = h(0), a = h(!1), d = h(!1), t = h(!1), b = h(!1), y = h(!1), v = h(_.DESKTOP), u = h(E.OTHER), S = h(!1), D = h(!1), w = h(!1), N = h(0), c = (i) => {
-    e.value = i;
-  }, r = (i) => {
-    l.value = i;
-  }, k = (i) => {
-    d.value = i;
-  }, C = (i) => {
-    o.value = i;
-  }, X = (i) => {
-    a.value = i;
-  }, Z = (i) => {
-    t.value = i;
-  }, q = (i) => {
-    y.value = i;
-  }, j = (i) => {
-    b.value = i;
-  }, J = (i) => {
-    v.value = i;
-  }, Q = (i) => {
-    u.value = i;
-  }, A = (i) => {
-    D.value = i;
-  }, B = (i) => {
-    S.value = i;
-  }, g = (i) => {
-    w.value = i;
-  }, K = (i) => {
-    N.value = i;
+const X = G("privateSmoothPage", () => {
+  const e = d(null), l = d(0), o = d(0), s = d(!1), h = d(!1), a = d(!1), f = d(!1), v = d(!1), P = d(Y.DESKTOP), m = d(N.OTHER), C = d(!1), O = d(!1), w = d(!1), E = d(0), y = (r) => {
+    e.value = r;
+  }, c = (r) => {
+    l.value = r;
+  }, i = (r) => {
+    h.value = r;
+  }, z = (r) => {
+    o.value = r;
+  }, Z = (r) => {
+    s.value = r;
+  }, q = (r) => {
+    a.value = r;
+  }, j = (r) => {
+    v.value = r;
+  }, J = (r) => {
+    f.value = r;
+  }, Q = (r) => {
+    P.value = r;
+  }, g = (r) => {
+    m.value = r;
+  }, _ = (r) => {
+    O.value = r;
+  }, A = (r) => {
+    C.value = r;
+  }, ee = (r) => {
+    w.value = r;
+  }, H = (r) => {
+    E.value = r;
   };
   return {
     settings: e,
     currentScrollPosition: l,
-    isEnabled: d,
+    isEnabled: h,
     nextScrollPosition: o,
-    isTriggeringScrollPosition: a,
-    isMounted: t,
-    isInited: y,
-    isEarlierMounted: b,
-    deviceType: v,
-    needReload: D,
-    isDestroyedByUser: S,
-    browser: u,
+    isTriggeringScrollPosition: s,
+    isMounted: a,
+    isInited: v,
+    isEarlierMounted: f,
+    deviceType: P,
+    needReload: O,
+    isDestroyedByUser: C,
+    browser: m,
     isPreventScroll: w,
-    savedCurrentScrollPositionForDestroy: N,
-    setSettings: c,
-    setCurrentScrollPosition: r,
-    setIsEnabled: k,
-    setNextScrollPosition: C,
-    setIsTriggeringScrollPosition: X,
-    setIsMounted: Z,
-    setIsInited: q,
-    setIsEarlierMounted: j,
-    setDeviceType: J,
-    setNeedReload: A,
-    setBrowser: Q,
-    preventScroll: g,
-    setSavedCurrentScrollPositionForDestroy: K,
-    reload: (i = !1) => {
-      A(!0), i && (r(0), C(0), K(0));
+    savedCurrentScrollPositionForDestroy: E,
+    setSettings: y,
+    setCurrentScrollPosition: c,
+    setIsEnabled: i,
+    setNextScrollPosition: z,
+    setIsTriggeringScrollPosition: Z,
+    setIsMounted: q,
+    setIsInited: j,
+    setIsEarlierMounted: J,
+    setDeviceType: Q,
+    setNeedReload: _,
+    setBrowser: g,
+    preventScroll: ee,
+    setSavedCurrentScrollPositionForDestroy: H,
+    reload: (r = !1) => {
+      _(!0), r && (c(0), z(0), H(0));
     },
-    destroy: (i = !1) => {
-      B(!0), i && (r(0), C(0), K(0));
+    destroy: (r = !1) => {
+      A(!0), r && (c(0), z(0), H(0));
     },
-    init: (i = !1) => {
-      B(!1), i && (r(0), C(0), K(0));
+    init: (r = !1) => {
+      A(!1), r && (c(0), z(0), H(0));
     }
   };
 }), Se = (e) => {
-  var l, o, a, d, t, b, y, v, u, S;
+  var l, o, s, h, a, f, v, P, m, C, O, w, E, y, c, i;
   return {
-    mode: (e == null ? void 0 : e.mode) || n.mode,
-    smoothness: (e == null ? void 0 : e.smoothness) || n.smoothness,
-    wheelIntensity: (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    touchmoveIntensity: (e == null ? void 0 : e.touchmoveIntensity) || n.touchmoveIntensity,
+    mode: (e == null ? void 0 : e.mode) || t.mode,
+    smoothness: (e == null ? void 0 : e.smoothness) || t.smoothness,
+    wheelIntensity: (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    touchmoveIntensity: (e == null ? void 0 : e.touchmoveIntensity) || t.touchmoveIntensity,
     // experimental features
-    safariWheelIntensity: (e == null ? void 0 : e.safariWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    safariTouchmoveIntensity: (e == null ? void 0 : e.safariTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || n.wheelIntensity,
-    chromeWheelIntensity: (e == null ? void 0 : e.chromeWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    chromeTouchmoveIntensity: (e == null ? void 0 : e.chromeTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || n.wheelIntensity,
-    operaWheelIntensity: (e == null ? void 0 : e.operaWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    operaTouchmoveIntensity: (e == null ? void 0 : e.operaTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || n.wheelIntensity,
-    edgeWheelIntensity: (e == null ? void 0 : e.edgeWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    edgeTouchmoveIntensity: (e == null ? void 0 : e.edgeTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || n.wheelIntensity,
-    mozillaWheelIntensity: (e == null ? void 0 : e.mozillaWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || n.wheelIntensity,
-    mozillaTouchmoveIntensity: (e == null ? void 0 : e.mozillaTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || n.wheelIntensity,
+    safariWheelIntensity: (e == null ? void 0 : e.safariWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    safariTouchmoveIntensity: (e == null ? void 0 : e.safariTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || t.wheelIntensity,
+    chromeWheelIntensity: (e == null ? void 0 : e.chromeWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    chromeTouchmoveIntensity: (e == null ? void 0 : e.chromeTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || t.wheelIntensity,
+    operaWheelIntensity: (e == null ? void 0 : e.operaWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    operaTouchmoveIntensity: (e == null ? void 0 : e.operaTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || t.wheelIntensity,
+    edgeWheelIntensity: (e == null ? void 0 : e.edgeWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    edgeTouchmoveIntensity: (e == null ? void 0 : e.edgeTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || t.wheelIntensity,
+    mozillaWheelIntensity: (e == null ? void 0 : e.mozillaWheelIntensity) || (e == null ? void 0 : e.wheelIntensity) || t.wheelIntensity,
+    mozillaTouchmoveIntensity: (e == null ? void 0 : e.mozillaTouchmoveIntensity) || (e == null ? void 0 : e.touchmoveIntensity) || t.wheelIntensity,
     // 
-    watchIsEnabledOn: (e == null ? void 0 : e.watchIsEnabledOn) || n.watchIsEnabledOn,
-    minTouchmoveDistance: (e == null ? void 0 : e.minTouchmoveDistance) || n.minTouchmoveDistance,
-    minWidth: (e == null ? void 0 : e.minWidth) || n.minWidth,
-    renderDelay: (e == null ? void 0 : e.renderDelay) || n.renderDelay,
-    enableOnTouchDevices: (e == null ? void 0 : e.enableOnTouchDevices) || n.enableOnTouchDevices,
-    resetScrollPositionOnStateChanging: (e == null ? void 0 : e.resetScrollPositionOnStateChanging) || n.resetScrollPositionOnStateChanging,
-    reloadPageOnStateChanging: (e == null ? void 0 : e.reloadPageOnStateChanging) || n.reloadPageOnStateChanging,
-    enableScrollOnKeyboard: (e == null ? void 0 : e.enableScrollOnKeyboard) || n.enableScrollOnKeyboard,
-    scrollDownOnKeys: (e == null ? void 0 : e.scrollDownOnKeys) || n.scrollDownOnKeys,
-    scrollUpOnKeys: (e == null ? void 0 : e.scrollUpOnKeys) || n.scrollUpOnKeys,
-    scrollRightOnKeys: (e == null ? void 0 : e.scrollRightOnKeys) || n.scrollRightOnKeys,
-    scrollLeftOnKeys: (e == null ? void 0 : e.scrollLeftOnKeys) || n.scrollLeftOnKeys,
-    preventScrollOnHoldKeys: (e == null ? void 0 : e.preventScrollOnHoldKeys) || n.preventScrollOnHoldKeys,
+    watchIsEnabledOn: (e == null ? void 0 : e.watchIsEnabledOn) || t.watchIsEnabledOn,
+    minTouchmoveDistance: (e == null ? void 0 : e.minTouchmoveDistance) || t.minTouchmoveDistance,
+    minWidth: (e == null ? void 0 : e.minWidth) || t.minWidth,
+    renderDelay: (e == null ? void 0 : e.renderDelay) || t.renderDelay,
+    enableOnTouchDevices: (e == null ? void 0 : e.enableOnTouchDevices) || t.enableOnTouchDevices,
+    resetScrollPositionOnStateChanging: (e == null ? void 0 : e.resetScrollPositionOnStateChanging) || t.resetScrollPositionOnStateChanging,
+    reloadPageOnStateChanging: (e == null ? void 0 : e.reloadPageOnStateChanging) || t.reloadPageOnStateChanging,
+    enableScrollOnKeyboard: (e == null ? void 0 : e.enableScrollOnKeyboard) || t.enableScrollOnKeyboard,
+    scrollDownOnKeys: (e == null ? void 0 : e.scrollDownOnKeys) || t.scrollDownOnKeys,
+    scrollUpOnKeys: (e == null ? void 0 : e.scrollUpOnKeys) || t.scrollUpOnKeys,
+    scrollRightOnKeys: (e == null ? void 0 : e.scrollRightOnKeys) || t.scrollRightOnKeys,
+    scrollLeftOnKeys: (e == null ? void 0 : e.scrollLeftOnKeys) || t.scrollLeftOnKeys,
+    preventScrollOnHoldKeys: (e == null ? void 0 : e.preventScrollOnHoldKeys) || t.preventScrollOnHoldKeys,
     defaultClassNames: {
-      smoothPage: ((l = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : l.smoothPage) || n.defaultClassNames.smoothPage,
-      smoothPageBody: ((o = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : o.smoothPageBody) || n.defaultClassNames.smoothPageBody,
-      smoothPageEnabled: ((a = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : a.smoothPageEnabled) || n.defaultClassNames.smoothPageEnabled,
-      smoothPageVertical: ((d = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : d.smoothPageVertical) || n.defaultClassNames.smoothPageVertical,
-      smoothPageHorizontal: ((t = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : t.smoothPageHorizontal) || n.defaultClassNames.smoothPageHorizontal
+      smoothPage: ((l = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : l.smoothPage) || t.defaultClassNames.smoothPage,
+      smoothPageBody: ((o = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : o.smoothPageBody) || t.defaultClassNames.smoothPageBody,
+      smoothPageBodyPosition: ((s = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : s.smoothPageBodyPosition) || t.defaultClassNames.smoothPageBodyPosition,
+      smoothPageEnabled: ((h = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : h.smoothPageEnabled) || t.defaultClassNames.smoothPageEnabled,
+      smoothPageVertical: ((a = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : a.smoothPageVertical) || t.defaultClassNames.smoothPageVertical,
+      smoothPageVerticalReverse: ((f = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : f.smoothPageVerticalReverse) || t.defaultClassNames.smoothPageVerticalReverse,
+      smoothPageHorizontal: ((v = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : v.smoothPageHorizontal) || t.defaultClassNames.smoothPageHorizontal,
+      smoothPageHorizontalReverse: ((P = e == null ? void 0 : e.defaultClassNames) == null ? void 0 : P.smoothPageHorizontalReverse) || t.defaultClassNames.smoothPageHorizontalReverse
     },
     additionalClassNames: {
-      smoothPage: ((b = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : b.smoothPage) || n.additionalClassNames.smoothPage,
-      smoothPageBody: ((y = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : y.smoothPageBody) || n.additionalClassNames.smoothPageBody,
-      smoothPageEnabled: ((v = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : v.smoothPageEnabled) || n.additionalClassNames.smoothPageEnabled,
-      smoothPageVertical: ((u = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : u.smoothPageVertical) || n.additionalClassNames.smoothPageVertical,
-      smoothPageHorizontal: ((S = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : S.smoothPageHorizontal) || n.additionalClassNames.smoothPageHorizontal
+      smoothPage: ((m = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : m.smoothPage) || t.additionalClassNames.smoothPage,
+      smoothPageBody: ((C = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : C.smoothPageBody) || t.additionalClassNames.smoothPageBody,
+      smoothPageBodyPosition: ((O = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : O.smoothPageBodyPosition) || t.additionalClassNames.smoothPageBodyPosition,
+      smoothPageEnabled: ((w = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : w.smoothPageEnabled) || t.additionalClassNames.smoothPageEnabled,
+      smoothPageVertical: ((E = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : E.smoothPageVertical) || t.additionalClassNames.smoothPageVertical,
+      smoothPageVerticalReverse: ((y = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : y.smoothPageVerticalReverse) || t.additionalClassNames.smoothPageVerticalReverse,
+      smoothPageHorizontal: ((c = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : c.smoothPageHorizontal) || t.additionalClassNames.smoothPageHorizontal,
+      smoothPageHorizontalReverse: ((i = e == null ? void 0 : e.additionalClassNames) == null ? void 0 : i.smoothPageHorizontalReverse) || t.additionalClassNames.smoothPageHorizontalReverse
     }
   };
-}, n = {
+}, t = {
   mode: "vertical",
   smoothness: 0.075,
   wheelIntensity: 4,
@@ -372,122 +380,146 @@ const $ = G("privateSmoothPage", () => {
   defaultClassNames: {
     smoothPage: "t-smoothpage",
     smoothPageBody: "t-smoothpage--body",
+    smoothPageBodyPosition: "t-smoothpage--body-position",
     smoothPageEnabled: "t-smoothpage--enabled",
     smoothPageVertical: "t-smoothpage--vertical",
-    smoothPageHorizontal: "t-smoothpage--horizontal"
+    smoothPageVerticalReverse: "t-smoothpage--vertical-reverse",
+    smoothPageHorizontal: "t-smoothpage--horizontal",
+    smoothPageHorizontalReverse: "t-smoothpage--horizontal-reverse"
   },
   additionalClassNames: {
     smoothPage: "",
     smoothPageBody: "",
+    smoothPageBodyPosition: "",
     smoothPageEnabled: "",
     smoothPageVertical: "",
-    smoothPageHorizontal: ""
+    smoothPageVerticalReverse: "",
+    smoothPageHorizontal: "",
+    smoothPageHorizontalReverse: ""
   }
-}, Ee = /* @__PURE__ */ le({
+}, Ce = /* @__PURE__ */ le({
   __name: "index",
   props: {
     settings: null
   },
   setup(e) {
-    const l = e, o = $(), a = te("smoothPageSettings", void 0), d = Se(a), t = ae({
-      ...d,
+    const l = e, o = X(), s = se("smoothPageSettings", void 0), h = Se(s), a = te({
+      ...h,
       ...(l == null ? void 0 : l.settings) || {}
       //mb should de removed?
     });
-    H(() => {
-      o.setSettings(t);
+    K(() => {
+      o.setSettings(a);
     });
-    const b = h(null), y = h(null);
-    F(() => {
-      o.setSettings(t), o.setDeviceType(Ie()), o.setIsEnabled(w()), o.setBrowser(ye()), o.setIsMounted(!0), setTimeout(() => o.setIsEarlierMounted(!0), 100);
-    }), U(() => {
+    const f = d(null), v = d(null);
+    U(() => {
+      o.setSettings(a), o.setDeviceType(Ie()), o.setIsEnabled(E()), o.setBrowser(ve()), o.setIsMounted(!0), setTimeout(() => o.setIsEarlierMounted(!0), 100);
+    }), $(() => {
       o.setIsMounted(!1);
-    }), H(() => {
-      o.isEnabled && !o.isInited ? v() : !o.isEnabled && o.isInited && u();
+    }), K(() => {
+      o.isEnabled && !o.isInited ? P() : !o.isEnabled && o.isInited && m();
     });
-    function v() {
-      b.value = new fe(document, D, t, o.browser), t.resetScrollPositionOnStateChanging && (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)), t.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100), o.setIsInited(!0), o.setNeedReload(!1), S(!0);
+    function P() {
+      f.value = new ye(document, O, a, o.browser), a.resetScrollPositionOnStateChanging && (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)), a.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100), o.setIsInited(!0), o.setNeedReload(!1), C(!0);
     }
-    function u() {
+    function m() {
       var c;
-      (c = b.value) == null || c.destroy(), t.resetScrollPositionOnStateChanging ? (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)) : window.scroll(0, o.savedCurrentScrollPositionForDestroy), t.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100), o.setIsInited(!1), S(!1);
+      (c = f.value) == null || c.destroy(), a.resetScrollPositionOnStateChanging ? (o.setCurrentScrollPosition(0), o.setNextScrollPosition(0), window.scroll(0, 0)) : window.scroll(0, o.savedCurrentScrollPositionForDestroy), a.reloadPageOnStateChanging && o.isEarlierMounted && setTimeout(() => location.reload(), 100), o.setIsInited(!1), C(!1);
     }
-    function S(c) {
-      const r = document.querySelector("html");
-      if (r) {
+    function C(c) {
+      const i = document.querySelector("html");
+      if (i) {
         if (c) {
-          t.defaultClassNames.smoothPageEnabled && r.classList.add(t.defaultClassNames.smoothPageEnabled), t.additionalClassNames.smoothPageEnabled && r.classList.add(t.additionalClassNames.smoothPageEnabled), t.mode === "vertical" ? (t.defaultClassNames.smoothPageVertical && r.classList.add(t.defaultClassNames.smoothPageVertical), t.additionalClassNames.smoothPageVertical && r.classList.add(t.additionalClassNames.smoothPageVertical)) : (t.defaultClassNames.smoothPageHorizontal && r.classList.add(t.defaultClassNames.smoothPageHorizontal), t.additionalClassNames.smoothPageHorizontal && r.classList.add(t.additionalClassNames.smoothPageHorizontal));
+          a.defaultClassNames.smoothPageEnabled && i.classList.add(a.defaultClassNames.smoothPageEnabled), a.additionalClassNames.smoothPageEnabled && i.classList.add(a.additionalClassNames.smoothPageEnabled), a.mode === "vertical" ? (a.defaultClassNames.smoothPageVertical && i.classList.add(a.defaultClassNames.smoothPageVertical), a.additionalClassNames.smoothPageVertical && i.classList.add(a.additionalClassNames.smoothPageVertical)) : a.mode === "vertical-reverse" ? (a.defaultClassNames.smoothPageVerticalReverse && i.classList.add(a.defaultClassNames.smoothPageVerticalReverse), a.additionalClassNames.smoothPageVerticalReverse && i.classList.add(a.additionalClassNames.smoothPageVerticalReverse)) : a.mode === "horizontal" ? (a.defaultClassNames.smoothPageHorizontal && i.classList.add(a.defaultClassNames.smoothPageHorizontal), a.additionalClassNames.smoothPageHorizontal && i.classList.add(a.additionalClassNames.smoothPageHorizontal)) : a.mode === "horizontal-reverse" && (a.defaultClassNames.smoothPageHorizontalReverse && i.classList.add(a.defaultClassNames.smoothPageHorizontalReverse), a.additionalClassNames.smoothPageHorizontalReverse && i.classList.add(a.additionalClassNames.smoothPageHorizontalReverse));
           return;
         }
-        t.defaultClassNames.smoothPageEnabled && r.classList.remove(t.defaultClassNames.smoothPageEnabled), t.additionalClassNames.smoothPageEnabled && r.classList.remove(t.additionalClassNames.smoothPageEnabled), t.mode === "vertical" ? (t.defaultClassNames.smoothPageVertical && r.classList.remove(t.defaultClassNames.smoothPageVertical), t.additionalClassNames.smoothPageVertical && r.classList.remove(t.additionalClassNames.smoothPageVertical)) : (t.defaultClassNames.smoothPageHorizontal && r.classList.remove(t.defaultClassNames.smoothPageHorizontal), t.additionalClassNames.smoothPageHorizontal && r.classList.remove(t.additionalClassNames.smoothPageHorizontal));
+        a.defaultClassNames.smoothPageEnabled && i.classList.remove(a.defaultClassNames.smoothPageEnabled), a.additionalClassNames.smoothPageEnabled && i.classList.remove(a.additionalClassNames.smoothPageEnabled), a.mode === "vertical" ? (a.defaultClassNames.smoothPageVertical && i.classList.remove(a.defaultClassNames.smoothPageVertical), a.additionalClassNames.smoothPageVertical && i.classList.remove(a.additionalClassNames.smoothPageVertical)) : a.mode === "vertical-reverse" ? (a.defaultClassNames.smoothPageVerticalReverse && i.classList.remove(a.defaultClassNames.smoothPageVerticalReverse), a.additionalClassNames.smoothPageVerticalReverse && i.classList.remove(a.additionalClassNames.smoothPageVerticalReverse)) : a.mode === "horizontal" ? (a.defaultClassNames.smoothPageHorizontal && i.classList.remove(a.defaultClassNames.smoothPageHorizontal), a.additionalClassNames.smoothPageHorizontal && i.classList.remove(a.additionalClassNames.smoothPageHorizontal)) : a.mode === "horizontal-reverse" && (a.defaultClassNames.smoothPageHorizontalReverse && i.classList.remove(a.defaultClassNames.smoothPageHorizontalReverse), a.additionalClassNames.smoothPageHorizontalReverse && i.classList.remove(a.additionalClassNames.smoothPageHorizontalReverse));
       }
     }
-    H(() => {
-      o.needReload && u();
+    K(() => {
+      o.needReload && m();
     });
-    function D(c) {
-      if (o.isPreventScroll || !y.value)
+    function O(c) {
+      if (o.isPreventScroll)
         return;
-      const r = y.value.getBoundingClientRect().height - window.innerHeight, k = y.value.getBoundingClientRect().width - window.innerWidth, C = t.mode === "vertical" ? r : k;
-      o.setNextScrollPosition(Math.max(0, Math.min(o.currentScrollPosition + c.wheel, C)));
+      const i = w();
+      i && o.setNextScrollPosition(Math.max(0, Math.min(o.currentScrollPosition + c.wheel, i)));
     }
-    ve(() => {
-      o.isPreventScroll || o.isMounted && (o.isTriggeringScrollPosition || (t.watchIsEnabledOn === "load-resize" && o.setIsEnabled(w()), o.isEnabled ? (o.setCurrentScrollPosition(Pe(o.currentScrollPosition, o.nextScrollPosition, t.smoothness)), o.setSavedCurrentScrollPositionForDestroy(o.currentScrollPosition)) : (o.setCurrentScrollPosition(window.scrollY), o.setNextScrollPosition(window.scrollY))));
-    }, t.renderDelay);
     function w() {
-      return o.isDestroyedByUser ? !1 : (t.enableOnTouchDevices || o.deviceType === _.DESKTOP) && window.innerWidth >= t.minWidth;
+      if (!v.value)
+        return 0;
+      const c = v.value.getBoundingClientRect().height - window.innerHeight, i = v.value.getBoundingClientRect().width - window.innerWidth;
+      return a.mode === "vertical" || a.mode === "vertical-reverse" ? c : a.mode === "horizontal" || a.mode === "horizontal-reverse" ? i : 0;
     }
-    const N = P(() => {
+    be(() => {
+      o.isPreventScroll || o.isMounted && (o.isTriggeringScrollPosition || (a.watchIsEnabledOn === "load-resize" && o.setIsEnabled(E()), o.isEnabled ? (o.setCurrentScrollPosition(Pe(o.currentScrollPosition, o.nextScrollPosition, a.smoothness)), o.setSavedCurrentScrollPositionForDestroy(o.currentScrollPosition)) : (o.setCurrentScrollPosition(window.scrollY), o.setNextScrollPosition(window.scrollY))));
+    }, a.renderDelay);
+    function E() {
+      return o.isDestroyedByUser ? !1 : (a.enableOnTouchDevices || o.deviceType === Y.DESKTOP) && window.innerWidth >= a.minWidth;
+    }
+    const y = I(() => {
       if (o.isEnabled) {
-        if (t.mode === "vertical")
+        if (a.mode === "vertical")
           return {
             transform: `translate3d(0, ${-o.currentScrollPosition}px, 0)`
           };
-        if (t.mode === "horizontal")
+        if (a.mode === "vertical-reverse")
+          return console.log("vertical-reverse", o.currentScrollPosition), {
+            transform: `translate3d(0, ${o.currentScrollPosition}px, 0)`
+          };
+        if (a.mode === "horizontal")
           return {
             transform: `translate3d(${-o.currentScrollPosition}px, 0, 0)`
+          };
+        if (a.mode === "horizontal-reverse")
+          return {
+            transform: `translate3d(${o.currentScrollPosition}px, 0, 0)`
           };
       }
       return {};
     });
-    return (c, r) => (ne(), se("div", {
-      class: V([t.defaultClassNames.smoothPage, t.additionalClassNames.smoothPage])
+    return (c, i) => (ne(), re("div", {
+      class: k([a.defaultClassNames.smoothPage, a.additionalClassNames.smoothPage])
     }, [
-      ie("div", {
+      F("div", {
         ref_key: "contentRef",
-        ref: y,
-        style: re(ce(N)),
-        class: V([t.defaultClassNames.smoothPageBody, t.additionalClassNames.smoothPageBody])
+        ref: v,
+        style: ie(ce(y)),
+        class: k([a.defaultClassNames.smoothPageBody, a.additionalClassNames.smoothPageBody])
       }, [
-        he(c.$slots, "default")
+        F("div", {
+          class: k([a.defaultClassNames.smoothPageBodyPosition, a.additionalClassNames.smoothPageBodyPosition])
+        }, [
+          de(c.$slots, "default")
+        ], 2)
       ], 6)
     ], 2));
   }
 });
-const Te = G("publicSmoothPage", () => {
-  const e = $(), l = P(() => e.settings), o = P(() => e.currentScrollPosition), a = P(() => e.isEnabled), d = P(() => e.isTriggeringScrollPosition), t = P(() => e.isMounted), b = P(() => e.isInited), y = P(() => e.deviceType), v = P(() => e.browser), u = P(() => e.isPreventScroll);
+const De = G("publicSmoothPage", () => {
+  const e = X(), l = I(() => e.settings), o = I(() => e.currentScrollPosition), s = I(() => e.isEnabled), h = I(() => e.isTriggeringScrollPosition), a = I(() => e.isMounted), f = I(() => e.isInited), v = I(() => e.deviceType), P = I(() => e.browser), m = I(() => e.isPreventScroll);
   return {
     settings: l,
     currentScrollPosition: o,
-    isEnabled: a,
-    isTriggeringScrollPosition: d,
-    isMounted: t,
-    isInited: b,
-    deviceType: y,
-    browser: v,
-    isPreventScroll: u,
-    preventScroll: (c) => e.preventScroll(c),
-    reload: (c = !1) => e.reload(c),
-    destroy: (c = !1) => e.destroy(c),
-    init: (c = !1) => e.init(c)
+    isEnabled: s,
+    isTriggeringScrollPosition: h,
+    isMounted: a,
+    isInited: f,
+    deviceType: v,
+    browser: P,
+    isPreventScroll: m,
+    preventScroll: (y) => e.preventScroll(y),
+    reload: (y = !1) => e.reload(y),
+    destroy: (y = !1) => e.destroy(y),
+    init: (y = !1) => e.init(y)
   };
-}), Me = {
+}), Le = {
   install(e, l) {
-    e.component("SmoothPage", Ee), e.provide("smoothPageSettings", l || {});
+    e.component("SmoothPage", Ce), e.provide("smoothPageSettings", l || {});
   }
 };
 export {
-  Ee as SmoothPage,
-  Me as default,
-  Te as useSmoothPage
+  Ce as SmoothPage,
+  Le as default,
+  De as useSmoothPage
 };
