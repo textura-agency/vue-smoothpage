@@ -91,6 +91,10 @@ Available settings
         scrollLeftOnKeys?: Array<{ code: number; distance: number; }>; // [ { code: 38, distance: 100 }, { code: 37, distance: 100 } ] by default
         preventScrollOnHoldKeys?: Array<{ code: number[] }> // [ { code: [ 16 ] } ] by default
 
+        enableScrollbar?: boolean; // true by default
+        scrollbarComponent?: Component; // SmoothScrollbar by default (could be use custom component)
+        scrollbarProps?: {}; // {} by default (u can add custom settings for custom component)
+
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
             smoothPageBody?: string; // 't-smoothpage--body' by default
