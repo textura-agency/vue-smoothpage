@@ -6,7 +6,7 @@
         safariWheelIntensity: 7,
         reloadPageOnStateChanging: false,
         watchIsEnabledOn: 'load-resize',
-        mode: 'vertical',
+        mode: 'vertical-reverse',
         preventScrollOnHoldKeys: [ { code: [ 16, 91 ] } ]
     }">
         <div class="container">

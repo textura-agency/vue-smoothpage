@@ -26,7 +26,7 @@ class DetectKeyboard {
         const key = e.keyCode
         console.log(key)
 
-        if (this.settings.mode === 'vertical') {
+        if (this.settings.mode === 'vertical' || this.settings.mode === 'vertical-reverse') {
             this.settings.scrollDownOnKeys.forEach((_: ScrollKeyType) => {
                 _.code === key && this.callback({ dir: 1, wheel: _.distance })
             })
@@ -34,7 +34,7 @@ class DetectKeyboard {
                 _.code === key && this.callback({ dir: -1, wheel: _.distance * -1 })
             })
         } else
-        if (this.settings.mode === 'horizontal') {
+        if (this.settings.mode === 'horizontal' || this.settings.mode === 'horizontal-reverse') {
             this.settings.scrollRightOnKeys.forEach((_: ScrollKeyType) => {
                 _.code === key && this.callback({ dir: 1, wheel: _.distance })
             })

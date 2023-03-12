@@ -202,7 +202,6 @@ const style = computed(() => {
             }
         }
         if (mergedSettings.mode === 'vertical-reverse') {
-            console.log('vertical-reverse', store.currentScrollPosition)
             return {
                 transform: `translate3d(0, ${store.currentScrollPosition}px, 0)`
             }

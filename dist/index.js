@@ -32,12 +32,12 @@ class he {
     this.element = l, this.cb = o, this.settings = s, this.subscribe();
   }
 }
-var b, S, D, B, L, W, T, V;
+var b, S, D, B, z, W, L, V;
 class me {
   constructor(l, o, s) {
     R(this, D);
+    R(this, z);
     R(this, L);
-    R(this, T);
     R(this, b, {
       sY: 0,
       eY: 0
@@ -49,10 +49,10 @@ class me {
     n(this, "minDelta");
     n(this, "settings");
     n(this, "subscribe", function() {
-      u(this, S).addEventListener("touchstart", p(this, D, B).bind(this), !1), u(this, S).addEventListener("touchmove", p(this, L, W).bind(this), !1), u(this, S).addEventListener("touchend", p(this, T, V).bind(this), !1);
+      u(this, S).addEventListener("touchstart", p(this, D, B).bind(this), !1), u(this, S).addEventListener("touchmove", p(this, z, W).bind(this), !1), u(this, S).addEventListener("touchend", p(this, L, V).bind(this), !1);
     }.bind(this));
     n(this, "unsubscribe", function() {
-      u(this, S).removeEventListener("touchstart", p(this, D, B), !1), u(this, S).removeEventListener("touchmove", p(this, L, W), !1), u(this, S).removeEventListener("touchend", p(this, T, V), !1);
+      u(this, S).removeEventListener("touchstart", p(this, D, B), !1), u(this, S).removeEventListener("touchmove", p(this, z, W), !1), u(this, S).removeEventListener("touchend", p(this, L, V), !1);
     }.bind(this));
     this.cb = o, x(this, S, l), this.subscribe(), this.settings = s, this.minDelta = s.minTouchmoveDistance, this.useCallback = this.useCallback.bind(this), this.unsubscribe = this.unsubscribe.bind(this);
   }
@@ -66,12 +66,12 @@ class me {
 b = new WeakMap(), S = new WeakMap(), D = new WeakSet(), B = function(l) {
   const o = l.touches[0];
   u(this, b).sY = o.screenY, this.prevY = u(this, b).sY, u(this, b).eY = u(this, b).sY;
-}, L = new WeakSet(), W = function(l) {
+}, z = new WeakSet(), W = function(l) {
   const o = l.touches[0];
   this.prevY = u(this, b).eY, u(this, b).eY = o.screenY, this.deltaY = u(this, b).sY - u(this, b).eY;
   const s = u(this, b).sY - this.prevY;
   Math.abs(s) > Math.abs(this.deltaY) && (u(this, b).sY = this.prevY), Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
-}, T = new WeakSet(), V = function(l) {
+}, L = new WeakSet(), V = function(l) {
   Math.abs(this.deltaY) > this.minDelta && this.useCallback(this.deltaY);
 };
 class ue {
@@ -89,11 +89,11 @@ class ue {
       if (!this.settings.enableScrollOnKeyboard || typeof this.callback != "function")
         return;
       const o = l.keyCode;
-      console.log(o), this.settings.mode === "vertical" ? (this.settings.scrollDownOnKeys.forEach((s) => {
+      console.log(o), this.settings.mode === "vertical" || this.settings.mode === "vertical-reverse" ? (this.settings.scrollDownOnKeys.forEach((s) => {
         s.code === o && this.callback({ dir: 1, wheel: s.distance });
       }), this.settings.scrollUpOnKeys.forEach((s) => {
         s.code === o && this.callback({ dir: -1, wheel: s.distance * -1 });
-      })) : this.settings.mode === "horizontal" && (this.settings.scrollRightOnKeys.forEach((s) => {
+      })) : (this.settings.mode === "horizontal" || this.settings.mode === "horizontal-reverse") && (this.settings.scrollRightOnKeys.forEach((s) => {
         s.code === o && this.callback({ dir: 1, wheel: s.distance });
       }), this.settings.scrollLeftOnKeys.forEach((s) => {
         s.code === o && this.callback({ dir: -1, wheel: s.distance * -1 });
@@ -245,7 +245,7 @@ const X = G("privateSmoothPage", () => {
     l.value = r;
   }, i = (r) => {
     h.value = r;
-  }, z = (r) => {
+  }, T = (r) => {
     o.value = r;
   }, Z = (r) => {
     s.value = r;
@@ -286,7 +286,7 @@ const X = G("privateSmoothPage", () => {
     setSettings: y,
     setCurrentScrollPosition: c,
     setIsEnabled: i,
-    setNextScrollPosition: z,
+    setNextScrollPosition: T,
     setIsTriggeringScrollPosition: Z,
     setIsMounted: q,
     setIsInited: j,
@@ -297,13 +297,13 @@ const X = G("privateSmoothPage", () => {
     preventScroll: ee,
     setSavedCurrentScrollPositionForDestroy: H,
     reload: (r = !1) => {
-      _(!0), r && (c(0), z(0), H(0));
+      _(!0), r && (c(0), T(0), H(0));
     },
     destroy: (r = !1) => {
-      A(!0), r && (c(0), z(0), H(0));
+      A(!0), r && (c(0), T(0), H(0));
     },
     init: (r = !1) => {
-      A(!1), r && (c(0), z(0), H(0));
+      A(!1), r && (c(0), T(0), H(0));
     }
   };
 }), Se = (e) => {
@@ -464,7 +464,7 @@ const X = G("privateSmoothPage", () => {
             transform: `translate3d(0, ${-o.currentScrollPosition}px, 0)`
           };
         if (a.mode === "vertical-reverse")
-          return console.log("vertical-reverse", o.currentScrollPosition), {
+          return {
             transform: `translate3d(0, ${o.currentScrollPosition}px, 0)`
           };
         if (a.mode === "horizontal")
@@ -513,13 +513,13 @@ const De = G("publicSmoothPage", () => {
     destroy: (y = !1) => e.destroy(y),
     init: (y = !1) => e.init(y)
   };
-}), Le = {
+}), ze = {
   install(e, l) {
     e.component("SmoothPage", Ce), e.provide("smoothPageSettings", l || {});
   }
 };
 export {
   Ce as SmoothPage,
-  Le as default,
+  ze as default,
   De as useSmoothPage
 };
