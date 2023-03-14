@@ -5,7 +5,7 @@
                 <slot></slot>
             </div>
         </div>
-        <mergedSettings.scrollbarComponent v-if="(mergedSettings.enableScrollbarWhileSmoothpageDisabled || store.isEnabled) && mergedSettings.enableScrollbar && mergedSettings.scrollbarComponent" :settings="mergedSettings" :store="store" />
+        <mergedSettings.scrollbarComponent v-if="(mergedSettings.enableScrollbarWhileSmoothpageDisabled || store.isEnabled) && mergedSettings.enableScrollbar && mergedSettings.scrollbarComponent" :settings="mergedSettings" :store="store" :onScroll="onScroll" />
     </div>
 </template>
 
@@ -175,7 +175,13 @@ function onScroll(scrollProps: OnScrollProps) {
     if (store.isPreventScroll) { return }
     const maxScroll = getMaxScroll()
     if ( !maxScroll ) { return }
-    store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
+    if ( store.isEnabled ) {
+        store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
+    } else {
+        // requires for smoothscrollbar when smoothpage disabled
+        window.scrollTo({ top: window.scrollY + scrollProps.wheel })
+        // 
+    }
 }
 function getMaxScroll(): number {
     if (!smoothpageBodyRef.value) { return 0 }

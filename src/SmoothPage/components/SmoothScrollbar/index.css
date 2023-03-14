@@ -31,6 +31,7 @@ html.t-smoothscrollbar--enabled .t-smoothscrollbar {
     cursor: grab;
     background: var(--t-smoothscrollbar-thumb-bg, #000);
     border-radius: var(--t-smoothscrollbar-thumb-radius, 1em);
+    will-change: transform;
 }
 /*  */
 

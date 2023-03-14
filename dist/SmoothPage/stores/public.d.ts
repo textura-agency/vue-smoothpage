@@ -42,6 +42,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             code: number[];
         }[] | undefined;
         enableScrollbar?: boolean | undefined;
+        enableScrollbarWhileSmoothpageDisabled?: boolean | undefined;
         scrollbarComponent?: import("vue").FunctionalComponent<any, any> | {
             new (...args: any[]): any;
             __isFragment?: undefined;
@@ -160,7 +161,11 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             __file?: string | undefined;
             __name?: string | undefined;
         } | undefined;
-        scrollbarProps?: {} | undefined;
+        scrollbarSettings?: {
+            trackWidth?: string | undefined;
+            thumbHeight?: string | undefined;
+            thumbWidth?: string | undefined;
+        } | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
@@ -170,6 +175,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
@@ -180,6 +186,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;
@@ -238,6 +245,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             code: number[];
         }[] | undefined;
         enableScrollbar?: boolean | undefined;
+        enableScrollbarWhileSmoothpageDisabled?: boolean | undefined;
         scrollbarComponent?: import("vue").FunctionalComponent<any, any> | {
             new (...args: any[]): any;
             __isFragment?: undefined;
@@ -356,7 +364,11 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             __file?: string | undefined;
             __name?: string | undefined;
         } | undefined;
-        scrollbarProps?: {} | undefined;
+        scrollbarSettings?: {
+            trackWidth?: string | undefined;
+            thumbHeight?: string | undefined;
+            thumbWidth?: string | undefined;
+        } | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
@@ -366,6 +378,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
@@ -376,6 +389,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;
@@ -434,6 +448,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             code: number[];
         }[] | undefined;
         enableScrollbar?: boolean | undefined;
+        enableScrollbarWhileSmoothpageDisabled?: boolean | undefined;
         scrollbarComponent?: import("vue").FunctionalComponent<any, any> | {
             new (...args: any[]): any;
             __isFragment?: undefined;
@@ -552,7 +567,11 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             __file?: string | undefined;
             __name?: string | undefined;
         } | undefined;
-        scrollbarProps?: {} | undefined;
+        scrollbarSettings?: {
+            trackWidth?: string | undefined;
+            thumbHeight?: string | undefined;
+            thumbWidth?: string | undefined;
+        } | undefined;
         defaultClassNames?: {
             smoothPage?: string | undefined;
             smoothPageBody?: string | undefined;
@@ -562,6 +581,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
         additionalClassNames?: {
             smoothPage?: string | undefined;
@@ -572,6 +592,7 @@ export declare const useSmoothPage: import("pinia").StoreDefinition<"publicSmoot
             smoothPageVerticalReverse?: string | undefined;
             smoothPageHorizontal?: string | undefined;
             smoothPageHorizontalReverse?: string | undefined;
+            scrollbarEnabled?: string | undefined;
         } | undefined;
     } | null>;
     currentScrollPosition: import("vue").ComputedRef<number>;
