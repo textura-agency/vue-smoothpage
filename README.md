@@ -149,7 +149,7 @@ Most of them can work dynamicaly, for example "minWidth".
         import { SmoothPage } from 'vue-smoothpage'
     </script> 
 
-#### Hook "useSmoothPage"
+## Hook "useSmoothPage"
 
     import { useSmoothPage } from 'vue-smoothpage'
 
@@ -180,7 +180,7 @@ Method "preventScroll( value: boolean )" accept "true" or "false" parameteries
 
 **if "resetScrollPositionOnStateChanging" set to "true" the scroll position will reset anyway**
 
-#### Custom Scrollbar
+## Custom Scrollbar
 
 By default Smoothpage uses inner custom component for scrollbar. Which u can easily customise via provided settings and styles.
 
@@ -230,9 +230,10 @@ Example for custom scrollbar component:
     })
     </script>
 
-**In props u have access to all "settings" and "store"**
-"settings" - all settings which smoothpage uses for working
-"store" - private store, which stores all states and methods of smoothPage, this store Smoothpage uses under the hood
+**In props u have access to "settings" and "store"**
+
+- "settings" - all settings which smoothpage uses for working
+- "store" - private store, which stores all states and methods of smoothPage, this store Smoothpage uses under the hood
 
 **Then simply provide this component to Smoothpage**
 
