@@ -92,8 +92,13 @@ Available settings
         preventScrollOnHoldKeys?: Array<{ code: number[] }> // [ { code: [ 16 ] } ] by default
 
         enableScrollbar?: boolean; // true by default
-        scrollbarComponent?: Component; // SmoothScrollbar by default (could be use custom component)
-        scrollbarProps?: {}; // {} by default (u can add custom settings for custom component)
+        enableScrollbarWhileSmoothpageDisabled?: boolean; // false by default (if "true" it will replace native scrollbar even when Smoothpage disabled)
+        scrollbarComponent?: Component; // SmoothScrollbar by default (can be used custom component)
+        scrollbarSettings?: {
+            trackWidth?: string; // 12px by default
+            thumbHeight?: string; // 100px by default
+            thumbWidth?: string; // 12px by default
+        }; // (can be replaced by custom scrollbarSettings for custom component)
 
         defaultClassNames?: {
             smoothPage?: string; // 't-smoothpage' by default
@@ -104,6 +109,7 @@ Available settings
             smoothPageVerticalReverse?: string; // 't-smoothpage--vertical-reverse' by default
             smoothPageHorizontal?: string; // 't-smoothpage--horizontal' by default
             smoothPageHorizontalReverse?: string; // 't-smoothpage--horizontal-reverse' by default
+            scrollbarEnabled?: string; // 't-smoothscrollbar--enabled' by default
         },
         additionalClassNames?: {
             smoothPage?: string; // '' by default
@@ -114,6 +120,7 @@ Available settings
             smoothPageVerticalReverse?: string; // '' by default
             smoothPageHorizontal?: string; // '' by default
             smoothPageHorizontalReverse?: string; // '' by default
+            scrollbarEnabled?: string; // '' by default
         }
     }
 
@@ -172,6 +179,81 @@ Methods "reload( resetPosition?: boolean )", "destroy( resetPosition?: boolean )
 Method "preventScroll( value: boolean )" accept "true" or "false" parameteries
 
 **if "resetScrollPositionOnStateChanging" set to "true" the scroll position will reset anyway**
+
+#### Custom Scrollbar
+
+By default Smoothpage uses inner custom component for scrollbar. Which u can easily customise via provided settings and styles.
+
+**Scrollbar bar works like a plugin. If u need to create ur own custom scrollbar u can make ur own component and replace it via "scrollbarComponent" key in settings**
+
+Example for custom scrollbar component:
+
+    <!-- MyCustomScrollBar.ts -->
+    <template>
+        <div :style="{ width: `${settings.scrollbarSettings?.trackWidth}` }" class="t-smoothscrollbar">
+            <div ref="track" class="t-smoothscrollbar--track">
+                <div 
+                    ref="thumb" 
+                    :style="{ 
+                        width: settings.scrollbarSettings?.thumbWidth, 
+                        height: settings.scrollbarSettings?.thumbHeight,
+                        transform: `translateY(${thumbPosition}px)`,
+                    }" 
+                    class="t-smoothscrollbar--thumb">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script lang="ts" setup>
+    import { ref, watchEffect } from 'vue';
+    import type { SmoothPageSettings } from '../../interfaces/settings.interface'
+    import type { PrivateStore } from '../../interfaces/store.interface';
+
+    const { settings, store } = defineProps<{
+        settings: SmoothPageSettings,
+        store: PrivateStore
+    }>()
+
+    const thumb = ref<HTMLElement>()
+    const track = ref<HTMLElement>()
+
+    const thumbPosition = ref<number>(0)
+    watchEffect(() => {
+        if (!thumb.value || !track.value) { return }
+        if (!store.isEnabled && !settings.enableScrollbarWhileSmoothpageDisabled) { return }
+        const pageHeight = document.getElementById('smoothpageBody')?.getBoundingClientRect().height
+        if (!pageHeight) { return }
+        const trackHeight = track.value!.getBoundingClientRect().height
+        const thumbHeight = thumb.value!.getBoundingClientRect().height
+        thumbPosition.value = Number(store.currentScrollPosition) / (pageHeight - trackHeight) * (trackHeight - thumbHeight)
+    })
+    </script>
+
+**In props u have access to all "settings" and "store"**
+"settings" - all settings which smoothpage uses for working
+"store" - private store, which stores all states and methods of smoothPage, this store Smoothpage uses under the hood
+
+**Then simply provide this component to Smoothpage**
+
+    <!-- main.ts -->
+    import MyCustomScrollBar from '../MyCustomScrollBar.vue'
+    app.use(SmoothPage, {
+        scrollbarComponent: MyCustomScrollBar
+    })
+
+or directly
+
+    <!-- layout.ts -->
+    <template>
+        <header/>
+        <smooth-page :settings="{ scrollbarComponent: MyCustomScrollBar }" >
+            <slot/>
+        </smooth-page>
+    </template>
+
+
+
 
 
 

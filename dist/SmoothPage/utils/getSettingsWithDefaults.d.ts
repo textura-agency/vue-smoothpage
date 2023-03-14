@@ -27,8 +27,9 @@ export declare const getSettingsWithDefaults: (settings: any) => {
     scrollLeftOnKeys: any;
     preventScrollOnHoldKeys: any;
     enableScrollbar: any;
+    enableScrollbarWhileSmoothpageDisabled: any;
     scrollbarComponent: any;
-    scrollbarProps: any;
+    scrollbarSettings: any;
     defaultClassNames: {
         smoothPage: any;
         smoothPageBody: any;
@@ -38,6 +39,7 @@ export declare const getSettingsWithDefaults: (settings: any) => {
         smoothPageVerticalReverse: any;
         smoothPageHorizontal: any;
         smoothPageHorizontalReverse: any;
+        scrollbarEnabled: any;
     };
     additionalClassNames: {
         smoothPage: any;
@@ -48,6 +50,7 @@ export declare const getSettingsWithDefaults: (settings: any) => {
         smoothPageVerticalReverse: any;
         smoothPageHorizontal: any;
         smoothPageHorizontalReverse: any;
+        scrollbarEnabled: any;
     };
 };
 //# sourceMappingURL=getSettingsWithDefaults.d.ts.map

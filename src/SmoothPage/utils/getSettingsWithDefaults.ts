@@ -37,8 +37,9 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
         preventScrollOnHoldKeys: settings?.preventScrollOnHoldKeys || dfs.preventScrollOnHoldKeys as PreventScrollKeysType,
 
         enableScrollbar: settings?.enableScrollbar || dfs.enableScrollbar,
+        enableScrollbarWhileSmoothpageDisabled: settings?.enableScrollbarWhileSmoothpageDisabled || dfs.enableScrollbarWhileSmoothpageDisabled,
         scrollbarComponent: settings?.scrollbarComponent || dfs.scrollbarComponent,
-        scrollbarProps: settings?.scrollbarProps || dfs.scrollbarProps,
+        scrollbarSettings: settings?.scrollbarSettings || dfs.scrollbarSettings,
 
         defaultClassNames: {
             smoothPage: settings?.defaultClassNames?.smoothPage || dfs.defaultClassNames.smoothPage,
@@ -49,6 +50,7 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
             smoothPageVerticalReverse: settings?.defaultClassNames?.smoothPageVerticalReverse || dfs.defaultClassNames.smoothPageVerticalReverse,
             smoothPageHorizontal: settings?.defaultClassNames?.smoothPageHorizontal || dfs.defaultClassNames.smoothPageHorizontal,
             smoothPageHorizontalReverse: settings?.defaultClassNames?.smoothPageHorizontalReverse || dfs.defaultClassNames.smoothPageHorizontalReverse,
+            scrollbarEnabled: settings?.defaultClassNames?.scrollbarEnabled || dfs.defaultClassNames.scrollbarEnabled,
         },
         additionalClassNames: {
             smoothPage: settings?.additionalClassNames?.smoothPage || dfs.additionalClassNames.smoothPage,
@@ -59,6 +61,7 @@ export const getSettingsWithDefaults = (settings: SmoothPageSettings | undefined
             smoothPageVerticalReverse: settings?.additionalClassNames?.smoothPageVerticalReverse || dfs.additionalClassNames.smoothPageVerticalReverse,
             smoothPageHorizontal: settings?.additionalClassNames?.smoothPageHorizontal || dfs.additionalClassNames.smoothPageHorizontal,
             smoothPageHorizontalReverse: settings?.additionalClassNames?.smoothPageHorizontalReverse || dfs.additionalClassNames.smoothPageHorizontalReverse,
+            scrollbarEnabled: settings?.additionalClassNames?.scrollbarEnabled || dfs.additionalClassNames.scrollbarEnabled,
         }
     }
 }
@@ -82,8 +85,13 @@ const dfs = {
     scrollRightOnKeys: [ { code: 40, distance: 100 }, { code: 39, distance: 100 }, { code: 32, distance: 200 } ],
     preventScrollOnHoldKeys: [ { code: [ 16 ] } ],
     enableScrollbar: true,
+    enableScrollbarWhileSmoothpageDisabled: false,
     scrollbarComponent: SmoothScrollbar,
-    scrollbarProps: {},
+    scrollbarSettings: {
+        trackWidth: '12px',
+        thumbHeight: '100px',
+        thumbWidth: '12px'
+    },
     defaultClassNames: {
         smoothPage: 't-smoothpage',
         smoothPageBody: 't-smoothpage--body',
@@ -93,6 +101,7 @@ const dfs = {
         smoothPageVerticalReverse: 't-smoothpage--vertical-reverse',
         smoothPageHorizontal: 't-smoothpage--horizontal',
         smoothPageHorizontalReverse: 't-smoothpage--horizontal-reverse',
+        scrollbarEnabled: 't-smoothscrollbar--enabled'
     },
     additionalClassNames: {
         smoothPage: '',
@@ -103,5 +112,6 @@ const dfs = {
         smoothPageVerticalReverse: '',
         smoothPageHorizontal: '',
         smoothPageHorizontalReverse: '',
+        scrollbarEnabled: ''
     }
 }

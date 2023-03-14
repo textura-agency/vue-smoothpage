@@ -1,11 +1,11 @@
 <template>
     <div :class="[mergedSettings.defaultClassNames.smoothPage , mergedSettings.additionalClassNames.smoothPage]">
-        <div ref="contentRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
+        <div id="smoothpageBody" ref="smoothpageBodyRef" :style="style" :class="[mergedSettings.defaultClassNames.smoothPageBody, mergedSettings.additionalClassNames.smoothPageBody]">
             <div :class="[mergedSettings.defaultClassNames.smoothPageBodyPosition, mergedSettings.additionalClassNames.smoothPageBodyPosition]">
                 <slot></slot>
             </div>
         </div>
-        <mergedSettings.scrollbarComponent v-if="mergedSettings.enableScrollbar && mergedSettings.scrollbarComponent" :settings="mergedSettings" :store="store" />
+        <mergedSettings.scrollbarComponent v-if="(mergedSettings.enableScrollbarWhileSmoothpageDisabled || store.isEnabled) && mergedSettings.enableScrollbar && mergedSettings.scrollbarComponent" :settings="mergedSettings" :store="store" />
     </div>
 </template>
 
@@ -31,6 +31,9 @@ const props = withDefaults(defineProps<SmoothScrollProps>(), {
     // preventScroll: false,
 })
 
+const detector = ref(null as any)
+const smoothpageBodyRef = ref<HTMLElement | null>(null)
+
 const store = useSmoothPageStore()
 
 const settings: SmoothPageSettings | undefined = inject('smoothPageSettings', undefined)
@@ -39,15 +42,12 @@ const settingsWithDefaults = getSettingsWithDefaults(settings)
 // todo: update defaults, to extend wheels from props.settings
 const mergedSettings = {
     ...settingsWithDefaults,
-    ...(props?.settings || {}) //mb should de removed?
+    ...(props?.settings || {}), //mb should de removed?
 }
 
 watchEffect(() => {
     store.setSettings(mergedSettings)
 })
-
-const detector = ref(null as any)
-const contentRef = ref(null as any)
 
 onMounted(() => {
     store.setSettings(mergedSettings)
@@ -56,6 +56,12 @@ onMounted(() => {
     store.setBrowser(getBrowser())
     store.setIsMounted(true)
     setTimeout(() => store.setIsEarlierMounted(true), 100) 
+    // TODO: move to toggleClassNames, rewrite toggle classnames
+    if (mergedSettings.enableScrollbar && mergedSettings.enableScrollbarWhileSmoothpageDisabled) {
+        mergedSettings.defaultClassNames.scrollbarEnabled && document.querySelector('html')?.classList.add(mergedSettings.defaultClassNames.scrollbarEnabled)
+        mergedSettings.additionalClassNames.scrollbarEnabled && document.querySelector('html')?.classList.add(mergedSettings.additionalClassNames.scrollbarEnabled)
+    }
+    // 
 })
 onUnmounted(() => {
     store.setIsMounted(false)
@@ -72,6 +78,12 @@ function init() {
     store.setIsInited(true)
     store.setNeedReload(false)
     toggleClassNames(true)
+    // TODO: move to toggleClassNames, rewrite toggle classnames
+    if (mergedSettings.enableScrollbar) {
+        mergedSettings.defaultClassNames.scrollbarEnabled && document.querySelector('html')?.classList.add(mergedSettings.defaultClassNames.scrollbarEnabled)
+        mergedSettings.additionalClassNames.scrollbarEnabled && document.querySelector('html')?.classList.add(mergedSettings.additionalClassNames.scrollbarEnabled)
+    }
+    // 
 
     detector.value = new Detector(document, onScroll, mergedSettings, store.browser)
     if (mergedSettings.resetScrollPositionOnStateChanging) {
@@ -88,6 +100,12 @@ function destroy() {
     // !dont change order, bc of scroll position reset!
     store.setIsInited(false)
     toggleClassNames(false)
+    // TODO: move to toggleClassNames, rewrite toggle classnames
+    if (!mergedSettings.enableScrollbarWhileSmoothpageDisabled) {
+        mergedSettings.defaultClassNames.scrollbarEnabled && document.querySelector('html')?.classList.remove(mergedSettings.defaultClassNames.scrollbarEnabled)
+        mergedSettings.additionalClassNames.scrollbarEnabled && document.querySelector('html')?.classList.remove(mergedSettings.additionalClassNames.scrollbarEnabled)
+    }
+    // 
 
     detector.value?.destroy()
     console.log(mergedSettings.resetScrollPositionOnStateChanging)
@@ -160,9 +178,9 @@ function onScroll(scrollProps: OnScrollProps) {
     store.setNextScrollPosition(Math.max(0, Math.min(store.currentScrollPosition + scrollProps.wheel, maxScroll)))
 }
 function getMaxScroll(): number {
-    if (!contentRef.value) { return 0 }
-    const contentHeight = contentRef.value.getBoundingClientRect().height - window.innerHeight
-    const contentWidth = contentRef.value.getBoundingClientRect().width - window.innerWidth
+    if (!smoothpageBodyRef.value) { return 0 }
+    const contentHeight = smoothpageBodyRef.value.getBoundingClientRect().height - window.innerHeight
+    const contentWidth = smoothpageBodyRef.value.getBoundingClientRect().width - window.innerWidth
     if ( mergedSettings.mode === 'vertical' || mergedSettings.mode === 'vertical-reverse' ) {
         return contentHeight
     }

@@ -1,19 +1,21 @@
+/* Smoothpage basic styles */
 html.t-smoothpage--enabled, .t-smoothpage--enabled body {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: none; /* disable overscroll behavior (mostly for macOS) */
 }
-
 html.t-smoothpage--enabled .t-smoothpage {
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
 }
+/*  */
 
+/* Smoothpage Body basic styles */
 html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body,
 html.t-smoothpage--enabled.t-smoothpage--vertical-reverse .t-smoothpage .t-smoothpage--body {
     position: absolute;
@@ -23,6 +25,9 @@ html.t-smoothpage--enabled.t-smoothpage--vertical-reverse .t-smoothpage .t-smoot
     height: auto;
     will-change: transform;
 }
+/*  */
+
+/* Smoothpage Body Position styles for different states ( 'vertical' | 'vertical-reverse' | 'horizontal' | 'horizontal-reverse' ) */
 html.t-smoothpage--enabled.t-smoothpage--vertical .t-smoothpage .t-smoothpage--body .t-smoothpage--body-position {
     width: 100%;
     height: auto;
@@ -50,3 +55,4 @@ html.t-smoothpage--enabled.t-smoothpage--horizontal-reverse .t-smoothpage .t-smo
     height: 100%;
     transform: translateX(calc(-100% + 100vw));
 }
+/*  */

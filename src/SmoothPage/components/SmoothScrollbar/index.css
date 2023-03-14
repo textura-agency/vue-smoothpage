@@ -1,12 +1,46 @@
-.t-smoothpage--scrollbar {
-    display: none;
-    position: fixed;
-    top: 0; right: 0;
-    height: 100%;
-    background: red;
-    width: 4px;
+/* Hide native scrollbar while enabled */
+html.t-smoothscrollbar--enabled, html.t-smoothscrollbar--enabled body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+html.t-smoothscrollbar--enabled::-webkit-scrollbar, html.t-smoothscrollbar--enabled body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+/*  */
 
-html.t-smoothpage--enabled .t-smoothpage--scrollbar {
-    display: block;
+/* Basic styles for scrollbar, used when Scrollbar enabled, but Smoothpage disabled */
+html.t-smoothscrollbar--enabled .t-smoothscrollbar {
+    position: fixed;
+    top: .25em; right: .25em;
+    height: calc(100% - .5em);
 }
+/*  */
+
+/* Scrollbar track styles */
+.t-smoothscrollbar--track {
+    position: absolute;
+    top: 0; right: 0;
+    width: 100%;
+    height: 100%;
+}
+/*  */
+
+/* Scrollbar thumb styles */
+.t-smoothscrollbar--thumb {
+    position: absolute;
+    cursor: grab;
+    background: var(--t-smoothscrollbar-thumb-bg, #000);
+    border-radius: var(--t-smoothscrollbar-thumb-radius, 1em);
+}
+/*  */
+
+
+/* Scrollbar styles for different states ( 'vertical' | 'vertical-reverse' | 'horizontal' | 'horizontal-reverse' ) */
+html.t-smoothscrollbar--enabled.t-smoothpage--vertical .t-smoothscrollbar--thumb {
+    top: 0; left: 0;
+}
+html.t-smoothscrollbar--enabled.t-smoothpage--vertical .t-smoothscrollbar  {
+    top: .25em; right: .25em;
+    height: calc(100% - .5em);
+}
+/*  */

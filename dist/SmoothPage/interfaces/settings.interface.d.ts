@@ -39,8 +39,13 @@ interface SmoothPageSettings {
     scrollLeftOnKeys?: ScrollKeysType;
     preventScrollOnHoldKeys?: PreventScrollKeysType;
     enableScrollbar?: boolean;
+    enableScrollbarWhileSmoothpageDisabled?: boolean;
     scrollbarComponent?: Component;
-    scrollbarProps?: {};
+    scrollbarSettings?: {
+        trackWidth?: string;
+        thumbHeight?: string;
+        thumbWidth?: string;
+    };
     defaultClassNames?: {
         smoothPage?: string;
         smoothPageBody?: string;
@@ -50,6 +55,7 @@ interface SmoothPageSettings {
         smoothPageVerticalReverse?: string;
         smoothPageHorizontal?: string;
         smoothPageHorizontalReverse?: string;
+        scrollbarEnabled?: string;
     };
     additionalClassNames?: {
         smoothPage?: string;
@@ -60,6 +66,7 @@ interface SmoothPageSettings {
         smoothPageVerticalReverse?: string;
         smoothPageHorizontal?: string;
         smoothPageHorizontalReverse?: string;
+        scrollbarEnabled?: string;
     };
 }
 export type { SmoothPageSettings, WatchIsEnabledOnType, ModeType, ScrollKeysType, ScrollKeyType, PreventScrollKeyType, PreventScrollKeysType, };

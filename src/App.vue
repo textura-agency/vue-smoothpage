@@ -7,6 +7,7 @@
         reloadPageOnStateChanging: false,
         watchIsEnabledOn: 'load-resize',
         mode: 'vertical',
+        enableScrollbarWhileSmoothpageDisabled: true,
         // preventScrollOnHoldKeys: [ { code: [ 16, 91 ] }, { code: [ 16 ] } ]
     }">
         <div class="container">
@@ -43,7 +44,7 @@ html, body {
 .container {
     height: 300vh;
     width: 100vw;
-    background: linear-gradient(0deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #000000 100%);
+    background: linear-gradient(0deg, #ff0000 0%, #00ff00 33%, #0000ff 66%, #ffffff 100%);
 
     /* for horizontal */
     /* height: 100vh;
