@@ -8,7 +8,7 @@
         watchIsEnabledOn: 'load-resize',
         mode: 'vertical',
         enableScrollbarWhileSmoothpageDisabled: true,
-        // preventScrollOnHoldKeys: [ { code: [ 16, 91 ] }, { code: [ 16 ] } ]
+        // preventScrollOnHoldKeys: [ { code: [ 16, 91 ] }, { code: [ 91 ] } ]
     }">
         <div class="container">
             <div @click="store.reload()"  class="button">Reload</div>

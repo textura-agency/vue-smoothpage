@@ -38,8 +38,8 @@ const store = useSmoothPageStore()
 
 const settings: SmoothPageSettings | undefined = inject('smoothPageSettings', undefined)
 const settingsWithDefaults = getSettingsWithDefaults(settings)
-// todo: fix reload issue, when u change "settings" prop in component directly
-// todo: update defaults, to extend wheels from props.settings
+// TODO: fix reload issue, when u change "settings" prop in component directly
+// TODO: update defaults, to extend wheels from props.settings
 const mergedSettings = {
     ...settingsWithDefaults,
     ...(props?.settings || {}), //mb should de removed?
